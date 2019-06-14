@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>成人输液泵质量检测原始记录表</title>
+    <link rel="stylesheet" type="text/css" href="../../../../static/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../static/css/admin.css"/>
+    <script src="../../../../static/js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../static/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../static/layui/layui.js"></script>
+    <style>
+        h2{
+            text-align: center;
+            margin-top: 30px;
+        }
+        td{
+            text-align: center;
+        }
+        .btn{
+            width: 100%;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-row">
+    <div class="col-xs-12">
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend style="color: #000000;font-weight: bold;text-align: center;margin-bottom: 30px;">输液泵质量检测原始记录表 (成人)</legend>
+        </fieldset>
+        <table class="layui-table">
+            <tr>
+                <td rowspan="2">流量检测</td>
+                <td colspan="3">流量测试点</td>
+                <td id="llcsd1" colspan="3">25 ml/h</td>
+                <td id="llcsd2" colspan="3">100 ml/h</td>
+                <td id="wc">测试结果：允许测量误差±10％</td>
+            </tr>
+            <tr>
+                <td colspan="3">平均流量</td>
+                <td id="pjll1" colspan="3">&nbsp;</td>
+                <td id="pjll2" colspan="3">&nbsp;</td>
+                <td>符合    不符合</td>
+            </tr>
+            <tr>
+                <td id="zsbjllz" rowspan="3">阻塞报警检测<br/>测试流量：25ml/h</td>
+                <td colspan="3">阻塞报警设置值（产品说明书）</td>
+                <td colspan="3">报警时间(min)</td>
+                <td colspan="3">报警压力（mmHg）</td>
+                <td id="zsbjWc1">测试结果允许测量误差：±20%或者±100mmHg</td>
+            </tr>
+            <tr>
+                <td>H</td>
+                <td>M</td>
+                <td>L</td>
+                <td>H</td>
+                <td>M</td>
+                <td>L</td>
+                <td>H</td>
+                <td>M</td>
+                <td>L</td>
+                <td rowspan="2">符合  不符合</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td rowspan="3">报警系统检测</td>
+                <td colspan="3">堵塞</td>
+                <td id="zs" colspan="3">符合  不符合  不适用</td>
+                <td colspan="3">即将空瓶</td>
+                <td id="jjkp">符合  不符合  不适用</td>
+            </tr>
+            <tr>
+                <td colspan="3">输液管路安装不妥</td>
+                <td id="sygbt" colspan="3">符合  不符合  不适用</td>
+                <td colspan="3">气泡报警</td>
+                <td id="qpbj">符合  不符合  不适用</td>
+            </tr>
+            <tr>
+                <td colspan="3">电源线脱开</td>
+                <td id="dyxtk" colspan="3">符合  不符合  不适用</td>
+                <td colspan="3">开门报警</td>
+                <td id="kmbj">符合  不符合  不适用</td>
+            </tr>
+        </table>
+        <div class="col-xs-12 btn">
+            <a id="back" class="layui-btn layui-btn-primary">返回</a>
+            <a id="update" class="layui-btn layui-btn-normal">修改</a>
+        </div>
+    </div>
+</div>
+<script>
+    //Demo
+    layui.use(['table','layer','jquery','form'],function(){
+        var table = layui.table
+            , layer = layui.layer
+            , $ = layui.jquery
+            , form = layui.form;
+        $(function(){
+            $.ajax({
+                url:"/syb/findManTemplate",
+                method:"GET",
+                dataType:"JSON",
+                success:function(res){
+                    console.log(res);
+                    if(res.data !== null && res.data !== ""){
+                        $("#llcsd1").append(res.data.llcsd1+"ml/h");
+                        $("#llcsd2").append(res.data.llcsd2+"ml/h");
+                        $("#wc").append("测试结果：允许测量误差±"+res.data.wc+"%");
+                        $("#zsbjllz").append("测试流量："+res.data.zsbjllz+"ml/h");
+                        $("#zsbjWc1").append("测试结果允许测量误差：±"+res.data.zsbjWc1+"%或者±"+res.data.zsbjWc2+"mmHg");
+                    }else{
+                        layer.msg("无数据");
+                    }
+                }
+            })
+        });
+     	// 修改
+        $("#update").click(function(){
+            location.href="/control/home/check/update/update_infusion_man_module.html";
+        });
+        // 返回
+        $("#back").click(function () {
+            window.history.back();
+        });
+    })
+</script>
+</body>
+
+</html>

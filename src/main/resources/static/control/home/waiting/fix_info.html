@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>检测设备</title>
+    <link rel="stylesheet" type="text/css" href="../../../static/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/admin.css"/>
+    <script src="../../../static/js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../static/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../static/js/basic.js"></script>
+    <script src="../../../static/layui/layui.js"></script>
+    <style>
+        .layui-elem-field{
+            width: 100%;
+            margin-top: 20px;
+            color: red;
+        }
+        .item{
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-row">
+    <div class="col-xs-12">
+    	<fieldset class="layui-elem-field layui-field-title">
+            <legend style="color: #000000;font-weight: bold;text-align: center;">设备检测</legend>
+        </fieldset>
+        <form style="display: flex;justify-content: center;" class="layui-form" action="">
+            <div class="layui-form-item col-xs-12 col-md-4 list">
+                <div class="layui-input-block item">
+                    <input style="margin-left: -100px;" type="text" name="dah" required  lay-verify="required" placeholder="请输入档案号" autocomplete="off" class="layui-input">
+                    <button style="margin: 0;" class="layui-btn layui-btn-normal" lay-submit lay-filter="searchSub">
+                        <i class="layui-icon">&#xe615;</i>查询
+                    </button>
+                </div>
+            </div>
+        </form>
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend style="color: red;">被检设备基础信息</legend>
+        </fieldset>
+        <table class="layui-hide" id="fixInfo" lay-filter="handle"></table>
+        <div id="history" style="display: none;">
+            <fieldset class="layui-elem-field layui-field-title">
+                <legend style="color: red;">历史检测数据</legend>
+            </fieldset>
+            <table class="layui-hide" id="hisInfo"></table>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="testHandles">
+    <a class="layui-btn layui-btn-xs" lay-event="lookHistory">检测历史</a>
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="hands">检测</a>
+</script>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+    </div>
+</script>
+<script>
+    // 获取上个页面传递的类型
+    var type = window.location.search;
+    var ids = parseInt(type.split("=")[1]);
+    var ndjhId = parseInt(sessionStorage["ndjhId"]);
+    //Demo
+    layui.use(['form','layer','jquery','table','element'],function(){
+        var form = layui.form
+            ,   layer = layui.layer
+            ,   $ = layui.jquery
+            ,   table = layui.table
+            ,   element = layui.element;
+        form.on("submit(searchSub)",function(data){
+            $.ajax({
+                url:"/yq/selectEqInfo?eqDah="+data.field.dah+"&ndjhId="+ndjhId,
+                method:"POST",
+                dataType:"JSON",
+                success:function(res){
+                    if(res.state === 200){
+                        layer.msg("查询成功");
+                        // 设备信息
+                        table.render({
+                            elem:"#fixInfo",
+                            cellMinWidth:150,
+                            toolbar: '#toolbarDemo',
+                            url:"/yq/selectEqInfo?eqDah="+data.field.dah+"&ndjhId="+ndjhId,
+                            method:"GET",
+                            response: {
+                                statusName: 'status'
+                                ,statusCode: 200
+                                ,msgName: 'hint'
+                                ,countName: 'total'
+                                ,dataName: 'data'
+                            },
+                            parseData:function(res){
+                                console.log(res.data);
+                                return{
+                                    "status":200
+                                    ,"msg":res.message
+                                    ,"count":res.total
+                                    ,"data":[res.data]
+                                }
+                            },
+                            cols:[[
+                                {field:'eqMc', title:'设备名称',align:'center'},
+                                {field:'eqDah', title:'档案号',align:'center'},
+                                {field:'eqScbh', title:'出厂编号',align:'center'},
+                                {field:'eqNum', title:'设备数量',align:'center'},
+                                {field:'eqCcdate', title:'出厂日期',align:'center'},
+                                {field:'eqCscs', title:'生产厂商',align:'center'},
+                                {field:'eqSyks', title:'使用科室',align:'center'},
+                                {field:'eqJx', title:'设备机型',align:'center'},
+                                {field:'eqQyrq', title:'启用日期',align:'center'},
+                                {field:'eqCfdd', title:'设备存放地点',align:'center'},
+                                {fixed: 'right', title:'操作',toolbar: '#testHandles',align:'center'}
+                            ]]
+                        });
+                    }else if(res.state === 503){
+                        layer.msg("该档案号不存在，请重新查询");
+                    }
+                },
+                error:function(data){
+                    layer.msg("请稍后再试");
+                    console.log(data);
+                }
+            });
+        	return false;
+        });
+        table.on('tool(handle)',function(obj){
+            var data = obj.data;
+            //console.log(obj)
+            if(obj.event === "lookHistory"){
+                layer.open({
+                    type:1,
+                    content:$("#history"),
+                    area:["90%","90%"],
+                    maxmin:true,
+                    btn:"确认",
+                    yes:function(){
+                        layer.closeAll();
+                    }
+                });
+                // 历史数据信息
+                table.render({
+                    elem:"#hisInfo",
+                    cellMinWidth:100,
+                    toolbar: '#toolbarDemo',
+                    url:"/eqzjls/selectEq/"+obj.data.eqDah,
+                    method:"GET",
+                    response:{
+                        statusName: 'status'
+                        ,statusCode: 200
+                        ,msgName: 'hint'
+                        ,countName: 'total'
+                        ,dataName: 'data'
+                    },
+                    parseData:function(res){
+                        console.log(res.data);
+                        return{
+                            "status":200
+                            ,"msg":res.message
+                            ,"count":res.total
+                            ,"data":res.data
+                        }
+                    },
+                    cols:[[
+                        {field:'eqMc', title:'设备名称',align:'center'},
+                        {field:'testTime', title:'检测时间',align:'center'},
+                        {field:'tester', title:'检测人',align:'center'},
+                        {field:'auditor', title:'审核人',align:'center'}
+                    ]]
+                });
+            }else if(obj.event === "hands"){
+                //alert(ids);
+                $.ajax({
+
+                    url:"/userEq/insertBatchByJcEqid?jcEqid="+obj.data.eqId+"&ndjhId="+ndjhId+"&eqPmId="+ids,
+                    method:"POST",
+                    dataType:"JSON",
+                    success:function(res){
+                        if(res.state === 200){
+                            sessionStorage['thisId'] = res.data;
+                            location.href="/control/home/waiting/check_info.html?id="+obj.data.eqId;
+                        }else{
+                            layer.msg("失败");
+                        }
+                    },
+                    error:function(data){
+                        console.log(data);
+                        layer.msg("失败");
+                    }
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

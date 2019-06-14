@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>高频电刀质量检测原始记录表</title>
+    <link rel="stylesheet" type="text/css" href="../../../../static/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../static/css/admin.css"/>
+    <script src="../../../../static/js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../static/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../static/layui/layui.js"></script>
+    <style>
+        td{
+            text-align: center;
+        }
+        .btn{
+            width: 100%;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-row">
+    <div class="col-xs-12">
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend style="color: #000000;font-weight: bold;text-align: center;margin-bottom: 30px;">高频电刀质量检测原始记录表</legend>
+        </fieldset>
+        <table class="layui-table">
+            <tr>
+                <td>最大允许误差</td>
+                <td colspan="7">输出功率±20%、高频漏电流≤150 mA（单极）、高频漏电流≤60 mA（双极）</td>
+            </tr>
+            <tr>
+                <td style="width: 12%;" rowspan="6">输出功率 (W)</td>
+                <td style="width: 12%;" rowspan="2">单极电切</td>
+                <td style="width: 12%;">设定功率 (W)</td>
+                <td id="djdqTest1" style="width: 12%;">75</td>
+                <td id="djdqTest2" style="width: 12%;">150</td>
+                <td id="djdqTest3" style="width: 12%;">220</td>
+                <td id="djdqTest4" style="width: 12%;">300</td>
+                <td id="djdqWc" style="width: 12%;">允许误差：±20%</td>
+            </tr>
+            <tr>
+                <td>测量功率 (W)</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>□符合 □不符合 □不适用</td>
+            </tr>
+            <tr>
+                <td rowspan="2">单极电凝</td>
+                <td>设定功率 (W)</td>
+                <td id="djdnTest1">30</td>
+                <td id="djdnTest2">60</td>
+                <td id="djdnTest3">90</td>
+                <td id="djdnTest4">120</td>
+                <td id="djdnWc">允许误差：±20%</td>
+            </tr>
+            <tr>
+                <td>测量功率 (W)</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>□符合 □不符合 □不适用</td>
+            </tr>
+            <tr>
+                <td rowspan="2">双极电凝</td>
+                <td>设定功率 (W)</td>
+                <td id="sjdnTest1">12.5</td>
+                <td id="sjdnTest2">25</td>
+                <td id="sjdnTest3">37.5</td>
+                <td id="sjdnTest4">50</td>
+                <td id="sjdnWc">允许误差：±20%</td>
+            </tr>
+            <tr>
+                <td>测量功率 (W)</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>□符合 □不符合 □不适用</td>
+            </tr>
+            <tr>
+                <td rowspan="3">高频漏电 (mA)</td>
+                <td>单极模式</td>
+                <td>单极电切</td>
+                <td>单极电凝</td>
+                <td id="djgpldWc">允许误差 ≤150 mA</td>
+                <td>双极模式</td>
+                <td>双极电凝</td>
+                <td id="sjgpldWc">允许误差 ≤60 mA</td>
+            </tr>
+            <tr>
+                <td>手术电极高频漏电</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td rowspan="2">□符合  □不符合 □不适用</td>
+                <td>电极1</td>
+                <td>&nbsp;</td>
+                <td rowspan="2">□符合  □不符合 □不适用</td>
+            </tr>
+            <tr>
+                <td>中性电极高频漏电</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>电极2</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>接触电阻监测</td>
+                <td id="spare1" colspan="2">□符合 □不符合</td>
+                <td colspan="2">声光报警功能</td>
+                <td id="spare2" colspan="3">□符合 □不符合</td>
+            </tr>
+        </table>
+        <div class="col-xs-12 btn">
+            <a id="back" class="layui-btn layui-btn-primary">返回</a>
+            <a id="update" class="layui-btn layui-btn-normal">修改</a>
+        </div>
+    </div>
+</div>
+<script>
+    //Demo
+    layui.use(['table','layer','jquery','form'],function(){
+        var table = layui.table
+            , layer = layui.layer
+            , $ = layui.jquery
+            , form = layui.form;
+        $(function(){
+            $.ajax({
+                url:"/gpdd/findTemplate",
+                method:"GET",
+                dataType:"JSON",
+                success:function(res){
+                    console.log(res);
+                    if(res.data !== null && res.data !== ""){
+                        $("#djdqTest1").append(res.data.djdqTest1);
+                        $("#djdqTest2").append(res.data.djdqTest2);
+                        $("#djdqTest3").append(res.data.djdqTest3);
+                        $("#djdqTest4").append(res.data.djdqTest4);
+                        $("#djdqWc").append("允许误差：±"+res.data.djdqWc+"%");
+                        $("#djdnTest1").append(res.data.djdnTest1);
+                        $("#djdnTest2").append(res.data.djdnTest2);
+                        $("#djdnTest3").append(res.data.djdnTest3);
+                        $("#djdnTest4").append(res.data.djdnTest4);
+                        $("#djdnWc").append("允许误差：±"+res.data.djdnWc+"%");
+                        $("#sjdnTest1").append(res.data.sjdnTest1);
+                        $("#sjdnTest2").append(res.data.sjdnTest2);
+                        $("#sjdnTest3").append(res.data.sjdnTest3);
+                        $("#sjdnTest4").append(res.data.sjdnTest4);
+                        $("#sjdnWc").append("允许误差：±"+res.data.sjdnWc+"%");
+                        $("#djgpldWc").append("允许误差 ≤"+res.data.djgpldWc+"mA");
+                        $("#sjgpldWc").append("允许误差 ≤"+res.data.sjgpldWc+"mA");
+                    }else{
+                        layer.msg("无数据");
+                    }
+                }
+            })
+        });
+     	// 修改
+        $("#update").click(function(){
+            location.href="/control/home/check/update/update_endotherm_knife_module.html";
+        });
+        // 返回
+        $("#back").click(function () {
+            window.history.back();
+        });
+    });
+</script>
+</body>
+
+</html>

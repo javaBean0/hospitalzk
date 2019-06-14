@@ -1,0 +1,17 @@
+package com.litbo.hospitalzj.supplier.service;
+/**
+ * 国别业务层接口
+ * @author 刘洋
+ *
+ */
+
+import com.litbo.hospitalzj.supplier.entity.SGb;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+
+public interface SGbService {
+	List<SGb> Select();
+	List<SGb> findGbLike(@Param("gb") String gb);
+}

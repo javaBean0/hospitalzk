@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>验收所有信息</title>
+    <link rel="stylesheet" type="text/css" href="../../static/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/admin.css"/>
+    <script src="../../static/layui/layui.js"></script>
+    <style>
+      .layui-elem-field{
+        width: 100%;
+        margin-top: 20px;
+        color: red;
+      }
+      .btn{
+        margin-top: 40px;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+      th,td{
+          text-align: center;
+      }
+    </style>
+</head>
+<body>
+  <div class="layui-row">
+    <p style="height: 34px;width: 100%;line-height: 34px;background-color: lightyellow; text-align: center;"><span class="sign">***</span>请认真核对合同信息是否正确<span class="sign">***</span></p>
+    <div class="col-xs-12">
+      <fieldset class="layui-elem-field layui-field-title">
+          <legend>合同信息详情</legend>
+      </fieldset>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th style="width: 50%;text-align: center;">字段名称</th>
+            <th style="width: 50%;text-align: center;">数据</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>供应商</td>
+            <td id="htGhsn"></td>
+        </tr>
+        <tr>
+            <td>供方联系人</td>
+            <td id="htGhslxr"></td>
+        </tr>
+        <tr>
+            <td>供方联系电话</td>
+            <td id="htGhsdh"></td>
+        </tr>
+        <tr>
+            <td>合同号</td>
+            <td id="htHthao"></td>
+        </tr>
+        <tr>
+            <td>招标编号</td>
+            <td id="htZhbhao"></td>
+        </tr>
+        <tr>
+            <td>合同总金额</td>
+            <td id="htZje"></td>
+        </tr>
+        <tr>
+            <td>合同签约期</td>
+            <td id="htQytime"></td>
+        </tr>
+        <tr>
+            <td>合同到货期</td>
+            <td id="htDhtime"></td>
+        </tr>
+        <tr>
+            <td>备注</td>
+            <td id="htBz"></td>
+        </tr>
+        <tr>
+            <td>来源</td>
+            <td id="htLy"></td>
+        </tr>
+        <tr>
+            <td>采购方式</td>
+            <td id="htCgfs"></td>
+        </tr>
+        <tr>
+            <td>申购类别</td>
+            <td id="htSglb"></td>
+        </tr>
+        <tr>
+            <td>经费来源</td>
+            <td id="htJfly"></td>
+        </tr>
+        </tbody>
+    </table>
+      <fieldset class="layui-elem-field layui-field-title">
+          <legend>设备信息详情</legend>
+      </fieldset>
+      <table class="layui-table" id="sbInfo" lay-filter="looksbfj"></table>
+      <fieldset class="layui-elem-field layui-field-title">
+          <legend>设备文件</legend>
+      </fieldset>
+      <!--<table class="layui-table" id="fileInfo"></table>-->
+      <table class="layui-table">
+            <thead>
+            <tr>
+                <th style="width: 50%;">文件名称</th>
+                <th style="width: 50%;">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>合同文件</td>
+                <td>
+                    <a id="lookHt" class="layui-btn layui-btn-normal">查看</a>
+                </td>
+            </tr>
+            <tr>
+                <td>中标通知书</td>
+                <td>
+                    <a id="lookZhb" class="layui-btn layui-btn-normal">查看</a>
+                </td>
+            </tr>
+            <tr>
+                <td>医疗器械注册登记证</td>
+                <td>
+                    <a id="lookYlqx" class="layui-btn layui-btn-normal">查看</a>
+                </td>
+            </tr>
+            <tr>
+                <td>厂家授权证明书</td>
+                <td>
+                    <a id="lookCjsq" class="layui-btn layui-btn-normal">查看</a>
+                </td>
+            </tr>
+            <tr>
+                <td>海关进口货物报关单</td>
+                <td>
+                    <a id="lookHgjk" class="layui-btn layui-btn-normal">查看</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+      <fieldset class="layui-elem-field layui-field-title">
+          <legend>验收信息</legend>
+      </fieldset>
+      <table class="layui-table" id="checkInfo"></table>
+      <div class="col-xs-12 btn">
+          <button id="sureSend" class="layui-btn layui-btn-normal">同意验收</button>
+      </div>
+    </div>
+  </div>
+  <script type="text/html" id="barDemo">
+      <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="look">查看详细</a>
+      <a class="layui-btn layui-btn-xs" lay-event="lookFssb">查看附属设备</a>
+      <a class="layui-btn layui-btn-xs" lay-event="lookFj">查看附件</a>
+  </script>
+<script>
+  // 获取上个页面传递的类型
+  var type = window.location.search;
+  var ids = parseInt(type.split("=")[1]);
+  sessionStorage['htId'] = ids;
+  //Demo
+  layui.use(['layer','jquery','table'], function(){
+      var layer = layui.layer
+      ,   $ = layui.jquery
+      ,   table = layui.table;
+      // 合同信息
+      $(function(){
+          $.ajax({
+              url:"/htInfo/selectOne?htId="+ids,
+              method:"GET",
+              dataType:"JSON",
+              success:function(res){
+                  if(res.data != "" && res.data != ""){
+                      $("#htGhsn").append(res.data.htGhsn);
+                      $("#htGhslxr").append(res.data.htGhslxr);
+                      $("#htGhsdh").append(res.data.htGhsdh);
+                      $("#htHthao").append(res.data.htHthao);
+                      $("#htZhbhao").append(res.data.htZhbhao);
+                      $("#htGzspd").append(res.data.htGzspd);
+                      $("#htZje").append(res.data.htZje);
+                      $("#htQytime").append(res.data.htQytime);
+                      $("#htDhtime").append(res.data.htDhtime);
+                      $("#htBz").append(res.data.htBz);
+                      $("#htLy").append(res.data.htLy);
+                      $("#htCgfs").append(res.data.htCgfs);
+                      $("#htSglb").append(res.data.htSglb);
+                      $("#htJfly").append(res.data.htJfly);
+                  }else{
+                      console.log("isGml");
+                  }
+              },
+              error:function(data){
+                  layer.msg("请稍后再试");
+              }
+          })
+      });
+      // 设备信息
+      table.render({
+        elem:"#sbInfo"
+        ,cellMinWidth: 120
+        ,url:"/eqInfo/selectEqHt?htIds="+ids
+        ,method:"GET"
+        ,response: {
+              statusName: 'status' //规定数据状态的字段名称，默认：code
+            ,statusCode: 200 //规定成功的状态码，默认：0
+            ,msgName: 'hint' //规定状态信息的字段名称，默认：msg
+            ,countName: 'total' //规定数据总数的字段名称，默认：count
+            ,dataName: 'data' //规定数据列表的字段名称，默认：data
+           }
+        ,parseData:function(res){
+          console.log(res);
+          return{
+            "status":200
+            ,"msg":res.message
+            ,"count":res.total
+            ,"data":res.data
+          }
+        },
+        title:"验收申请设备信息记录表",
+        // page:true,
+        cols:[[
+            {field:'eqMc', title:'设备名称',align:'center'},
+            {field:'eqXh', title:'规格型号',align:'center'},
+            {field:'eqPrice', title:'设备单价',align:'center'},
+            {field:'eqNum', title:'数量',align:'center'},
+            {field:'eqSyks', title:'使用科室',align:'center'},
+            {field:'eqYt', title:'设备用途',sort: true,align:'center'},
+            {field:'eqAzdd', title:'安装地点',align:'center'},
+            {field:'eqCscs', title:'生产厂商',sort: true,align:'center'},
+            {field:'eqGb', title:'国别',sort: true,align:'center'},
+            {field:'eqBgbh', title:'海关进口货物报关单号',align:'center'},
+            {field:'eqScbh', title:'出厂编号',align:'center'},
+            {field:'eqCcdate', title:'出厂日期',align:'center'},
+            {field:'eqBxq', title:'保修期(月)',align:'center'},
+            {field:'eqShFws', title:'售后服务机构',align:'center'},
+            {field:'eqShQddh', title:'售后座机',align:'center'},
+            {field:'eqShShjl', title:'售后经理',align:'center'},
+            {field:'eqShJldh', title:'售后经理电话',align:'center'},
+            {field:'eqShLxr', title:'售后联系人',align:'center'},
+            {field:'eqShLxrdh', title:'售后联系电话',align:'center'},
+            {field:'eqShLb', title:'设备类别',align:'center'},
+            {fixed: 'right', title:'操作',minWidth:250, toolbar: '#barDemo',align:'center'}
+      ]]
+      });
+      // 验收信息
+      table.render({
+          elem:"#checkInfo"
+          ,cellMinWidth: 80
+          ,url:"/htInfo/selectOne?htId="+ids
+          ,method:"GET"
+          ,response: {
+              statusName: 'status' //规定数据状态的字段名称，默认：code
+              ,statusCode: 200 //规定成功的状态码，默认：0
+              ,msgName: 'hint' //规定状态信息的字段名称，默认：msg
+              ,countName: 'total' //规定数据总数的字段名称，默认：count
+              ,dataName: 'data' //规定数据列表的字段名称，默认：data
+          }
+          ,parseData:function(res){
+              console.log(res);
+              return{
+                  "status":200
+                  ,"msg":res.message
+                  ,"count":res.total
+                  ,"data":[res.data]
+              }
+          },
+          // page:true,
+          cols:[[
+              {field:'htYssj', title:'预约验收时间',align:'center'},
+              {field:'htYsyDh', title:'验收联系电话',align:'center'},
+              {field:'htBz', title:'验收要求',align:'center'}
+          ]]
+      });
+    //监听行工具事件
+    table.on('tool(looksbfj)', function(obj){
+      var data = obj.data;
+      console.log(obj);
+        if(obj.event === 'look'){
+            location.href="/supplier/look_info/fixs_info.html?id="+obj.data.eqId;
+        }else if(obj.event === 'lookFssb'){
+            location.href="/supplier/look_info/child_fix_info.html?id="+obj.data.eqId;
+        }else if(obj.event === 'lookFj'){
+            location.href="/supplier/look_info/enclosure_info.html?id="+obj.data.eqId;
+        }
+    });
+    $("#sureSend").click(function(){
+        $.ajax({
+            url:"/htInfo/tyys?htId="+ids,
+            method:"POST",
+            dataType:"JSON",
+            success:function(res){
+                if(res.state === 200){
+                    layer.msg("同意验收成功");
+                    setTimeout(function(){
+                        location.href="/supplier/home/schedule.html"
+                    },1500);
+                }else{
+                    layer.msg("同意验收失败");
+                }
+            },
+            error:function(data){
+                layer.msg("请稍后再试");
+                console.log(data);
+            }
+        });
+    });
+    // 查看合同文件
+    $("#lookHt").click(function(){
+        location.href="/supplier/file/ht_accept_file.html?id="+1;
+    });
+      // 中标通知书
+      $("#lookZhb").click(function(){
+          location.href="/supplier/file/ht_accept_file.html?id="+2;
+      });
+      // 医疗器械注册登记证
+      $("#lookYlqx").click(function(){
+          location.href="/supplier/file/ht_accept_file.html?id="+3;
+      });
+      // 厂家授权证明书
+      $("#lookCjsq").click(function(){
+          location.href="/supplier/file/ht_accept_file.html?id="+4;
+      });
+      // 海关进口货物报关单
+      $("#lookHgjk").click(function(){
+          location.href="/supplier/file/ht_accept_file.html?id="+5;
+      });
+  });
+</script>
+</body>
+</html>

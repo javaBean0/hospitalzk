@@ -1,0 +1,61 @@
+package com.litbo.hospitalzj.supplier.controller;
+
+import com.litbo.hospitalzj.controller.BaseController;
+import com.litbo.hospitalzj.supplier.entity.EqYt;
+import com.litbo.hospitalzj.supplier.service.EqYtService;
+import com.litbo.hospitalzj.util.ResponseResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+/**
+ * 设备用途控制层
+ * @author 刘洋
+ *
+ */
+@RestController
+@RequestMapping("/eqyt")
+public class EqYtController extends BaseController{
+	@Autowired
+	public EqYtService eqYtService;
+	
+	@RequestMapping("/{eqytId}")
+	public ResponseResult<EqYt> getByCode(@PathVariable("eqytId") Integer eqytId) {
+		EqYt data=eqYtService.getById(eqytId);
+		return new ResponseResult<EqYt>(SUCCESS,data);
+	}
+	@RequestMapping("/all")
+	public ResponseResult<List<EqYt>> getAll() {
+		List<EqYt> data=eqYtService.getAll();
+		return new ResponseResult<List<EqYt>>(SUCCESS,data);
+	}
+	@RequestMapping("/allEqYt")
+	public ResponseResult<List<EqYt>> All() {
+		List<EqYt> data=eqYtService.getAll();
+		return new ResponseResult<List<EqYt>>(SUCCESS,data);
+	}
+	@RequestMapping("/insert")
+	public ResponseResult<Void> insert(EqYt eqYt) {
+		System.out.println(eqYt);
+		eqYtService.insert(eqYt);
+		return new ResponseResult<Void>(SUCCESS);
+	}
+	@RequestMapping("/delete")
+	public ResponseResult<Void> delete(Integer eqytId) {
+		eqYtService.delete(eqytId,1);
+		return new ResponseResult<Void>(SUCCESS);
+	}
+	@RequestMapping("/update")
+	public ResponseResult<EqYt> update(EqYt eqYt) {
+		EqYt data=eqYtService.update(eqYt);
+		return new ResponseResult<EqYt>(SUCCESS,data);
+	}
+	@RequestMapping("/findEqYtLike")
+	public ResponseResult<List<EqYt>> findEqYtLike(String eqytName) {
+		List<EqYt> data=eqYtService.findEqYtLike(eqytName);
+		return new ResponseResult<List<EqYt>>(SUCCESS,data);
+	}
+}
