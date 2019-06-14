@@ -5,9 +5,13 @@ import com.litbo.hospitalzj.checklist.domain.DcsjhyTemplate;
 import com.litbo.hospitalzj.checklist.service.DcsjhyService;
 import com.litbo.hospitalzj.checklist.utils.commons.CommonUtils;
 import com.litbo.hospitalzj.controller.BaseController;
+import com.litbo.hospitalzj.user.bean.EqZjls;
+import com.litbo.hospitalzj.user.service.EqZjlsService;
 import com.litbo.hospitalzj.util.ResponseResult;
 import com.litbo.hospitalzj.zk.Enum.EnumProcess2;
+import com.litbo.hospitalzj.zk.domian.EqInfo;
 import com.litbo.hospitalzj.zk.domian.TabEq;
+import com.litbo.hospitalzj.zk.service.EqInfoService;
 import com.litbo.hospitalzj.zk.service.TabEqService;
 import com.litbo.hospitalzj.zk.service.UserEqService;
 import com.litbo.hospitalzj.zk.service.YqEqService;
@@ -36,6 +40,11 @@ public class JhyController extends BaseController {
 	private TabEqService tabEqService;
 	@Autowired
 	private YqEqService yqEqService;
+
+	@Autowired
+	private EqZjlsService eqZjlsService;
+	@Autowired
+	private EqInfoService eqInfoService;
 	/**
 	 *  查询多参数监护仪模板表数据
 	 * @return
@@ -110,6 +119,13 @@ public class JhyController extends BaseController {
 		//修改状态为待上传
 		userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
 		dcsjhyService.saveMan(dcsjhy);
+		//质检流水
+		EqZjls eqZjls = CommonUtils.toBean(req.getParameterMap(), EqZjls.class);
+		EqInfo eqById = eqInfoService.findEqById(eqId);
+		eqZjls.setEqMc(eqById.getEqMc());
+		eqZjls.setEqDah(eqById.getEqDah());
+		eqZjlsService.insert(eqZjls);
+
 		TabEq table=new TabEq();
 		table.setEqId(Integer.valueOf(eqId));
 		table.setJcyqId(Integer.valueOf(jcyqId));
@@ -138,6 +154,13 @@ public class JhyController extends BaseController {
 		yqEqService.updateType(yqEqId, EnumProcess2.TO_UPLOAD.getMessage());
 		userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
 		dcsjhyService.saveChild(dcsjhy);
+		//质检流水
+		EqZjls eqZjls = CommonUtils.toBean(req.getParameterMap(), EqZjls.class);
+		EqInfo eqById = eqInfoService.findEqById(eqId);
+		eqZjls.setEqMc(eqById.getEqMc());
+		eqZjls.setEqDah(eqById.getEqDah());
+		eqZjlsService.insert(eqZjls);
+
 		TabEq table=new TabEq();
 		table.setEqId(Integer.valueOf(eqId));
 		table.setJcyqId(Integer.valueOf(jcyqId));

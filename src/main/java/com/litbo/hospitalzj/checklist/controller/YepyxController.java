@@ -3,9 +3,14 @@ package com.litbo.hospitalzj.checklist.controller;
 import com.litbo.hospitalzj.checklist.domain.Yepyx;
 import com.litbo.hospitalzj.checklist.domain.YepyxTemplate;
 import com.litbo.hospitalzj.checklist.service.YepyxService;
+import com.litbo.hospitalzj.checklist.utils.commons.CommonUtils;
 import com.litbo.hospitalzj.controller.BaseController;
+import com.litbo.hospitalzj.user.bean.EqZjls;
+import com.litbo.hospitalzj.user.service.EqZjlsService;
 import com.litbo.hospitalzj.util.ResponseResult;
 import com.litbo.hospitalzj.zk.Enum.EnumProcess2;
+import com.litbo.hospitalzj.zk.domian.EqInfo;
+import com.litbo.hospitalzj.zk.service.EqInfoService;
 import com.litbo.hospitalzj.zk.service.UserEqService;
 import com.litbo.hospitalzj.zk.service.YqEqService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -26,6 +32,10 @@ public class YepyxController extends BaseController {
     private YqEqService yqEqService;
     @Autowired
     private UserEqService userEqService;
+    @Autowired
+    private EqZjlsService eqZjlsService;
+    @Autowired
+    private EqInfoService eqInfoService;
     //查询婴儿培养箱检测模板表
     @RequestMapping("/findTemplate")
     public ResponseResult<YepyxTemplate> findTemplate(){
@@ -47,14 +57,20 @@ public class YepyxController extends BaseController {
     //保存婴儿培养箱检测数据
     @RequestMapping("/save")
     public ResponseResult save(@RequestParam(value = "eqId") String eqId,
-                                     @RequestParam(value = "jcyqId") String jcyqId,
-                                     @RequestParam(value = "userEqId") Integer userEqId,
-                                     Yepyx yepyx){
+                               @RequestParam(value = "jcyqId") String jcyqId,
+                               @RequestParam(value = "userEqId") Integer userEqId,
+                               Yepyx yepyx, HttpServletRequest req){
         int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
         yqEqService.updateType(yqEqId, EnumProcess2.TO_UPLOAD.getMessage());
         //修改状态为待上传
         userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
         yepyxService.save(yepyx);
+        //质检流水
+        EqZjls eqZjls = CommonUtils.toBean(req.getParameterMap(), EqZjls.class);
+        EqInfo eqById = eqInfoService.findEqById(eqId);
+        eqZjls.setEqMc(eqById.getEqMc());
+        eqZjls.setEqDah(eqById.getEqDah());
+        eqZjlsService.insert(eqZjls);
         int[] x={yepyx.getPyxId(),yqEqId};
         return new ResponseResult<>(200,x);
     }

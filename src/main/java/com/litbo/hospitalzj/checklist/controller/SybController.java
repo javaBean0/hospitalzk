@@ -4,9 +4,14 @@ import com.litbo.hospitalzj.checklist.domain.SybC;
 import com.litbo.hospitalzj.checklist.domain.SybCTemplate;
 import com.litbo.hospitalzj.checklist.service.SybService;
 import com.litbo.hospitalzj.checklist.utils.ResponseResult;
+import com.litbo.hospitalzj.checklist.utils.commons.CommonUtils;
 import com.litbo.hospitalzj.controller.BaseController;
+import com.litbo.hospitalzj.user.bean.EqZjls;
+import com.litbo.hospitalzj.user.service.EqZjlsService;
 import com.litbo.hospitalzj.zk.Enum.EnumProcess2;
+import com.litbo.hospitalzj.zk.domian.EqInfo;
 import com.litbo.hospitalzj.zk.domian.TabEq;
+import com.litbo.hospitalzj.zk.service.EqInfoService;
 import com.litbo.hospitalzj.zk.service.TabEqService;
 import com.litbo.hospitalzj.zk.service.UserEqService;
 import com.litbo.hospitalzj.zk.service.YqEqService;
@@ -34,6 +39,10 @@ public class SybController extends BaseController {
     private YqEqService yqEqService;
     @Autowired
     private TabEqService tabEqService;
+    @Autowired
+    private EqZjlsService eqZjlsService;
+    @Autowired
+    private EqInfoService eqInfoService;
     //插入模板数据
     //插入输液泵儿童模板值
     @RequestMapping("/insertChildTemplate")
@@ -81,12 +90,20 @@ public class SybController extends BaseController {
     public ResponseResult savechild(@RequestParam(value = "eqId") String eqId,
                                           @RequestParam(value = "jcyqId") String jcyqId,
                                           @RequestParam(value = "userEqId") Integer userEqId,
-                                          SybC sybC){
+                                          SybC sybC, HttpServletRequest req){
         int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
         yqEqService.updateType(yqEqId, EnumProcess2.TO_UPLOAD.getMessage());
         //修改状态为待上传
         userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
         sybService.saveChild(sybC);
+
+        //质检流水
+        EqZjls eqZjls = CommonUtils.toBean(req.getParameterMap(), EqZjls.class);
+        EqInfo eqById = eqInfoService.findEqById(eqId);
+        eqZjls.setEqMc(eqById.getEqMc());
+        eqZjls.setEqDah(eqById.getEqDah());
+        eqZjlsService.insert(eqZjls);
+
         TabEq table=new TabEq();
         table.setEqId(Integer.valueOf(eqId));
         table.setJcyqId(Integer.valueOf(jcyqId));
@@ -112,6 +129,14 @@ public class SybController extends BaseController {
         //修改状态为待上传
         userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
         sybService.saveMan(sybC);
+
+        //质检流水
+        EqZjls eqZjls = CommonUtils.toBean(req.getParameterMap(), EqZjls.class);
+        EqInfo eqById = eqInfoService.findEqById(eqId);
+        eqZjls.setEqMc(eqById.getEqMc());
+        eqZjls.setEqDah(eqById.getEqDah());
+        eqZjlsService.insert(eqZjls);
+
         TabEq table=new TabEq();
         table.setEqId(Integer.valueOf(eqId));
         table.setJcyqId(Integer.valueOf(jcyqId));

@@ -12,6 +12,7 @@
     <groupId>com.litbo</groupId>
     <artifactId>hospitalzj</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
     <name>hospitalzj</name>
     <description>Demo project for Spring Boot</description>
 
@@ -197,6 +198,7 @@
     </dependencies>
 
     <build>
+        <finalName>hospitalzk</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
