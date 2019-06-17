@@ -40,10 +40,10 @@
                 <td style="width: 12%;" rowspan="6">输出功率 (W)</td>
                 <td style="width: 12%;" rowspan="2">单极电切</td>
                 <td style="width: 12%;">设定功率 (W)</td>
-                <td id="djdqTest1" style="width: 12%;">75</td>
-                <td id="djdqTest2" style="width: 12%;">150</td>
-                <td id="djdqTest3" style="width: 12%;">220</td>
-                <td id="djdqTest4" style="width: 12%;">300</td>
+                <td id="djdqTest1" style="width: 12%;"></td><!--75-->
+                <td id="djdqTest2" style="width: 12%;"></td><!--150-->
+                <td id="djdqTest3" style="width: 12%;"></td><!--220-->
+                <td id="djdqTest4" style="width: 12%;"></td><!--300-->
                 <td id="djdqWc" style="width: 12%;">允许误差：±20%</td>
             </tr>
             <tr>
@@ -57,10 +57,10 @@
             <tr>
                 <td rowspan="2">单极电凝</td>
                 <td>设定功率 (W)</td>
-                <td id="djdnTest1">30</td>
-                <td id="djdnTest2">60</td>
-                <td id="djdnTest3">90</td>
-                <td id="djdnTest4">120</td>
+                <td id="djdnTest1"></td><!--30-->
+                <td id="djdnTest2"></td><!--60-->
+                <td id="djdnTest3"></td><!--90-->
+                <td id="djdnTest4"></td><!--120-->
                 <td id="djdnWc">允许误差：±20%</td>
             </tr>
             <tr>
@@ -74,11 +74,11 @@
             <tr>
                 <td rowspan="2">双极电凝</td>
                 <td>设定功率 (W)</td>
-                <td id="sjdnTest1">12.5</td>
-                <td id="sjdnTest2">25</td>
-                <td id="sjdnTest3">37.5</td>
-                <td id="sjdnTest4">50</td>
-                <td id="sjdnWc">允许误差：±20%</td>
+                <td id="sjdnTest1"></td><!--12.5-->
+                <td id="sjdnTest2"></td><!--25-->
+                <td id="sjdnTest3"></td><!--37.5-->
+                <td id="sjdnTest4"></td><!--50-->
+                    <td id="sjdnWc">允许误差：±20%</td>
             </tr>
             <tr>
                 <td>测量功率 (W)</td>
@@ -93,7 +93,7 @@
                 <td>单极模式</td>
                 <td>单极电切</td>
                 <td>单极电凝</td>
-                <td id="djgpldWc">允许误差 ≤150 mA</td>
+                <td id="djgpldWc"><span>允许误差 ≤</span>150<span>mA</span></td><!--150-->
                 <td>双极模式</td>
                 <td>双极电凝</td>
                 <td id="sjgpldWc">允许误差 ≤60 mA</td>
@@ -171,7 +171,8 @@
         });
         // 返回
         $("#back").click(function () {
-            window.history.back();
+            location.href="/control/home/check/module/endotherm_knife.html";
+           /* window.history.back();*/
         });
     });
 </script>
