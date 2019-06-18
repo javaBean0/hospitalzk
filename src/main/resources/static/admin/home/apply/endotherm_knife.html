@@ -156,7 +156,7 @@
     var type = window.location.search;
     var ids = parseInt(type.split("=")[1]);
     var thiseqId = parseInt(sessionStorage['thiseqId']);
-    var babyId = "";
+    var gpddId = "";
     $(function(){
         $.ajax({
             url:"/gpdd/findByEqIdandJcyqIdLast1?eqId="+thiseqId+"&jcyqId="+ids,
@@ -164,6 +164,7 @@
             dataType:"JSON",
             success:function(res){
                 console.log(res);
+                gpddId = res.data.gpddid;
                 if(res.data != null && res.data != ""){
                     $("#djdqValue1").append(res.data.djdqValue1);
                     $("#djdqValue2").append(res.data.djdqValue2);
@@ -236,7 +237,7 @@
         form.on("submit(subEnd)",function(data){
             console.log(data.field);
             $.ajax({
-                url:"/dqjc/updateShrJcjy?babyId="+babyId+"&jcyqId="+ids+"&eqId="+thiseqId+"&shrJcjl="+data.field.shrJcjl+"&state="+data.field.state,
+                url:"/gpdd/updateShrJcjy?gpddid="+gpddId+"&jcyqId="+ids+"&eqId="+thiseqId+"&shrJcjl="+data.field.shrJcjl+"&state="+data.field.state,
                 method:"POST",
                 dataType:"JSON",
                 success:function(res){

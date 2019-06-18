@@ -65,7 +65,7 @@ public class GpddServiceImpl implements GpddService {
         return gpddMapper.findByGpddid(gpddid);
     }
     @Override
-    public void updateShrJcjy(Integer dqjcid, String shrJcjl, String auditor) {
-        gpddMapper.updateShrJcjy(dqjcid,shrJcjl,auditor,new Date());
+    public void updateShrJcjy(Integer gpddid, String shrJcjl, String auditor) {
+        gpddMapper.updateShrJcjy(gpddid,shrJcjl,auditor,new Date());
     }
 }

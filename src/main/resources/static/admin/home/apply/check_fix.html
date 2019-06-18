@@ -181,15 +181,16 @@
                     });
                 }
             }else if(obj.event === "hands2"){
-                if(obj.data.jcyqName == "婴儿培养箱检测仪"){
+                //alert(obj.data.jcyqName);
+                if(obj.data.jcyqName == "婴儿培养箱分析仪"){
                     location.href="/admin/home/apply/baby_table.html?id="+obj.data.jcyqId;
-                }else if(obj.data.jcyqName == "高频电刀检测仪"){
+                }else if(obj.data.jcyqName == "高频电刀分析仪"){
                     location.href="/admin/home/apply/endotherm_knife.html?id="+obj.data.jcyqId;
-                }else if(obj.data.jcyqName == "呼吸机检测仪"){
+                }else if(obj.data.jcyqName == "气流分析仪"){
                     location.href="/admin/home/apply/breathing_machine_table.html?id="+obj.data.jcyqId;
-                }else if(obj.data.jcyqName == "双通道注射泵检测仪"){
+                }else if(obj.data.jcyqName == "双通道注射泵分析仪"){
                     location.href="/admin/home/apply/double_injection_pump.html?id="+obj.data.jcyqId;
-                }else if(obj.data.jcyqName == "除颤仪检测仪"){
+                }else if(obj.data.jcyqName == "除颤起搏分析仪"){
                     location.href="/admin/home/apply/defibrillator_table.html?id="+obj.data.jcyqId;
                 }
             }

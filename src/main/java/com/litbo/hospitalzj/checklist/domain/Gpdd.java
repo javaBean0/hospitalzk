@@ -20,6 +20,28 @@ public class Gpdd {
     private Date shsjTime;
     private String jcjl;
 
+
+
+
+
+    private String shrJcjl;
+
+    public Date getShsjTime() {
+        return shsjTime;
+    }
+
+    public void setShsjTime(Date shsjTime) {
+        this.shsjTime = shsjTime;
+    }
+
+    public String getShrJcjl() {
+        return shrJcjl;
+    }
+
+    public void setShrJcjl(String shrJcjl) {
+        this.shrJcjl = shrJcjl;
+    }
+
     private String jcsm;
 
     private Double djdqTest1;

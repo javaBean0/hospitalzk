@@ -35,5 +35,5 @@ public interface GpddService {
     Gpdd findByGpddid(@Param("gpddid") Integer gpddid);
 
     //修改审核人意见
-    void updateShrJcjy(@Param("dqjcid") Integer dqjcid, @Param("shrJcjl") String shrJcjl, @Param("auditor") String auditor);
+    void updateShrJcjy(@Param("gpddid") Integer gpddid, @Param("shrJcjl") String shrJcjl, @Param("auditor") String auditor);
 }
