@@ -19,6 +19,22 @@ public class SybC {
     private Date testTime;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+
+
+
+
+    private String shrJcjl;
+
+    public String getShrJcjl() {
+        return shrJcjl;
+    }
+
+    public void setShrJcjl(String shrJcjl) {
+        this.shrJcjl = shrJcjl;
+    }
+
+
+
     private Date shsjTime;
 
     private String jcjl;

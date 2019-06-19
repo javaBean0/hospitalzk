@@ -61,7 +61,8 @@ public class HxjController extends BaseController {
     public ResponseResult saveChild(@RequestParam("eqId") String eqId,
                                     @RequestParam("jcyqId") String jcyqId,
                                     @RequestParam(value = "userEqId") Integer userEqId,
-                                    Hxj hxj, HttpServletRequest req){
+                                    HttpServletRequest req){
+        Hxj hxj = CommonUtils.toBean(req.getParameterMap(), Hxj.class);
         int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
         yqEqService.updateType(yqEqId, EnumProcess2.TO_UPLOAD.getMessage());
         //修改状态为待上传

@@ -87,10 +87,11 @@ public class SybController extends BaseController {
 
     //修改幼儿数据表信息
     @RequestMapping("/saveChild")
-    public ResponseResult savechild(@RequestParam(value = "eqId") String eqId,
+    public ResponseResult saveChild(@RequestParam(value = "eqId") String eqId,
                                           @RequestParam(value = "jcyqId") String jcyqId,
                                           @RequestParam(value = "userEqId") Integer userEqId,
-                                          SybC sybC, HttpServletRequest req){
+                                           HttpServletRequest req){
+        SybC sybC = CommonUtils.toBean(req.getParameterMap(), SybC.class);
         int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
         yqEqService.updateType(yqEqId, EnumProcess2.TO_UPLOAD.getMessage());
         //修改状态为待上传
@@ -119,11 +120,12 @@ public class SybController extends BaseController {
         return new ResponseResult<SybC>(200, sybC);
     }
 
-    @RequestMapping("/saveMan")
+    @RequestMapping("/saveman")
     public ResponseResult saveMan(@RequestParam(value = "eqId") String eqId,
                                   @RequestParam(value = "jcyqId") String jcyqId,
                                   @RequestParam(value = "userEqId") Integer userEqId,
-                                  SybC sybC, HttpSession session, HttpServletRequest req){
+                                   HttpSession session, HttpServletRequest req){
+        SybC sybC = CommonUtils.toBean(req.getParameterMap(), SybC.class);
         int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
         yqEqService.updateType(yqEqId, EnumProcess2.TO_UPLOAD.getMessage());
         //修改状态为待上传

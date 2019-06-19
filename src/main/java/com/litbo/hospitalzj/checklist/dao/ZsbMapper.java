@@ -19,6 +19,7 @@ public interface ZsbMapper {
     //查询双通道模板数据，最后一条记录
     @Select("select * from stzs_m_template order by temp_id desc limit 1")
     StzsMTemplate findStZsTemplate();
+
     //修改模板表数据
     //幼儿
     @Update(" update zsb_c_template\n" +
@@ -30,6 +31,7 @@ public interface ZsbMapper {
             "      zsbj_wc2 = #{zsbjWc2,jdbcType=INTEGER}\n" +
             "    where temp_id = #{tempId,jdbcType=BIGINT}")
     int updateC(SybCTemplate sybCTemplate);
+
     //成人
     @Update("update zsb_m_template\n" +
             "    set llcsd1 = #{llcsd1,jdbcType=INTEGER},\n" +
@@ -40,6 +42,7 @@ public interface ZsbMapper {
             "      zsbj_wc2 = #{zsbjWc2,jdbcType=INTEGER}\n" +
             "    where temp_id = #{tempId,jdbcType=BIGINT}")
     int updateM(SybCTemplate sybCTemplate);
+
     //双通道
     @Update("update stzs_m_template\n" +
             "    set llcsd11 = #{llcsd11,jdbcType=INTEGER},\n" +
@@ -56,6 +59,7 @@ public interface ZsbMapper {
             "      zsbj_wc22 = #{zsbjWc22,jdbcType=INTEGER}\n" +
             "    where temp_id = #{tempId,jdbcType=BIGINT}")
     int updateS(StzsMTemplate stzsMTemplate);
+
     //插入模板表数据
     //幼儿
     @Insert("insert into zsb_c_template (temp_id, llcsd1, llcsd2, \n" +
@@ -65,6 +69,7 @@ public interface ZsbMapper {
             "      #{wc,jdbcType=INTEGER}, #{zsbjllz,jdbcType=INTEGER}, #{zsbjWc1,jdbcType=INTEGER}, \n" +
             "      #{zsbjWc2,jdbcType=INTEGER})")
     int insertChildTemplate(SybCTemplate template);
+
     //成人
     @Insert("insert into zsb_m_template (temp_id, llcsd1, llcsd2, \n" +
             "      wc, zsbjllz, zsbj_wc1, \n" +
@@ -73,6 +78,7 @@ public interface ZsbMapper {
             "      #{wc,jdbcType=INTEGER}, #{zsbjllz,jdbcType=INTEGER}, #{zsbjWc1,jdbcType=INTEGER}, \n" +
             "      #{zsbjWc2,jdbcType=INTEGER})")
     int insertManTemplate(SybCTemplate template);
+
     //双通道
     @Insert("insert into stzs_m_template (temp_id, llcsd11, llcsd21, \n" +
             "      wc1, zsbjcsz1, zsbj_wc11, \n" +
@@ -85,6 +91,7 @@ public interface ZsbMapper {
             "      #{wc2,jdbcType=INTEGER}, #{zsbjcsz2,jdbcType=INTEGER}, #{zsbjWc12,jdbcType=INTEGER}, \n" +
             "      #{zsbjWc22,jdbcType=INTEGER})")
     int insertStzsTemplate(StzsMTemplate template);
+
     //保存信息
     //输液泵检测信息录入（幼儿）
     @Insert("insert into zsb_c (id, jcyq_id, eq_id,  tester, auditor, test_time,  shsj_time  jcjl, jcsm, llcsd1,   pjll_1, llcsd2, pjll_2, \n" +
@@ -140,6 +147,7 @@ public interface ZsbMapper {
             "      kmbj = #{kmbj,jdbcType=TINYINT}\n" +
             "    where id = #{id,jdbcType=BIGINT}")
     void updateChild(SybC sybC);
+
     //输液泵检测信息录入（成人）
     @Insert("insert into zsb_m (id, jcyq_id, eq_id,  tester, auditor, test_time, shsj_time,   jcjl, jcsm, llcsd1,   pjll_1, llcsd2, pjll_2, \n" +
             "      wc, llcs_result, zsbjcsll,   bjsz_h, bjsz_m, bjsz_l,   bjsj_h, bjsj_m, bjsj_l,     bjyl_h, bjyl_m, bjyl_l, \n" +
@@ -157,6 +165,7 @@ public interface ZsbMapper {
             "      #{qpbj,jdbcType=TINYINT}, #{kmbj,jdbcType=TINYINT})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void saveMan(SybC sybC);
+
     @Update("update zsb_m\n" +
             "    set jcyq_id = #{jcyqId,jdbcType=INTEGER},\n" +
             "      eq_id = #{eqId,jdbcType=INTEGER},\n" +
@@ -193,6 +202,7 @@ public interface ZsbMapper {
             "      kmbj = #{kmbj,jdbcType=TINYINT}\n" +
             "    where id = #{id,jdbcType=BIGINT}")
     void updateMan(SybC sybC);
+
     //插入双通道注射泵检测数据
     @Insert("insert into stzs_m (id, jcyq_id, eq_id,   tester, auditor, test_time,   jcjl, jcsm, llcsd11,  pjll_11, llcsd21, pjll_21, \n" +
             "      wc1, llcs_result1, zsbj_llz1,   bjsz_h1, bjsz_m1, bjsz_l1,    bjsj_h1, bjsj_m1, bjsj_l1,     bjyl_h1, bjyl_m1, bjyl_l1, \n" +
@@ -221,6 +231,7 @@ public interface ZsbMapper {
             "      #{kmbj2,jdbcType=TINYINT})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void saveStzs(StzsM stzsM);
+
     @Update("update stzs_m\n" +
             "    set jcyq_id = #{jcyqId,jdbcType=INTEGER},\n" +
             "      eq_id = #{eqId,jdbcType=INTEGER},\n" +
@@ -283,38 +294,41 @@ public interface ZsbMapper {
     void updateStzs(StzsM stzsM);
 
     //根据设备Id,检测仪器Id以及状态查询最后一条记录
-    @Select("select * from ${tableName} where eq_id=#{eqId} and jcyq_id=#{jcyqId} order by id desc limit 1" )
+    @Select("select * from ${tableName} where eq_id=#{eqId} and jcyq_id=#{jcyqId} order by id desc limit 1")
     SybC findByEqIdandJcyqIdLast(@Param("tableName") String tableName, @Param("eqId") String eqId, @Param("jcyqId") String jcyqId);
+
     //根据设备Id,检测仪器Id以及状态查询
-    @Select("select * from ${tableName} where eq_id=#{eqId} and jcyq_id=#{jcyqId}" )
+    @Select("select * from ${tableName} where eq_id=#{eqId} and jcyq_id=#{jcyqId}")
     List<SybC> findByEqIdandJcyqId(@Param("tableName") String tableName, @Param("eqId") String eqId, @Param("jcyqId") String jcyqId);
 
 
-    @Select("select * from zsb_c where zsb_c.eq_id=#{eqId} and zsb_c.jcyq_id=#{jcyqId} order by id desc limit 1" )
+    @Select("select * from zsb_c where zsb_c.eq_id=#{eqId} and zsb_c.jcyq_id=#{jcyqId} order by id desc limit 1")
     SybC findByEqIdandJcyqIdLast1C(@Param("eqId") String eqId, @Param("jcyqId") String jcyqId);
 
     //根据设备Id,检测仪器Id以及状态查询电器表
-    @Select("select * from zsb_c where zsb_c.eq_id=#{eqId} and zsb_c.jcyq_id=#{jcyqId}" )
+    @Select("select * from zsb_c where zsb_c.eq_id=#{eqId} and zsb_c.jcyq_id=#{jcyqId}")
     List<SybC> findByEqIdandJcyqIdC(@Param("eqId") String eqId, @Param("jcyqId") String jcyqId);
 
     //根据设备Id,检测仪器Id以及状态查询电器表查询最后一条记录
-    @Select("select * from zsb_m where zsb_c.eq_id=#{eqId} and zsb_c.jcyq_id=#{jcyqId} order by id desc limit 1" )
+    @Select("select * from zsb_m where zsb_c.eq_id=#{eqId} and zsb_c.jcyq_id=#{jcyqId} order by id desc limit 1")
     SybC findByEqIdandJcyqIdLast1M(@Param("eqId") String eqId, @Param("jcyqId") String jcyqId);
 
     //根据设备Id,检测仪器Id以及状态查询电器表
-    @Select("select * from zsb_m where zsb_c.eq_id=#{eqId} and zsb_c.jcyq_id=#{jcyqId}" )
+    @Select("select * from zsb_m where zsb_c.eq_id=#{eqId} and zsb_c.jcyq_id=#{jcyqId}")
     List<SybC> findByEqIdandJcyqIdM(@Param("eqId") String eqId, @Param("jcyqId") String jcyqId);
+
     //根据设备Id,检测仪器Id以及状态查询电器表查询最后一条记录
-    @Select("select * from stzs_m where zsb_c.eq_id=#{eqId} and zsb_c.jcyq_id=#{jcyqId} order by id desc limit 1" )
+    @Select("select * from stzs_m where zsb_c.eq_id=#{eqId} and zsb_c.jcyq_id=#{jcyqId} order by id desc limit 1")
     StzsM findByEqIdandJcyqIdLast1S(@Param("eqId") String eqId, @Param("jcyqId") String jcyqId);
 
     //根据设备Id,检测仪器Id以及状态查询电器表
-    @Select("select * from stzs_m where zsb_c.eq_id=#{eqId} and zsb_c.jcyq_id=#{jcyqId}" )
+    @Select("select * from stzs_m where zsb_c.eq_id=#{eqId} and zsb_c.jcyq_id=#{jcyqId}")
     List<StzsM> findByEqIdandJcyqIdS(@Param("eqId") String eqId, @Param("jcyqId") String jcyqId);
 
     //查询所有检测表数据信息
     @Select("select * from ${tableName}")
     List<SybC> findAll(String tableName);
+
     @Select("select * from stzs_m")
     List<StzsM> findAllS();
 
@@ -323,14 +337,18 @@ public interface ZsbMapper {
      */
     @Select("select * from ${tableName} where id=#{id}")
     SybC findByid(@Param("id") Integer id, @Param("tableName") String tableName);
+
     @Select("select * from stzs_m where id=#{id}")
     StzsM findByidS(@Param("id") Integer id);
+
     //修改审核人意见
-    @Update("update zsb_c set shr_jcjl=#{shrJcjl},auditor=#{auditor},shsj_time=#{shsjTime} where dqjcid=#{dqjcid}")
+    @Update("update zsb_c set shr_jcjl=#{shrJcjl},auditor=#{auditor},shsj_time=#{shsjTime} where id=#{dqjcid}")
     void updateShrJcjyC(@Param("dqjcid") Integer dqjcid, @Param("shrJcjl") String shrJcjl, @Param("auditor") String auditor, @Param("shsjTime") Date shsjTime);
-    @Update("update zsb_m set shr_jcjl=#{shrJcjl},auditor=#{auditor},shsj_time=#{shsjTime} where dqjcid=#{dqjcid}")
+
+    @Update("update zsb_m set shr_jcjl=#{shrJcjl},auditor=#{auditor},shsj_time=#{shsjTime} where id=#{dqjcid}")
     void updateShrJcjyM(@Param("dqjcid") Integer dqjcid, @Param("shrJcjl") String shrJcjl, @Param("auditor") String auditor, @Param("shsjTime") Date shsjTime);
-    @Update("update stzs_m set shr_jcjl=#{shrJcjl},auditor=#{auditor},shsj_time=#{shsjTime} where dqjcid=#{dqjcid}")
+
+    @Update("update stzs_m set shr_jcjl=#{shrJcjl},auditor=#{auditor},shsj_time=#{shsjTime} where id=#{dqjcid}")
     void updateShrJcjyS(@Param("dqjcid") Integer dqjcid, @Param("shrJcjl") String shrJcjl, @Param("auditor") String auditor, @Param("shsjTime") Date shsjTime);
 
 }

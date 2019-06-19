@@ -193,7 +193,7 @@ public interface SybMapper {
     //修改审核人意见
     @Update("update syb_c set shr_jcjl=#{shrJcjl},auditor=#{auditor},shsj_time=#{shsjTime} where id=#{id}")
     void updateShrJcjyC(@Param("id") Integer id, @Param("shrJcjl") String shrJcjl, @Param("auditor") String auditor, @Param("shsjTime") Date shsjTime);
-    @Update("update syb_m set shr_jcjl=#{shrJcjl},auditor=#{auditor},shsj_time=#{shsjTime} where dqjcid=#{dqjcid}")
+    @Update("update syb_m set shr_jcjl=#{shrJcjl},auditor=#{auditor},shsj_time=#{shsjTime} where id=#{id}")
     void updateShrJcjyM(@Param("id") Integer id, @Param("shrJcjl") String shrJcjl, @Param("auditor") String auditor, @Param("shsjTime") Date shsjTime);
 
 
