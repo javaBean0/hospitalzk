@@ -51,7 +51,7 @@ public class ZsbController extends BaseController {
     }
     @RequestMapping("/findTemplateM")
     public ResponseResult<SybCTemplate> findTemplateM(){
-        String tableName="zsb_M_template";
+        String tableName="zsb_m_template";
         return new ResponseResult<SybCTemplate>(200, zsbService.findTemplate(tableName));
     }
     @RequestMapping("/findStZsTemplate")

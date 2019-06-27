@@ -71,6 +71,11 @@ public class EqInfo {
 
     private String eqBfjd;
 
+
+
+
+
+
     public String getEqPmName() {
         return eqPmName;
     }

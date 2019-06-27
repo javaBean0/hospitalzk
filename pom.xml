@@ -12,7 +12,7 @@
     <groupId>com.litbo</groupId>
     <artifactId>hospitalzj</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>hospitalzj</name>
     <description>Demo project for Spring Boot</description>
 
@@ -23,6 +23,11 @@
     </properties>
 
     <dependencies>
+
+
+
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>

@@ -70,7 +70,9 @@
             },
             parseData:function(res){
                 console.log(res);
+                //alert(res.data.jcyqName);
                 if(res.data[0].jcyqName == "生命体征模拟器" || res.data[0].jcyqName == "注射设备分析仪" || res.data[0].jcyqName == "输液设备分析仪"){
+               /* if(res.data.jcyqName == "生命体征模拟器" || res.data.jcyqName == "注射设备分析仪" || res.data.jcyqName == "输液设备分析仪"){*/
                     $("#xnJump").append("<a class='layui-btn layui-btn-xs' lay-event='hands1'>查看数据</a>")
                 }else{
                     $("#xnJump").append("<a class='layui-btn layui-btn-xs' lay-event='hands2'>查看数据</a>")
@@ -128,6 +130,7 @@
             var data = obj.data;
             //console.log(obj)
             if(obj.event === "hands1"){
+                //alert(obj.data.jcyqName);
                 if(obj.data.jcyqName == "生命体征模拟器"){
                     $.ajax({
                         url:"/tableName/findTable?eqId="+ids+"&jcyqId="+obj.data.jcyqId,
@@ -163,7 +166,7 @@
                         }
                     });
                 }else if(obj.data.jcyqName == "输液设备分析仪"){
-                    alert(obj.data.jcyqName);
+                   // alert(obj.data.jcyqName);
                     $.ajax({
                         url:"/tableName/findTable?eqId="+ids+"&jcyqId="+obj.data.jcyqId,
                         method:"GET",
