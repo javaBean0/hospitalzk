@@ -207,7 +207,8 @@
     var type = window.location.search;
     var ids = parseInt(type.split("=")[1]);
     var thiseqId = parseInt(sessionStorage['thiseqId']);
-    var babyId = "";
+    //alert("eqId = " + thiseqId);
+    var pyxId = "";
     //Demo
     layui.use(['table','layer','jquery','form'],function(){
         var table = layui.table
@@ -220,8 +221,12 @@
                 method:"GET",
                 dataType:"JSON",
                 success:function(res){
-                    console.log(res);
-                    babyId = res.data.babyId;
+                    //console.log(res);
+                    //console.log(res.data);
+                    //alert("json id = " + res.data.id);
+
+                    pyxId = res.data.pyxId;
+                    //alert(pyxId);
                     if(res.data != null && res.data != ""){
                         // Tx显示温度
                         $("#txWd1").append(res.data.txWd1);
@@ -337,9 +342,12 @@
             ]]
         });
         form.on("submit(subEnd)",function(data){
-            console.log(data.field);
+            //alert("babyId = " + babyId);
+            //alert("ids = " + ids);
+            //console.log(data.field);
             $.ajax({
-                url:"/dqjc/updateShrJcjy?babyId="+babyId+"&jcyqId="+ids+"&eqId="+thiseqId+"&shrJcjl="+data.field.shrJcjl+"&state="+data.field.state,
+
+                url:"/yepyx/updateShrJcjy?pyxId="+pyxId+"&jcyqId="+ids+"&eqId="+thiseqId+"&shrJcjl="+data.field.shrJcjl+"&state="+data.field.state,
                 method:"POST",
                 dataType:"JSON",
                 success:function(res){

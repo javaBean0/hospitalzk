@@ -94,7 +94,7 @@ public interface ZsbMapper {
 
     //保存信息
     //输液泵检测信息录入（幼儿）
-    @Insert("insert into zsb_c (id, jcyq_id, eq_id,  tester, auditor, test_time,  shsj_time  jcjl, jcsm, llcsd1,   pjll_1, llcsd2, pjll_2, \n" +
+    @Insert("insert into zsb_c (id, jcyq_id, eq_id,  tester, auditor, test_time, shsj_time,   jcjl, jcsm, llcsd1,   pjll_1, llcsd2, pjll_2, \n" +
             "      wc, llcs_result, zsbjcsll,   bjsz_h, bjsz_m, bjsz_l,   bjsj_h, bjsj_m, bjsj_l,     bjyl_h, bjyl_m, bjyl_l, \n" +
             "      zsbj_wc1, zsbj_wc2, zsbj_result,    zs, sygbt, dyxtk, jjkp,   qpbj, kmbj)\n" +
             "    values (#{id,jdbcType=BIGINT}, #{jcyqId,jdbcType=INTEGER}, #{eqId,jdbcType=INTEGER}, \n" +

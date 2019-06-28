@@ -97,7 +97,8 @@ public class ZsbController extends BaseController {
     public ResponseResult saveChild(@RequestParam(value = "eqId") String eqId,
                                     @RequestParam(value = "jcyqId") String jcyqId,
                                     @RequestParam(value = "userEqId") Integer userEqId,
-                                    SybC sybC, HttpSession session, HttpServletRequest req){
+                                    HttpSession session, HttpServletRequest req){
+        SybC sybC = CommonUtils.toBean(req.getParameterMap(), SybC.class);
         int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
         yqEqService.updateType(yqEqId, EnumProcess2.TO_UPLOAD.getMessage());
         //修改状态为待上传
@@ -279,8 +280,11 @@ public class ZsbController extends BaseController {
         return new com.litbo.hospitalzj.util.ResponseResult<Void>(200);
     }
     @RequestMapping("/updateShrJcjyM")
-    public com.litbo.hospitalzj.util.ResponseResult<Void> updateShrJcjyM(@RequestParam("id")Integer id, @RequestParam("jcyqId")Integer jcyqId,
-                                                                         @RequestParam("eqId")Integer eqId, @RequestParam("shrJcjl")String shrJcjl, @RequestParam("state")Integer state, HttpSession session){
+    public com.litbo.hospitalzj.util.ResponseResult<Void> updateShrJcjyM(@RequestParam("id")Integer id,
+                                                                         @RequestParam("jcyqId")Integer jcyqId,
+                                                                         @RequestParam("eqId")Integer eqId,
+                                                                         @RequestParam("shrJcjl")String shrJcjl,
+                                                                         @RequestParam("state")Integer state, HttpSession session){
         String auditor=getUserNameFromSession(session);
         Integer yqEqId= yqEqService.findId(jcyqId,eqId);
         zsbService.updateShrJcjyM(id,shrJcjl,auditor);

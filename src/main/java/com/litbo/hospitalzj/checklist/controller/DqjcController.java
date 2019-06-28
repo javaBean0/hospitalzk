@@ -176,8 +176,11 @@ public class DqjcController extends BaseController {
 
     //修改审核人建议同时修改状态
     @RequestMapping("/updateShrJcjy")
-    public ResponseResult<Void> updateShrJcjy(@RequestParam("dqjcid") Integer dqjcid, @RequestParam("jcyqId") Integer jcyqId,
-                                              @RequestParam("eqId") Integer eqId, @RequestParam("shrJcjl") String shrJcjl, @RequestParam("state") Integer state, HttpSession session) {
+    public ResponseResult<Void> updateShrJcjy(@RequestParam("dqjcid") Integer dqjcid,
+                                              @RequestParam("jcyqId") Integer jcyqId,
+                                              @RequestParam("eqId") Integer eqId,
+                                              @RequestParam("shrJcjl") String shrJcjl,
+                                              @RequestParam("state") Integer state, HttpSession session) {
         String auditor = getUserNameFromSession(session);
         Integer yqEqId = yqEqService.findId(jcyqId, eqId);
         dqjcService.updateShrJcjy(dqjcid, shrJcjl, auditor);
