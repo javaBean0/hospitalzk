@@ -454,7 +454,7 @@ public interface HxjMapper {
 */
 
     //根据设备Id,检测仪器Id以及状态查询电器表查询最后一条记录
-    @Select("select hxj.* from hxj where hxj.eq_id=#{eqId} and hxj.jcyq_id=#{jcyqId} order by hxjid desc limit 1" )
+    @Select("select hxj.* from hxj where hxj.eq_id=#{eqId} and hxj.jcyq_id=#{jcyqId} order by test_time desc, hxjid desc limit 1" )
     Hxj findByEqIdandJcyqIdLast1(@Param("eqId") String eqId, @Param("jcyqId") String jcyqId);
 
     //根据设备Id,检测仪器Id以及状态查询电器表

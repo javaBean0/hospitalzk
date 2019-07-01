@@ -1,5 +1,6 @@
 package com.litbo.hospitalzj.zk.mapper;
 
+import com.litbo.hospitalzj.zk.domian.Yq;
 import com.litbo.hospitalzj.zk.domian.YqEq;
 import com.litbo.hospitalzj.zk.vo.YqEqVo;
 import org.apache.ibatis.annotations.*;
@@ -28,6 +29,22 @@ public interface YqEqMapper {
     @Select("SELECT y.*,e.eq_mc from  yq_eq y left join eq_info e on y.eq_id=e.eq_id where jcyq_id=#{jcyqId}")
     YqEq selectEqId(String jcyqId);
 
+    @Select("SELECT  * FROM yq WHERE jcyq_id IN (SELECT jcyq_id FROM yq_eq  WHERE eq_id = #{eqId}  AND `type` = '待上传' )AND jcyq_id <> 5")
+    List<Yq> selectOtherAndDsc(@Param("eqId") String eqId);
+
+    @Select("SELECT  * FROM yq WHERE jcyq_id IN (SELECT jcyq_id FROM yq_eq  WHERE eq_id = #{eqId}  AND `type` = '待上传' AND jcyq_id = 5 )")
+    List<Yq> selectDqjcAndDsc(@Param("eqId") String eqId);
+
+    //查询检测审核成功最后一条记录
+    @Select("SELECT  * FROM yq WHERE jcyq_id IN (SELECT jcyq_id FROM yq_eq  WHERE eq_id = #{eqId}  AND `type` = '已上传' )AND jcyq_id <> 5")
+    List<Yq> selectOtherAndJcshcg(String eqId);
+
+    //查询检测审核成功最后一条记录
+    @Select("SELECT  * FROM yq WHERE jcyq_id IN (SELECT jcyq_id FROM yq_eq  WHERE eq_id = #{eqId}  AND `type` = '已上传' AND jcyq_id = 5 )")
+    List<Yq> selectDqjcAndJcshcg(String eqId);
+
+
+
     @Select("SELECT count(*) from  yq_eq where eq_id=#{eqId} and state=#{state}")
     Integer selectStateNot(@Param("eqId") String eqId, @Param("state") Integer state);
 
@@ -44,4 +61,7 @@ public interface YqEqMapper {
     //以id排序，查询最后一条记录
     @Select("select id from yq_eq where jcyq_id=#{jcyqId} and eq_id=#{eqId} order by id limit 1")
     Integer findId(@Param("jcyqId") Integer jcyqId, @Param("eqId") Integer eqId);
+
+
+
 }

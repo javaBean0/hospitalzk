@@ -115,4 +115,7 @@ public interface EqInfoMapper1 {
 	List<EqInfo> findShEqsByUserIdAndState(@Param("userId") String userId, @Param("state") String state);
 	@Select("SELECT * FROM eq_info WHERE eq_dah=#{dah}")
 	EqInfo Dah(@Param("dah") String dah);
+
+	@Select("Select eq_pm_id from eq_info where eq_id = #{eqId}")
+    int findEqPm(String eqId);
 }

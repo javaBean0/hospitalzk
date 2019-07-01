@@ -10,55 +10,55 @@ public class YqEq {
     private String eqMc;
 
     private Integer state;
-	private String type;
+    private String type;
 
-	public String getType() {
-		return type;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public Integer getState() {
-		return state;
-	}
+    public Integer getState() {
+        return state;
+    }
 
-	public void setState(Integer state) {
-		this.state = state;
-	}
+    public void setState(Integer state) {
+        this.state = state;
+    }
 
-	public String getEqMc() {
-		return eqMc;
-	}
+    public String getEqMc() {
+        return eqMc;
+    }
 
-	public void setEqMc(String eqMc) {
-		this.eqMc = eqMc;
-	}
+    public void setEqMc(String eqMc) {
+        this.eqMc = eqMc;
+    }
 
-	public Integer getId() {
-		return Id;
-	}
+    public Integer getId() {
+        return Id;
+    }
 
-	public void setId(Integer id) {
-		Id = id;
-	}
+    public void setId(Integer id) {
+        Id = id;
+    }
 
-	public String getJcyqId() {
-		return jcyqId;
-	}
+    public String getJcyqId() {
+        return jcyqId;
+    }
 
-	public void setJcyqId(String jcyqId) {
-		this.jcyqId = jcyqId;
-	}
+    public void setJcyqId(String jcyqId) {
+        this.jcyqId = jcyqId;
+    }
 
-	public String getEqId() {
-		return eqId;
-	}
+    public String getEqId() {
+        return eqId;
+    }
 
-	public void setEqId(String eqId) {
-		this.eqId = eqId;
-	}
+    public void setEqId(String eqId) {
+        this.eqId = eqId;
+    }
 
-   
+
 }

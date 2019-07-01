@@ -114,4 +114,10 @@ public class DcsjhyServiceImpl implements DcsjhyService {
     public void updateShrJcjyC(Integer dcid, String shrJcjl, String auditor) {
         dcsjhyMapper.updateShrJcjyC(dcid, shrJcjl, auditor, new Date());
     }
+
+    @Override
+    public Dcsjhy findByEqIdandJcyqId1(String eqId, String jcyqId) {
+        return dcsjhyMapper.findByEqIdandJcyqId1(eqId, jcyqId);
+
+    }
 }

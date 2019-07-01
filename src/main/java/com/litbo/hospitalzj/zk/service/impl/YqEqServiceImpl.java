@@ -1,5 +1,6 @@
 package com.litbo.hospitalzj.zk.service.impl;
 
+import com.litbo.hospitalzj.zk.domian.Yq;
 import com.litbo.hospitalzj.zk.domian.YqEq;
 import com.litbo.hospitalzj.zk.mapper.YqEqMapper;
 import com.litbo.hospitalzj.zk.service.YqEqService;
@@ -14,6 +15,26 @@ public class YqEqServiceImpl implements YqEqService{
 
 	@Autowired
 	YqEqMapper yqEqMapper;
+
+	@Override
+	public List<Yq> selectOtherAndJcshcg(String eqId) {
+		return yqEqMapper.selectOtherAndJcshcg(eqId);
+	}
+
+	@Override
+	public List<Yq> selectDqjcAndJcshcg(String eqId) {
+		return yqEqMapper.selectDqjcAndJcshcg(eqId);
+	}
+
+	@Override
+	public List<Yq> selectOtherAndDsc(String eqId) {
+		return yqEqMapper.selectOtherAndDsc(eqId);
+	}
+
+	@Override
+	public List<Yq> selectDqjcAndDsc(String eqId) {
+		return yqEqMapper.selectDqjcAndDsc(eqId);
+	}
 
 	@Override
 	public int insertBatch(String eqId, String jcyqId) {

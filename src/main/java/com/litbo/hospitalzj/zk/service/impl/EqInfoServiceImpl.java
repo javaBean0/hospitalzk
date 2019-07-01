@@ -152,6 +152,10 @@ public class EqInfoServiceImpl implements EqInfoService {
 		return eqInfoMapper.findByDah(dah);
 	}
 
-	
+	@Override
+	public int findEqPm(String eqId) {
+		return eqInfoMapper.findEqPm(eqId);
+	}
+
 
 }

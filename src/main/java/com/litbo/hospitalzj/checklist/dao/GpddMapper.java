@@ -176,7 +176,7 @@ public interface GpddMapper {
     @Select("select * from gpdd order by gpddid desc limit 1")
     Gpdd find();
     //根据设备Id,检测仪器Id以及状态查询电切表查询最后一条记录
-    @Select("select gpdd.* from gpdd where gpdd.eq_id=#{eqId} and gpdd.jcyq_id=#{jcyqId} order by gpddid desc limit 1" )
+    @Select("select gpdd.* from gpdd where gpdd.eq_id=#{eqId} and gpdd.jcyq_id=#{jcyqId} order by test_time desc, gpddid desc limit 1" )
     Gpdd findByEqIdandJcyqIdLast1(@Param("eqId") String eqId, @Param("jcyqId") String jcyqId);
 
     //根据设备Id,检测仪器Id以及状态查询电切表

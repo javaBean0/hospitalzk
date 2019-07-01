@@ -16,13 +16,16 @@ public interface HxjService {
 
     //修改模板值
     void updateHxjTemplate(HxjTemplate hxjTemplate);
+
     //插入模板值
     void insertHxjTemplate(HxjTemplate hxjTemplate);
 
     //保存
     void save(Hxj hxj);
+
     //修改
     void updateHxj(Hxj hxj);
+
     //根据电气检测设备id查询设备检测表
     public Hxj findHxj(String eqId);
 

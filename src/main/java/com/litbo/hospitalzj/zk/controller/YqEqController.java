@@ -1,42 +1,163 @@
 package com.litbo.hospitalzj.zk.controller;
 
+import com.litbo.hospitalzj.checklist.domain.*;
+import com.litbo.hospitalzj.checklist.service.*;
 import com.litbo.hospitalzj.controller.BaseController;
 import com.litbo.hospitalzj.util.ResponseResult;
+import com.litbo.hospitalzj.zk.domian.Yq;
+import com.litbo.hospitalzj.zk.domian.YqEq;
 import com.litbo.hospitalzj.zk.service.EqInfoService;
 import com.litbo.hospitalzj.zk.service.YqEqService;
 import com.litbo.hospitalzj.zk.service.YqService;
 import com.litbo.hospitalzj.zk.vo.YqEqVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/yqEq")
-public class YqEqController extends BaseController{
+public class YqEqController extends BaseController {
 
-	@Autowired
-	private YqEqService yqEqService;
-	@Autowired
-	private EqInfoService eqInfoService;
-	@Autowired
-	YqService yqService;
-	//为仪器分配设备pm
-	@RequestMapping("/selectYqEq")
-	public ResponseResult<List<YqEqVo>> selectYqEq(HttpSession session){
-		String userId=getUserIdFromSession(session);
-		List<YqEqVo> data=yqEqService.selectYqEq(userId,2);
-		return new ResponseResult<List<YqEqVo>>(SUCCESS,data);
-	}
-	//修改状态
-	@RequestMapping("/insert")
-	public ResponseResult<Integer> insert(@RequestParam("jcyqId") String jcyqId, @RequestParam("eqId") String eqId){
-		int data=yqEqService.insertBatch(eqId,jcyqId);
-		return new ResponseResult<Integer>(SUCCESS,data);
-	}
+    @Autowired
+    private YqEqService yqEqService;
+    @Autowired
+    private EqInfoService eqInfoService;
+    @Autowired
+    YqService yqService;
+    @Autowired
+    private CcyService ccyService;
+    @Autowired
+    private GpddService gpddService;
+    @Autowired
+    private HxjService hxjService;
+    @Autowired
+    private DcsjhyService dcsjhyService;
+    @Autowired
+    private SybService sybService;
+    @Autowired
+    private YepyxService yepyxService;
+    @Autowired
+    private ZsbService zsbService;
+    @Autowired
+    private DqjcService dqjcService;
+
+
+
+    //根据设备的id和检测仪器的id查询最后一条检测记录
+    @RequestMapping("/findByEqIdAndJcyqId/{eqId}/{jcyqId}/{type}")
+    public ResponseResult<Object> findByEqIdAndJcyqId(@PathVariable("eqId") String eqId,
+                                                      @PathVariable("jcyqId") String jcyqId,
+                                                      @PathVariable("type") String type){
+
+        if(Integer.parseInt(jcyqId) == 5){
+               Dqjc dqjc =  dqjcService.findByEqIdandJcyqIdLast(eqId, jcyqId);
+        }
+
+        //根据设备id查询设备对应的品名
+        int eqPm = eqInfoService.findEqPm(eqId);
+        if(eqPm == 1){
+            //心电监护仪
+            Dcsjhy dcsjhy;
+            if("c".equals(type)){
+                dcsjhy = dcsjhyService.findByEqIdandJcyqIdLast("dcsjhy_c",eqId, jcyqId);
+            }else {
+                dcsjhy = dcsjhyService.findByEqIdandJcyqIdLast("dcsjhy_m",eqId, jcyqId);
+            }
+
+           return new ResponseResult<>(200, dcsjhy);
+        }else if(eqPm == 2){
+            //除颤器
+            Ccy ccy = ccyService.findByEqIdandJcyqIdLast1(eqId, jcyqId);
+            return new ResponseResult<>(200, ccy);
+        }else if(eqPm == 3){
+            //高频电刀
+            Gpdd gpdd = gpddService.findByEqIdandJcyqIdLast1(eqId, jcyqId);
+            return new ResponseResult<>(200, gpdd);
+        }else if(eqPm == 4){
+            //呼吸机
+            Hxj hxj = hxjService.findByEqIdandJcyqIdLast1(eqId, jcyqId);
+            return new ResponseResult<>(200, hxj);
+        }else if(eqPm == 5){
+            //输液泵
+            SybC syb =null;
+            if("c".equals(type)){
+                syb = sybService.findByEqIdandJcyqIdLast("syb_c", eqId, jcyqId);
+            }else {
+                 syb = sybService.findByEqIdandJcyqIdLast("syb_m", eqId, jcyqId);
+            }
+
+            return new ResponseResult<>(200, syb);
+        }else if(eqPm == 6){
+            //注射泵
+            SybC zsb = null;
+            if("c".equals(type)){
+                zsb = zsbService.findByEqIdandJcyqIdLast("zsb_c", eqId, jcyqId);
+            }else {
+                zsb = zsbService.findByEqIdandJcyqIdLast("zsb_m", eqId, jcyqId);
+
+            }
+
+            return new ResponseResult<>(200, zsb);
+        }else if(eqPm == 7){
+            //婴儿培养箱
+            Yepyx yepyx = yepyxService.findByEqIdandJcyqIdLast1(eqId, jcyqId);
+            return new ResponseResult<>(200, yepyx);
+        }else {
+            //暂无该数据
+            return new ResponseResult<>(501, "暂无数据");
+        }
+
+    }
+
+    @RequestMapping("/findOtherAndJcshcg/{eqId}")
+    public ResponseResult<List<Yq>> findOtherAndJcshcg(@PathVariable String eqId) {
+        List<Yq> yqs = yqEqService.selectOtherAndJcshcg(eqId);
+        return new ResponseResult<List<Yq>>(200, yqs);
+    }
+
+
+    @RequestMapping("/findDqjcAndJcshcg/{eqId}")
+    public ResponseResult<List<Yq>> findDqjcAndJcshcg(@PathVariable String eqId) {
+        List<Yq> yqs = yqEqService.selectDqjcAndJcshcg(eqId);
+        return new ResponseResult<List<Yq>>(200, yqs);
+    }
+
+
+    //待上传
+    @RequestMapping("/findOtherAndDsc/{eqId}")
+    public ResponseResult<List<Yq>> selectOtherAndDsc(@PathVariable String eqId) {
+        List<Yq> yqs = yqEqService.selectOtherAndDsc(eqId);
+        return new ResponseResult<List<Yq>>(200, yqs);
+    }
+
+    //待上传
+    @RequestMapping("/findDqjcAndDsc/{eqId}")
+    public ResponseResult<List<Yq>> selectDqjcAndDsc(@PathVariable String eqId) {
+        List<Yq> yqList = yqEqService.selectDqjcAndDsc(eqId);
+        return new ResponseResult<List<Yq>>(200, yqList);
+    }
+
+
+    //为仪器分配设备pm
+    @RequestMapping("/selectYqEq")
+    public ResponseResult<List<YqEqVo>> selectYqEq(HttpSession session) {
+        String userId = getUserIdFromSession(session);
+        List<YqEqVo> data = yqEqService.selectYqEq(userId, 2);
+        return new ResponseResult<List<YqEqVo>>(SUCCESS, data);
+    }
+
+    //修改状态
+    @RequestMapping("/insert")
+    public ResponseResult<Integer> insert(@RequestParam("jcyqId") String jcyqId, @RequestParam("eqId") String eqId) {
+        int data = yqEqService.insertBatch(eqId, jcyqId);
+        return new ResponseResult<Integer>(SUCCESS, data);
+    }
 //	
 //	//删除仪器设备
 //	@RequestMapping("/delete")
@@ -73,8 +194,8 @@ public class YqEqController extends BaseController{
 		}
 		return new ResponseResult<List<Yq>>(SUCCESS,yqList);
 	}*/
-	
-	//查询仪器已分配的设备
+
+    //查询仪器已分配的设备
 	/*@RequestMapping("/findByJcyqId/{jcyqId}")
 	public ResponseResult<List<EqInfo>> findByJcyqId(@PathVariable String jcyqId){
 		List<EqInfo> yqList=eqInfoService.findByJcyqId(jcyqId);
@@ -92,7 +213,6 @@ public class YqEqController extends BaseController{
 		YqEq yqList=yqEqService.selectEqId(jcyqId);
 		return new ResponseResult<YqEq>(SUCCESS,yqList);
 	}*/
-	
-	
-	
+
+
 }

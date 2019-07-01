@@ -213,7 +213,7 @@ public interface CcyMapper {
     Ccy find();
 
     //根据设备Id,检测仪器Id以及状态查询查询最后一条记录
-    @Select("select * from ccy where ccy.eq_id=#{eqId} and ccy.jcyq_id=#{jcyqId} order by ccy_id desc limit 1" )
+    @Select("select * from ccy where ccy.eq_id=#{eqId} and ccy.jcyq_id=#{jcyqId} order by test_time desc, ccy_id desc limit 1" )
     Ccy findByEqIdandJcyqIdLast1(@Param("eqId") String eqId, @Param("jcyqId") String jcyqId);
 
     //根据设备Id,检测仪器Id以及状态查询电器表

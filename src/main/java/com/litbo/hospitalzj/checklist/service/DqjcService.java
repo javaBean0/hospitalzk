@@ -112,4 +112,8 @@ public class DqjcService {
 	public void updateShrJcjy(@Param("dqjcid")Integer dqjcid, @Param("shrJcjl")String shrJcjl, @Param("auditor")String auditor){
 		dqjcMapper.updateShrJcjy(dqjcid,shrJcjl,auditor,new Date());
 	}
+
+    public Dqjc findByEqIdandJcyqIdLast(String eqId, String jcyqId) {
+		return dqjcMapper.findByEqIdandJcyqIdLast1(eqId,jcyqId);
+    }
 }

@@ -56,4 +56,6 @@ public interface EqInfoService {
 	List<User> findUserIdByEqId(String userId);
 	EqInfo findByDah(String dah);
 
+	//根据设备id查询设备品名
+    int findEqPm(String eqId);
 }
