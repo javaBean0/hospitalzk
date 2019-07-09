@@ -33,7 +33,7 @@
 <div class="layui-row">
     <div class="col-xs-12">
         <fieldset class="layui-elem-field layui-field-title">
-            <legend style="color: #000000;font-weight: bold;text-align: center;margin-bottom: 30px;">多参数监护仪质量检测原始记录表(成人)</legend>
+            <legend style="color: #000000;font-weight: bold;text-align: center;margin-bottom: 30px;">多参数监护仪质量检测原始记录表</legend>
         </fieldset>
         <table class="layui-table">
             <tr>
@@ -175,13 +175,10 @@
     // 获取上个页面传递的类型
     var type = window.location.search;
     var ids = parseInt(type.split("=")[1]);
-    // var thiseqId = parseInt(sessionStorage['thiseqId']);
-    // var thisjcyqId = parseInt(sessionStorage['thisjcyqId']);
-    var thissjId = parseInt(sessionStorage['thissjId']);
-    var thisId = parseInt(sessionStorage['thisId']);
+    var eqId = parseInt(sessionStorage['eqId']);
     $(function(){
         $.ajax({
-            url:"/jhy/findByDcidM?dcid="+ids,
+            url:"/yqEq/findByEqIdAndJcyqId/" + eqId + "/"  + ids ,
             method:"GET",
             dataType:"JSON",
             success:function(res){
@@ -296,7 +293,7 @@
             elem:"#testerInfo",
             cellMinWidth:100,
             toolbar: '#toolbarDemo',
-            url:"/jhy/findByDcidM?dcid="+ids,
+            url:"/yqEq/findByEqIdAndJcyqId/" + eqId + "/"  + ids ,  
             method:"GET",
             response: {
                 statusName: 'status'

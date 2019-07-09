@@ -36,6 +36,9 @@ public class UserEqController extends BaseController{
 	public ResponseResult<Integer> insertBatchByEqid(UserEq userEq,
 													 @RequestParam("eqPmId") String eqPmId,
 													 HttpSession session){
+		/*根据eq_id*/
+
+
 		String userId=getUserIdFromSession(session);
 		String shrId=userPmService.selectShrId(userId,eqPmId);
 		Integer data=userEqService.insertBatchByJcEqid(userId,userEq.getJcEqid(),shrId,userEq.getNdjhId());

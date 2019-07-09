@@ -50,30 +50,38 @@ public class YqEqController extends BaseController {
 
 
     //根据设备的id和检测仪器的id查询最后一条检测记录
-    @RequestMapping("/findByEqIdAndJcyqId/{eqId}/{jcyqId}/{type}")
+    @RequestMapping("/findByEqIdAndJcyqId/{eqId}/{jcyqId}")
     public ResponseResult<Object> findByEqIdAndJcyqId(@PathVariable("eqId") String eqId,
-                                                      @PathVariable("jcyqId") String jcyqId,
-                                                      @PathVariable("type") String type){
+                                                      @PathVariable("jcyqId") String jcyqId
+                                                     ){
 
         if(Integer.parseInt(jcyqId) == 5){
                Dqjc dqjc =  dqjcService.findByEqIdandJcyqIdLast(eqId, jcyqId);
+            return new ResponseResult<>(200, dqjc);
         }
 
         //根据设备id查询设备对应的品名
         int eqPm = eqInfoService.findEqPm(eqId);
         if(eqPm == 1){
             //心电监护仪
-            Dcsjhy dcsjhy;
-            if("c".equals(type)){
-                dcsjhy = dcsjhyService.findByEqIdandJcyqIdLast("dcsjhy_c",eqId, jcyqId);
-            }else {
+            Dcsjhy dcsjhy = dcsjhyService.findByEqIdandJcyqIdLast("dcsjhy_c",eqId, jcyqId);
+            if(dcsjhy == null){
                 dcsjhy = dcsjhyService.findByEqIdandJcyqIdLast("dcsjhy_m",eqId, jcyqId);
             }
-
            return new ResponseResult<>(200, dcsjhy);
+
         }else if(eqPm == 2){
             //除颤器
             Ccy ccy = ccyService.findByEqIdandJcyqIdLast1(eqId, jcyqId);
+           if(ccy == null){
+               //心电监护仪
+               Dcsjhy dcsjhy = dcsjhyService.findByEqIdandJcyqIdLast("dcsjhy_c",eqId, jcyqId);
+               if(dcsjhy == null){
+                   dcsjhy = dcsjhyService.findByEqIdandJcyqIdLast("dcsjhy_m",eqId, jcyqId);
+               }
+               return new ResponseResult<>(200, dcsjhy);
+           }
+
             return new ResponseResult<>(200, ccy);
         }else if(eqPm == 3){
             //高频电刀
@@ -85,21 +93,21 @@ public class YqEqController extends BaseController {
             return new ResponseResult<>(200, hxj);
         }else if(eqPm == 5){
             //输液泵
-            SybC syb =null;
-            if("c".equals(type)){
-                syb = sybService.findByEqIdandJcyqIdLast("syb_c", eqId, jcyqId);
-            }else {
-                 syb = sybService.findByEqIdandJcyqIdLast("syb_m", eqId, jcyqId);
+            SybC syb = sybService.findByEqIdandJcyqIdLast("syb_c", eqId, jcyqId);
+            if(syb == null){
+                syb = sybService.findByEqIdandJcyqIdLast("syb_m", eqId, jcyqId);
             }
-
             return new ResponseResult<>(200, syb);
+
         }else if(eqPm == 6){
             //注射泵
-            SybC zsb = null;
-            if("c".equals(type)){
-                zsb = zsbService.findByEqIdandJcyqIdLast("zsb_c", eqId, jcyqId);
-            }else {
+            SybC zsb =zsbService.findByEqIdandJcyqIdLast("zsb_c", eqId, jcyqId);
+            if(zsb == null){
                 zsb = zsbService.findByEqIdandJcyqIdLast("zsb_m", eqId, jcyqId);
+                if(zsb == null){
+                   StzsM stzsM = zsbService.findByEqIdandJcyqIdLastStzsM("stzs_m",  eqId, jcyqId);
+                    return new ResponseResult<>(200, stzsM);
+                }
 
             }
 

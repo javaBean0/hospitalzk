@@ -296,6 +296,10 @@ public interface ZsbMapper {
     //根据设备Id,检测仪器Id以及状态查询最后一条记录
     @Select("select * from ${tableName} where eq_id=#{eqId} and jcyq_id=#{jcyqId} order by test_time desc, id desc limit 1")
     SybC findByEqIdandJcyqIdLast(@Param("tableName") String tableName, @Param("eqId") String eqId, @Param("jcyqId") String jcyqId);
+/*双通道注射泵*/
+    @Select("select * from ${tableName} where eq_id=#{eqId} and jcyq_id=#{jcyqId} order by test_time desc, id desc limit 1")
+    StzsM findByEqIdandJcyqIdLastStzsM(@Param("tableName") String tableName, @Param("eqId") String eqId, @Param("jcyqId") String jcyqId);
+
 
     //根据设备Id,检测仪器Id以及状态查询
     @Select("select * from ${tableName} where eq_id=#{eqId} and jcyq_id=#{jcyqId}")

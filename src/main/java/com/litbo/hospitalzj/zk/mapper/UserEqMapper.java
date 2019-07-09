@@ -76,7 +76,7 @@ public interface UserEqMapper {
 
     //待上报，待审核，审核完成，审核不通过
     /*@Select("SELECT e.eq_mc,u.state,u.jc_eqid FROM user_eq u left join eq_info e on u.jc_eqid =e.eq_id where u.user_id=#{userId} and u.state=#{state}")*/
-    @Select("SELECT e.*,u.state,u.jc_eqid FROM user_eq u left join eq_info e on u.jc_eqid =e.eq_id  where u.user_id=#{userId} and u.state=#{state}")
+    @Select("SELECT e.*,u.state,u.jc_eqid FROM user_eq u left join eq_info e on u.jc_eqid =e.eq_id  where u.user_id=#{userId} and u.state=#{state} ")
     List<UserEqVo> findUserEqVo(@Param("userId") String userId, @Param("state") String state);
 
     @Select(" select date_format(date,'%c') as month,count(*) as count  " +

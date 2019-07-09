@@ -57,9 +57,13 @@ public class UserEqServiceImpl implements UserEqService{
 		userEq.setShrId(shrId);
 		userEq.setNdjhId(ndjhId);
 		userEq.setDate(new Date());
-		userEqMapper.insertBatchByJcEqid(userEq);
-		System.out.println("!!!!!!!!!!!!!"+userEq.getId());
-		return userEq.getId();
+		Integer id = userEqMapper.findUserEqByUserIdAndJceqid(userId, jcEqid);
+		if(id == null){
+			userEqMapper.insertBatchByJcEqid(userEq);
+			return userEq.getId();
+		}
+
+		return id;
 	}
 
 	@Override

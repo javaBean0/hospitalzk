@@ -56,8 +56,11 @@ public interface ZsbService {
     void updateStzs(StzsM stzsM);
 
     //根据设备Id,检测仪器Id以及状态查询最后一条记录
-    @Select("select * from ${tableName} where syb_c.eq_id=#{eqId} and syb_c.jcyq_id=#{jcyqId} order by id desc limit 1")
+
     SybC findByEqIdandJcyqIdLast(@Param("tableName") String tableName, @Param("eqId") String eqId, @Param("jcyqId") String jcyqId);
+
+    StzsM findByEqIdandJcyqIdLastStzsM(@Param("tableName") String tableName, @Param("eqId") String eqId, @Param("jcyqId") String jcyqId);
+
 
     //根据设备Id,检测仪器Id以及状态查询
     @Select("select * from ${tableName} where syb_c.eq_id=#{eqId} and syb_c.jcyq_id=#{jcyqId}")

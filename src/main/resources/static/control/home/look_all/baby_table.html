@@ -191,8 +191,7 @@
     // 获取上个页面传递的类型
     var type = window.location.search;
     var ids = parseInt(type.split("=")[1]);
-    var thissjId = parseInt(sessionStorage['thissjId']);
-    var thisId = parseInt(sessionStorage['thisId']);
+    var eqId = parseInt(sessionStorage['eqId']);
     //Demo
     layui.use(['table','layer','jquery','form'],function(){
         var table = layui.table
@@ -201,7 +200,7 @@
             , form = layui.form;
         $(function(){
             $.ajax({
-                url:"/yepyx/findByPyxId?pyxId="+ids,
+                url:"/yqEq/findByEqIdAndJcyqId/" + eqId + "/"  + ids ,
                 method:"GET",
                 dataType:"JSON",
                 success:function(res){
@@ -295,7 +294,7 @@
             elem:"#testerInfo",
             cellMinWidth:100,
             toolbar: '#toolbarDemo',
-            url:"/yepyx/findByPyxId?pyxId="+ids,
+            url:"/yqEq/findByEqIdAndJcyqId/" + eqId + "/"  + ids ,
             method:"GET",
             response: {
                 statusName: 'status'

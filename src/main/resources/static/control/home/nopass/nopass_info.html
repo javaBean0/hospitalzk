@@ -36,12 +36,12 @@
 <body>
 <div class="layui-row">
     <div class="col-xs-12">
-    	<fieldset class="layui-elem-field layui-field-title">
+        <fieldset class="layui-elem-field layui-field-title">
             <legend style="color: #000000;font-weight: bold">设备信息</legend>
         </fieldset>
         <table class="layui-hide" id="fixInfo"></table>
         <fieldset class="layui-elem-field layui-field-title">
-            <legend style="color: #000000;font-weight: bold">待上传检测信息</legend>
+            <legend style="color: #000000;font-weight: bold">未通过检测信息</legend>
         </fieldset>
         <fieldset class="layui-elem-field layui-field-title">
             <legend style="color: red;">性能检测</legend>
@@ -64,6 +64,7 @@
     // 获取上个页面传递的类型
     var type = window.location.search;
     var ids = parseInt(type.split("=")[1]);
+    sessionStorage['eqId'] = ids;
     layui.use(['form','layer','jquery','table','element'], function(){
         var form = layui.form
             ,   layer = layui.layer
@@ -107,13 +108,13 @@
                 {field:'eqCfdd', title:'设备存放地点',align:'center'}
             ]]
         });
-        // 检测仪器信息
+        // 状态为待上报的检测仪器信息
         // 性能检测
         table.render({
             elem:"#xnInfo",
             cellMinWidth:100,
             toolbar: '#toolbarDemo',
-            url:"/yq/selectEqYqNotDqByEqId?eqId="+ids,
+            url:"/yqEq/findOtherAndDsc/"+ids,
             method:"GET",
             response: {
                 statusName: 'status'
@@ -145,7 +146,7 @@
             elem:"#dqaqInfo",
             cellMinWidth:100,
             toolbar: '#toolbarDemo',
-            url:"/yq/selectEqYqByEqId?eqId="+ ids,
+            url:"/yqEq/findDqjcAndDsc/"+ ids,
             method:"GET",
             response: {
                 statusName: 'status'
@@ -176,16 +177,30 @@
             var data = obj.data;
             //console.log(obj)
             if(obj.event === "hands"){
-                // location.href="/control/home/upload/up_each/electric.html?id="+obj.data.jcyqId;
-                layer.msg("111")
+                if(data.jcyqName == "生命体征模拟器"){
+                    location.href="/control/home/look_all/man_life.html?id="+obj.data.jcyqId;
+                }else if(data.jcyqName == "注射设备分析仪"){
+                    location.href="/control/home/look_all/injection_pump_man.html?id="+obj.data.jcyqId;
+                }else if(data.jcyqName == "输液设备分析仪"){
+                    location.href="/control/home/look_all/infusion_pump_man.html?id="+obj.data.jcyqId;
+                }else if(data.jcyqName == "婴儿培养箱分析仪"){
+                    location.href="/control/home/look_all/baby_table.html?id="+obj.data.jcyqId;
+                }else if(data.jcyqName == "双通道注射泵分析仪"){
+                    location.href="/control/home/look_all/double_injection_pump.html?id="+obj.data.jcyqId;
+                }else if(data.jcyqName == "气流分析仪"){
+                    location.href="/control/home/look_all/breathing_machine.html?id="+obj.data.jcyqId;
+                }else if(data.jcyqName == "除颤起搏分析仪"){
+                    location.href="/control/home/look_all/defibrillator_table.html?id="+obj.data.jcyqId;
+                }else if(data.jcyqName == "高频电刀分析仪"){
+                    location.href="/control/home/look_all/endotherm_knife.html?id="+obj.data.jcyqId;
+                }
             }
         });
         table.on('tool(handle2)', function(obj){
             var data = obj.data;
             //console.log(obj)
             if(obj.event === "hands"){
-                layer.msg("222")
-                //location.href="/control/home/upload/up_each/electric.html?id="+obj.data.jcyqId;
+                location.href="/control/home/look_all/electric.html?id="+obj.data.jcyqId;
             }
         });
     });
