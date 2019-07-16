@@ -79,18 +79,21 @@
                 </dl>
             </li>
             <li class="layui-nav-item" shiro:haspermission="" name="a">
-                <a href="javascript:;"><i class="layui-icon layui-icon-template"></i>年度计划管理</a>
+                <a href="javascript:;"><i class="layui-icon layui-icon-template"></i>年度计划管理<span id="ndjhAll" class="layui-badge"></span></a>
                 <dl class="layui-nav-child">
                     <dd>
-                        <a href="javascript:void(0);" data-url="./home/my_plan.html" data-id="37" data-text="我的年度计划"><i class="layui-icon layui-icon-circle-dot"></i>我的年度计划</a>
+                        <a href="javascript:void(0);" data-url="./home/my_plan.html" data-id="37" data-text="我的年度计划"><i class="layui-icon layui-icon-circle-dot"></i>我的年度计划<span id="ndjhDqr" class="layui-badge"></span></a>
                     </dd>
                     <dd>
-                        <a href="javascript:void(0);" data-url="./home/on_plan.html" data-id="38" data-text="上报年度计划"><i class="layui-icon layui-icon-circle-dot"></i>上报年度计划</a>
+                        <a href="javascript:void(0);" data-url="./home/on_plan.html" data-id="38" data-text="上报年度计划"><i class="layui-icon layui-icon-circle-dot"></i>上报年度计划<span id="ndjhDsb" class="layui-badge"></span></a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:void(0);" data-url="./home/no_plan.html" data-id="39" data-text="审核未通过年度计划"><i class="layui-icon layui-icon-circle-dot"></i>审核未通过年度计划<span id="ndjhWtg" class="layui-badge"></span></a>
                     </dd>
                 </dl>
             </li>
             <li class="layui-nav-item" shiro:haspermission="" name="a">
-                <a href="javascript:void(0);" data-url="./home/waiting/breakdown.html" data-id="39" data-text="统计查询"><i class="layui-icon layui-icon-chart-screen"></i>统计查询</a>
+                <a href="javascript:void(0);" data-url="./home/waiting/breakdown.html" data-id="40" data-text="统计查询"><i class="layui-icon layui-icon-chart-screen"></i>统计查询</a>
             </li>
         </ul>
     </div>
@@ -181,6 +184,70 @@
 <script src="../static/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../static/js/main.js" type="text/javascript" charset="utf-8"></script>
 <script>
+    // 年度计划总数量
+    $.ajax({
+        url:"/ndjh/totalCount",
+        method:"GET",
+        dataType:"JSON",
+        success:function(res){
+            if(res.data != null && res.data != ""){
+                $("#ndjhAll").append(res.data);
+            }else{
+                $("#ndjhAll").css("display","none");
+            }
+        },
+        error:function(){
+            alert("服务器故障");
+        }
+    });
+    // 年度计划待确认数量
+    $.ajax({
+        url:"/ndjh/dqrCount",
+        method:"GET",
+        dataType:"JSON",
+        success:function(res){
+            if(res.data != null && res.data != ""){
+                $("#ndjhDqr").append(res.data);
+            }else{
+                $("#ndjhDqr").css("display","none");
+            }
+        },
+        error:function(){
+            alert("服务器故障");
+        }
+    });
+    // 年度计划待上报数量
+    $.ajax({
+        url:"/userpm/dsbCount",
+        method:"GET",
+        dataType:"JSON",
+        success:function(res){
+            if(res.data != null && res.data != ""){
+                $("#ndjhDsb").append(res.data);
+            }else{
+                $("#ndjhDsb").css("display","none");
+            }
+        },
+        error:function(){
+            alert("服务器故障");
+        }
+    });
+    // 年度计划审核未通过数量
+    $.ajax({
+        url:"/ndjh/btgCount",
+        method:"GET",
+        dataType:"JSON",
+        success:function(res){
+            if(res.data != null && res.data != ""){
+                $("#ndjhWtg").append(res.data);
+            }else{
+                $("#ndjhWtg").css("display","none");
+            }
+        },
+        error:function(){
+            alert("服务器故障");
+        }
+    });
     // 检测不通过数量
     $.ajax({
         url:"/userEq/findByUserIdStateCount",
@@ -255,7 +322,6 @@
             })
         });
     });
-
     window.onload = function(){
         var homes = document.getElementById('home');
         //判断当前页面渲染是否正确，不正确的话将刷新页面重新渲染

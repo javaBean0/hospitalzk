@@ -54,6 +54,9 @@ public class SybServiceImpl implements SybService {
 
     @Override
     public void updateChild(SybC sybC) {
+        String tableName = "syb_c_template";
+        SybCTemplate sybCTemplate = sybMapper.findTemplate(tableName);
+        BeanUtils.copyProperties(sybCTemplate, sybC);
         sybMapper.updateChild(sybC);
     }
 
@@ -67,6 +70,9 @@ public class SybServiceImpl implements SybService {
 
     @Override
     public void updateMan(SybC sybC) {
+        String tableName = "syb_m_template";
+        SybCTemplate sybCTemplate = sybMapper.findTemplate(tableName);
+        BeanUtils.copyProperties(sybCTemplate,sybC);
         sybMapper.updateMan(sybC);
     }
 

@@ -1,5 +1,6 @@
 package com.litbo.hospitalzj.checklist.controller;
 
+import com.litbo.hospitalzj.checklist.domain.Gpdd;
 import com.litbo.hospitalzj.checklist.domain.Hxj;
 import com.litbo.hospitalzj.checklist.domain.HxjTemplate;
 import com.litbo.hospitalzj.checklist.service.HxjService;
@@ -78,11 +79,34 @@ public class HxjController extends BaseController {
     }
 
     //修改录入数据
-    @RequestMapping("/updateHxj")
-    public ResponseResult<Void> updateHxj(Hxj hxj){
+    @RequestMapping("/updataHxj")
+    public ResponseResult updataHxj(
+            @RequestParam("eqId")String eqId,
+            @RequestParam("jcyqId") String jcyqId,
+            HttpSession session,
+            HttpServletRequest req){
+        Hxj last1 = hxjService.findByEqIdandJcyqIdLast1(eqId, jcyqId);
+        Hxj hxj = CommonUtils.toBean(req.getParameterMap(), Hxj.class);
+        hxj.setHxjid(last1.getHxjid());
+        //修改yq_eq 得state 和 type
+        int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
+        yqEqService.updateType(yqEqId,EnumProcess2.TO_UPLOAD.getMessage());
+        yqEqService.updateState(yqEqId, 0);
+
+        //如果未通过的设备关联的仪器为0，修改状态为待上传
+        Integer num = yqEqService.findTotalNum(eqId);
+        Integer userEqId = userEqService.findUserEqByUserIdAndJceqid(getUserIdFromSession(session), eqId);
+        if(num == 0){
+
+            userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
+        }
+
+        //更新
         hxjService.updateHxj(hxj);
-        return new ResponseResult<Void>(200);
+        int[] x={hxj.getHxjid(),yqEqId,userEqId};
+        return new ResponseResult(200, x);
     }
+
 
     //查询本设备的最后一条
     @RequestMapping("/findGpdd")

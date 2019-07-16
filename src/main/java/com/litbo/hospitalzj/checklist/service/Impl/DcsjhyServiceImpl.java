@@ -60,6 +60,8 @@ public class DcsjhyServiceImpl implements DcsjhyService {
 
     @Override
     public void updateMen(Dcsjhy dcsjhy) {
+        DcsjhyTemplate template = dcsjhyMapper.findTemplate_c();
+        BeanUtils.copyProperties(template, dcsjhy);
         dcsjhyMapper.updateMen(dcsjhy);
     }
 
@@ -72,6 +74,8 @@ public class DcsjhyServiceImpl implements DcsjhyService {
 
     @Override
     public void updateChild(Dcsjhy dcsjhy) {
+        DcsjhyTemplate template = dcsjhyMapper.findTemplate_c();
+        BeanUtils.copyProperties(template, dcsjhy);
         dcsjhyMapper.updateChild(dcsjhy);
     }
     @Override

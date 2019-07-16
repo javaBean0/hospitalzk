@@ -45,6 +45,8 @@ public class YepyxServiceImpl implements YepyxService {
     //数据修改
     @Override
     public void update(Yepyx yepyx) {
+        YepyxTemplate yepyxTemplate= yepyxMapper.findTemplate();
+        BeanUtils.copyProperties(yepyxTemplate, yepyx);
         yepyxMapper.update(yepyx);
     }
     //根据设备id查询检测表婴儿培养箱

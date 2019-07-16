@@ -26,14 +26,21 @@
 <div class="layui-row">
     <div class="col-xs-12">
         <fieldset class="layui-elem-field layui-field-title">
+            <legend style="font-weight: bold;color: red;">待确认年度计划</legend>
+        </fieldset>
+        <table class="layui-table" id="readyWork" lay-filter="up"></table>
+        <fieldset class="layui-elem-field layui-field-title">
             <legend style="font-weight: bold;color: red;">已生效年度计划</legend>
         </fieldset>
-        <table class="layui-table" id="overWork" lay-filter="up"></table>
+        <table class="layui-table" id="overWork"></table>
     </div>
 </div>
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
     </div>
+</script>
+<script type="text/html" id="upTest">
+    <a class="layui-btn layui-btn-xs" lay-event="handle">确认</a>
 </script>
 <script>
     layui.use(['layer','jquery','upload','table','element'], function(){
@@ -41,6 +48,63 @@
             ,   $ = layui.jquery
             ,   table = layui.table
             ,   element = layer.element;
+        // 待确认
+        table.render({
+            elem:"#readyWork",
+            url:"/ndjh/selectByUserIdAndStateDqr",
+            method:"GET",
+            toolbar:"#toolbarDemo",
+            cellMinWidth: 120,
+            response: {
+                statusName: 'status' //规定数据状态的字段名称，默认：code
+                ,statusCode: 200 //规定成功的状态码，默认：0
+                ,msgName: 'hint' //规定状态信息的字段名称，默认：msg
+                ,countName: 'total' //规定数据总数的字段名称，默认：count
+                ,dataName: 'data' //规定数据列表的字段名称，默认：data
+            },
+            parseData:function(res){
+                console.log(res);
+                return{
+                    "status":200
+                    ,"msg":res.message
+                    ,"count":res.total
+                    ,"data":res.data
+                }
+            },
+            cols:[[
+                {field:'eqPmName', title:'设备品名名称',align:'center'},
+                {field:'ndjhSbsl', title:'设备总数量',align:'center'},
+                {field:'ndjhJhl', title:'总计划量',align:'center'},
+                {field:'ndjhDtsj', title:'单台用时',align:'center'},
+                {field:'ndjh1yfjh', title:'1月计划',align:'center'},
+                {field:'ndjh1sj', title:'1月实际',align:'center'},
+                {field:'ndjh2yfjh', title:'2月计划',align:'center'},
+                {field:'ndjh2sj', title:'2月实际',align:'center'},
+                {field:'ndjh3yfjh', title:'3月计划',align:'center'},
+                {field:'ndjh3sj', title:'3月实际',align:'center'},
+                {field:'ndjh4yfjh', title:'4月计划',align:'center'},
+                {field:'ndjh4sj', title:'4月实际',align:'center'},
+                {field:'ndjh5yfjh', title:'5月计划',align:'center'},
+                {field:'ndjh5sj', title:'5月实际',align:'center'},
+                {field:'ndjh6yfjh', title:'6月计划',align:'center'},
+                {field:'ndjh6sj', title:'6月实际',align:'center'},
+                {field:'ndjh7yfjh', title:'7月计划',align:'center'},
+                {field:'ndjh7sj', title:'7月实际',align:'center'},
+                {field:'ndjh8yfjh', title:'8月计划',align:'center'},
+                {field:'ndjh8sj', title:'8月实际',align:'center'},
+                {field:'ndjh9yfjh', title:'9月计划',align:'center'},
+                {field:'ndjh9sj', title:'9月实际',align:'center'},
+                {field:'ndjh10yfjh', title:'10月计划',align:'center'},
+                {field:'ndjh10sj', title:'10月实际',align:'center'},
+                {field:'ndjh11yfjh', title:'11月计划',align:'center'},
+                {field:'ndjh11sj', title:'11月实际',align:'center'},
+                {field:'ndjh12yfjh', title:'12月计划',align:'center'},
+                {field:'ndjh12sj', title:'12月实际',align:'center'},
+                {field:'userName', title:'上报人',align:'center'},
+                {field:'ndjhSbsj', title:'上报时间',align:'center'},
+                {fixed: 'right', title:'操作',toolbar: '#upTest',align:'center'}
+            ]]
+        });
         // 审核通过
         table.render({
             elem:"#overWork",
@@ -96,6 +160,32 @@
                 {field:'userName', title:'上报人',align:'center'},
                 {field:'ndjhSbsj', title:'上报时间',align:'center'}
             ]]
+        });
+        // 确认
+        table.on('tool(up)', function(obj){
+            var data = obj.data;
+            //console.log(obj)
+            if(obj.event === 'handle'){
+                //location.href="/control/home/plan/up_plan.html?id="+obj.data.eqPmId;
+                $.ajax({
+                    url:"/ndjh/updateStateIsDjc?ndjhId="+obj.data.ndjhId,
+                    dataType:"JSON",
+                    success:function(res){
+                        if(res.state === 200){
+                            layer.msg("确认成功，此年度计划已生效！");
+                            setTimeout(function(){
+                                window.location.reload();
+                            },1000);
+                        }else{
+                            layer.msg("确认失败");
+                        }
+                    },
+                    error:function(data){
+                        layer.msg("请稍后再试");
+                        console.log(data);
+                    }
+                })
+            }
         });
     });
 </script>

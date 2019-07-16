@@ -103,4 +103,9 @@ public class NdjhServiceImpl implements NdjhService {
         ndjhMapper.updateNdjh(ndjh);
     }
 
+   /* @Override*/
+    /*public Integer SubCount(String userId, String message) {
+        return ndjhMapper.subCount(userId, message);
+    }
+*/
 }

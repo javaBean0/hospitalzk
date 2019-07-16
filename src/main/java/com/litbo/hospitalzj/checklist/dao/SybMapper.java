@@ -123,6 +123,8 @@ public interface SybMapper {
             "      #{qpbj,jdbcType=TINYINT}, #{kmbj,jdbcType=TINYINT})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void saveMan(SybC sybC);
+
+
     @Update("update syb_m\n" +
             "    set jcyq_id = #{jcyqId,jdbcType=INTEGER},\n" +
             "      eq_id = #{eqId,jdbcType=INTEGER},\n" +

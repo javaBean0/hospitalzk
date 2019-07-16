@@ -25,37 +25,18 @@
 <body>
 <div class="layui-row">
     <div class="col-xs-12">
-        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-            <ul class="layui-tab-title">
-                <li class="layui-this">待上报年度计划<span id="onHandleNum" class="layui-badge"></span></li>
-                <li>未通过提醒<span id="noPassNum" class="layui-badge"></span></li>
-            </ul>
-            <div class="layui-tab-content">
-                <div class="layui-tab-item layui-show">
-                    <fieldset class="layui-elem-field layui-field-title">
-                        <legend style="font-weight: bold;color: red;">待上报年度计划</legend>
-                    </fieldset>
-                    <table class="layui-table" id="haveWork" lay-filter="up"></table>
-                    <fieldset class="layui-elem-field layui-field-title">
-                        <legend style="font-weight: bold;color: red;">待审核年度计划</legend>
-                    </fieldset>
-                    <table class="layui-table" id="onWork"></table>
-                </div>
-                <div class="layui-tab-item">
-                    <fieldset class="layui-elem-field layui-field-title">
-                        <legend style="font-weight: bold;color: red;">审核未通过年度计划</legend>
-                    </fieldset>
-                    <table class="layui-table" id="noPass" lay-filter="reUp"></table>
-                </div>
-            </div>
-        </div>
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend style="font-weight: bold;color: red;">待上报年度计划</legend>
+        </fieldset>
+        <table class="layui-table" id="haveWork" lay-filter="up"></table>
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend style="font-weight: bold;color: red;">待审核年度计划</legend>
+        </fieldset>
+        <table class="layui-table" id="onWork"></table>
     </div>
 </div>
 <script type="text/html" id="upTest">
     <a class="layui-btn layui-btn-xs" lay-event="handle">上报</a>
-</script>
-<script type="text/html" id="reTest">
-    <a class="layui-btn layui-btn-xs" lay-event="reup">重新上报</a>
 </script>
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
@@ -175,51 +156,6 @@
                 {field:'state', title:'状态',align:'center'}
             ]]
         });
-        // 审核不通过
-        table.render({
-            elem:"#noPass",
-            url:"/ndjh/selectByUserIdAndStateShbtg",
-            method:"GET",
-            toolbar:"#toolbarDemo",
-            cellMinWidth: 120,
-            response: {
-                statusName: 'status' //规定数据状态的字段名称，默认：code
-                ,statusCode: 200 //规定成功的状态码，默认：0
-                ,msgName: 'hint' //规定状态信息的字段名称，默认：msg
-                ,countName: 'total' //规定数据总数的字段名称，默认：count
-                ,dataName: 'data' //规定数据列表的字段名称，默认：data
-            },
-            parseData:function(res){
-                console.log(res);
-                return{
-                    "status":200
-                    ,"msg":res.message
-                    ,"count":res.total
-                    ,"data":res.data
-                }
-            },
-            cols:[[
-                {field:'eqPmName', title:'设备品名名称',align:'center'},
-                {field:'ndjhSbsl', title:'设备总数量',align:'center'},
-                {field:'ndjhJhl', title:'总计划量',align:'center'},
-                {field:'ndjhDtsj', title:'单台用时',align:'center'},
-                {field:'ndjh1yfjh', title:'1月计划',align:'center'},
-                {field:'ndjh2yfjh', title:'2月计划',align:'center'},
-                {field:'ndjh3yfjh', title:'3月计划',align:'center'},
-                {field:'ndjh4yfjh', title:'4月计划',align:'center'},
-                {field:'ndjh5yfjh', title:'5月计划',align:'center'},
-                {field:'ndjh6yfjh', title:'6月计划',align:'center'},
-                {field:'ndjh7yfjh', title:'7月计划',align:'center'},
-                {field:'ndjh8yfjh', title:'8月计划',align:'center'},
-                {field:'ndjh9yfjh', title:'9月计划',align:'center'},
-                {field:'ndjh10yfjh', title:'10月计划',align:'center'},
-                {field:'ndjh11yfjh', title:'11月计划',align:'center'},
-                {field:'ndjh12yfjh', title:'12月计划',align:'center'},
-                {field:'userName', title:'上报人',align:'center'},
-                {field:'ndjhSbsj', title:'上报时间',align:'center'},
-                {fixed: 'right', title:'操作',toolbar: '#reTest',align:'center'}
-            ]]
-        });
         //上报
         table.on('tool(up)', function(obj){
             var data = obj.data;
@@ -228,15 +164,6 @@
             //console.log(obj)
             if(obj.event === 'handle'){
                 location.href="/control/home/plan/up_plan.html?id="+obj.data.eqPmId;
-            }
-        });
-        //重新上报
-        table.on('tool(reUp)', function(obj){
-            var data = obj.data;
-            //console.log(obj)
-            sessionStorage['eqPmId'] = obj.data.eqPmId;
-            if(obj.event === 'reup'){
-                location.href="/control/home/plan/re_plan.html?id="+obj.data.ndjhId;
             }
         });
     });

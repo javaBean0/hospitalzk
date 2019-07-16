@@ -424,7 +424,7 @@ public interface DcsjhyMapper {
     @Options(useGeneratedKeys = true, keyProperty = "dcid", keyColumn = "dcid")
     public void saveChild(Dcsjhy dcsjhy);
 
-    @Update("update dcsjhy_m\n" +
+    @Update("update dcsjhy_c\n" +
             "    set jcyq_id = #{jcyqId,jdbcType=INTEGER},\n" +
             "      eq_id = #{eqId,jdbcType=INTEGER},\n" +
             "      tester = #{tester,jdbcType=VARCHAR},\n" +

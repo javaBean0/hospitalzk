@@ -116,4 +116,10 @@ public class DqjcService {
     public Dqjc findByEqIdandJcyqIdLast(String eqId, String jcyqId) {
 		return dqjcMapper.findByEqIdandJcyqIdLast1(eqId,jcyqId);
     }
+
+	public void updateDqjc(Dqjc dqjc) {
+		DqjcTemplate dqjcTemplate = dqjcMapper.findTemplate();
+		BeanUtils.copyProperties(dqjcTemplate, dqjc);
+		dqjcMapper.updataDqjc(dqjc);
+	}
 }

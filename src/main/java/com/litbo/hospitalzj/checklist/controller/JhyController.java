@@ -137,6 +137,42 @@ public class JhyController extends BaseController {
 	}
 
 	/**
+	 * 更新成人检测数据
+	 * @param eqId
+	 * @param jcyqId
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping("/updataman")
+	public ResponseResult updataman(
+			@RequestParam("eqId")String eqId,
+			@RequestParam("jcyqId") String jcyqId,
+			HttpSession session,
+			HttpServletRequest req){
+		Dcsjhy last = dcsjhyService.findByEqIdandJcyqIdLast("dcsjhy_m", eqId, jcyqId);
+		Dcsjhy dcsjhy = CommonUtils.toBean(req.getParameterMap(), Dcsjhy.class);
+		dcsjhy.setDcid(last.getDcid());
+		//修改yq_eq 得state 和 type待上传
+		int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
+		yqEqService.updateType(yqEqId,EnumProcess2.TO_UPLOAD.getMessage());
+		yqEqService.updateState(yqEqId, 0);
+		//如果未通过的设备关联的仪器为0，修改状态为待上传
+		Integer num = yqEqService.findTotalNum(eqId);
+		Integer userEqId = userEqService.findUserEqByUserIdAndJceqid(getUserIdFromSession(session), eqId);
+		if(num == 0){
+
+			userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
+		}
+		//更新
+		dcsjhyService.updateMen(dcsjhy);
+		int[] x={dcsjhy.getDcid(),yqEqId,userEqId};
+		return new ResponseResult<>(200, x);
+	}
+
+
+
+
+	/**
 	 * 保存幼儿检测数据
 	 * @param eqId
 	 * @param req
@@ -167,23 +203,55 @@ public class JhyController extends BaseController {
 		table.setTableName("dcsjhy_c");
 		table.setValue(1);
 		tabEqService.insert(table);
-		int[] x={dcsjhy.getDcid(),yqEqId};
+		int[] x={dcsjhy.getDcid(),yqEqId, userEqId};
+		return new ResponseResult<>(200, x);
+	}
+
+	/**
+	 * 更新成人检测数据
+	 * @param eqId
+	 * @param jcyqId
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping("/updatachild")
+	public ResponseResult updatachild(
+			@RequestParam("eqId")String eqId,
+			@RequestParam("jcyqId") String jcyqId,
+			HttpSession session,
+			HttpServletRequest req){
+		Dcsjhy last = dcsjhyService.findByEqIdandJcyqIdLast("dcsjhy_c", eqId, jcyqId);
+		Dcsjhy dcsjhy = CommonUtils.toBean(req.getParameterMap(), Dcsjhy.class);
+		dcsjhy.setDcid(last.getDcid());
+		//修改yq_eq 得state 和 type
+		int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
+		yqEqService.updateType(yqEqId,EnumProcess2.TO_UPLOAD.getMessage());
+		yqEqService.updateState(yqEqId, 0);
+		//如果未通过的设备关联的仪器为0，修改状态为待上传
+		Integer num = yqEqService.findTotalNum(eqId);
+		Integer userEqId = userEqService.findUserEqByUserIdAndJceqid(getUserIdFromSession(session), eqId);
+		if(num == 0){
+			userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
+		}
+		//更新
+		dcsjhyService.updateChild(dcsjhy);
+		int[] x={dcsjhy.getDcid(),yqEqId, userEqId,userEqId};
 		return new ResponseResult<>(200, x);
 	}
 
 	//成人
-	@RequestMapping("/updateMen")
+	/*@RequestMapping("/updateMen")
 	public ResponseResult<Void> updateMen(Dcsjhy dcsjhy){
 		dcsjhyService.updateMen(dcsjhy);
 		return new ResponseResult<Void>(200);
-	}
+	}*/
 	//幼儿
-	@RequestMapping("/updateChild")
+	/*@RequestMapping("/updateChild")
 	public ResponseResult<Void> updateC(Dcsjhy dcsjhy){
 		dcsjhyService.updateChild(dcsjhy);
 		return new ResponseResult<Void>(200);
 	}
-
+*/
 	@RequestMapping("/findByEqIdandJcyqIdLast1")
 	public ResponseResult findByEqIdandJcyqIdLast1(@RequestParam("eqId")String eqId, @RequestParam("jcyqId") String jcyqId){
 		TabEq table=tabEqService.findTable(Integer.valueOf(eqId),Integer.valueOf(jcyqId));

@@ -84,10 +84,19 @@ public class NdjhController extends BaseController {
     //根据状态查询年度计划
     @RequestMapping("/selectByUserIdAndState")
     public ResponseResult<List<Ndjh>> selectByUserIdAndState(HttpSession session){
-    	String userId=getUserIdFromSession(session);
+        String userId=getUserIdFromSession(session);
         List<Ndjh> data=ndjhService.selectByUserIdAndState(userId,EnumProcess2.UNDER_DETECTIO.getMessage());
         return new ResponseResult<List<Ndjh>>(SUCCESS,data);
     }
+
+    //根据状态为待确认查询年度计划
+    @RequestMapping("/selectByUserIdAndStateDqr")
+    public ResponseResult<List<Ndjh>> selectByUserIdAndStateDqr(HttpSession session){
+        String userId=getUserIdFromSession(session);
+        List<Ndjh> data=ndjhService.selectByUserIdAndState(userId,EnumProcess2.TO_CONFIRM.getMessage());
+        return new ResponseResult<List<Ndjh>>(SUCCESS,data);
+    }
+
     //待审核年度计划
     @RequestMapping("/selectByUserIdAndStateDsh")
     public ResponseResult<List<Ndjh>> selectByUserIdAndStateDsh(HttpSession session){
@@ -108,11 +117,21 @@ public class NdjhController extends BaseController {
       ndjhService.update(ndjhId,EnumProcess2.SHANG_AUTID_NOT.getMessage());
       return new ResponseResult<Void>(SUCCESS);
     }
+    //更新状态为待确认
     @RequestMapping("/updateStateIs")
     public ResponseResult<Void> updateStateIs(@RequestParam("ndjhId")Integer ndjhId){
+        ndjhService.update(ndjhId,EnumProcess2.TO_CONFIRM.getMessage());
+        return new ResponseResult<Void>(SUCCESS);
+    }
+
+    //更新状态为最后状态待检测
+    @RequestMapping("/updateStateIsDjc")
+    public ResponseResult<Void> updateStateIsDjc(@RequestParam("ndjhId")Integer ndjhId){
         ndjhService.update(ndjhId,EnumProcess2.UNDER_DETECTIO.getMessage());
         return new ResponseResult<Void>(SUCCESS);
     }
+
+
     @RequestMapping("/updateMonth")
     public ResponseResult<Void> updateMonth(Integer ndjhId, HttpSession session){
         ndjhService.updateMonth(ndjhId);
@@ -125,11 +144,37 @@ public class NdjhController extends BaseController {
         Integer data=ndjhService.dshCount(shrId,EnumProcess2.UNDER_REVIEW.getMessage());
         return new ResponseResult<Integer>(SUCCESS,data);
     }
-    //查询未通过数量
+    //查看当前用户的年度计划审核不通过数量
     @RequestMapping("/btgCount")
     public ResponseResult<Integer> btgCount(HttpSession session){
         String userId=getUserIdFromSession(session);
-        Integer data=ndjhService.jhCount(userId,EnumProcess2.AUTID_NOT.getMessage());
+        Integer data=ndjhService.jhCount(userId,EnumProcess2.SHANG_AUTID_NOT.getMessage());
         return new ResponseResult<Integer>(SUCCESS,data);
+    }
+
+    //查看当前用户的年度计划待确认数量
+    @RequestMapping("/dqrCount")
+    public ResponseResult<Integer> dqrCount(HttpSession session){
+        String userId=getUserIdFromSession(session);
+        Integer data=ndjhService.jhCount(userId,EnumProcess2.TO_CONFIRM.getMessage());
+        return new ResponseResult<Integer>(SUCCESS,data);
+    }
+
+   /* //查看当前用户的年度计划待上报数量
+    @RequestMapping("/dsbCount")
+    public ResponseResult<Integer> dsbCount(HttpSession session){
+        String userId=getUserIdFromSession(session);
+        Integer data=ndjhService.jhCount(userId,EnumProcess2.TO_AUDIT.getMessage());
+        return new ResponseResult<Integer>(SUCCESS,data);
+    }*/
+
+    //查询总数量
+    @RequestMapping("/totalCount")
+    public ResponseResult<Integer> totalCount(HttpSession session){
+        String userId=getUserIdFromSession(session);
+        Integer data1=ndjhService.jhCount(userId,EnumProcess2.SHANG_AUTID_NOT.getMessage());
+        Integer data2=ndjhService.jhCount(userId,EnumProcess2.TO_CONFIRM.getMessage());
+        Integer data3=userPmService.dsbNum(userId,EnumProcess2.TO_AUDIT.getMessage());
+        return new ResponseResult<Integer>(SUCCESS,data1 + data2 + data3);
     }
 }

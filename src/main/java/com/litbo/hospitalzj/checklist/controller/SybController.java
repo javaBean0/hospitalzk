@@ -1,5 +1,6 @@
 package com.litbo.hospitalzj.checklist.controller;
 
+import com.litbo.hospitalzj.checklist.domain.Gpdd;
 import com.litbo.hospitalzj.checklist.domain.SybC;
 import com.litbo.hospitalzj.checklist.domain.SybCTemplate;
 import com.litbo.hospitalzj.checklist.service.SybService;
@@ -114,11 +115,40 @@ public class SybController extends BaseController {
         long[] x={sybC.getId(),yqEqId};
         return new ResponseResult(200, x);
     }
-    @RequestMapping("/updateChild")
+
+    @RequestMapping("/updatachild")
+    public ResponseResult updataChild(
+            @RequestParam("eqId")String eqId,
+            @RequestParam("jcyqId") String jcyqId,
+            HttpSession session,
+            HttpServletRequest req){
+        SybC syb_m = sybService.findByEqIdandJcyqIdLast("syb_c", eqId, jcyqId);
+        SybC sybC = CommonUtils.toBean(req.getParameterMap(), SybC.class);
+        sybC.setId(syb_m.getId());
+        //修改yq_eq 得state 和 type
+        int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
+        yqEqService.updateType(yqEqId,EnumProcess2.TO_UPLOAD.getMessage());
+        yqEqService.updateState(yqEqId, 0);
+        //如果未通过的设备关联的仪器为0，修改状态为待上传
+        Integer num = yqEqService.findTotalNum(eqId);
+        Integer userEqId = userEqService.findUserEqByUserIdAndJceqid(getUserIdFromSession(session), eqId);
+        if(num == 0){
+            userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
+        }
+        //更新
+        //dqjcService.updateDqjc(dqjc);
+        sybService.updateChild(sybC);
+        long[] x={sybC.getId(),yqEqId,userEqId};
+        return new ResponseResult(200, x);
+    }
+
+
+
+    /*@RequestMapping("/updateChild")
     public ResponseResult<SybC> updateChild(SybC sybC){
         sybService.updateChild(sybC);
         return new ResponseResult<SybC>(200, sybC);
-    }
+    }*/
 
     @RequestMapping("/saveman")
     public ResponseResult saveMan(@RequestParam(value = "eqId") String eqId,
@@ -148,11 +178,40 @@ public class SybController extends BaseController {
         long[] x={sybC.getId(),yqEqId};
         return new ResponseResult(200,x);
     }
-    @RequestMapping("/updateMan")
+
+
+    @RequestMapping("/updataman")
+    public ResponseResult updataMan(
+            @RequestParam("eqId")String eqId,
+            @RequestParam("jcyqId") String jcyqId,
+            HttpSession session,
+            HttpServletRequest req){
+        SybC syb_m = sybService.findByEqIdandJcyqIdLast("syb_m", eqId, jcyqId);
+        SybC sybC = CommonUtils.toBean(req.getParameterMap(), SybC.class);
+        sybC.setId(syb_m.getId());
+        //修改yq_eq 得state 和 type
+        int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
+        yqEqService.updateType(yqEqId,EnumProcess2.TO_UPLOAD.getMessage());
+        yqEqService.updateState(yqEqId, 0);
+        //如果未通过的设备关联的仪器为0，修改状态为待上传
+        Integer num = yqEqService.findTotalNum(eqId);
+        Integer userEqId = userEqService.findUserEqByUserIdAndJceqid(getUserIdFromSession(session), eqId);
+        if(num == 0){
+            userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
+        }
+        //更新
+        //dqjcService.updateDqjc(dqjc);
+        sybService.updateMan(sybC);
+        long[] x={sybC.getId(),yqEqId,userEqId};
+        return new ResponseResult(200, x);
+    }
+
+
+   /* @RequestMapping("/updateMan")
     public ResponseResult<SybC> updateMan(SybC sybC){
         sybService.updateMan(sybC);
         return new ResponseResult<SybC>(200, sybC);
-    }
+    }*/
     //查询所有录入信息(成人)
     @RequestMapping("/findAllMan")
     public ResponseResult<List<SybC>> findAllMan(){

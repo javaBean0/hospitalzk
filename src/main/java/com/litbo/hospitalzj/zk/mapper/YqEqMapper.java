@@ -36,12 +36,20 @@ public interface YqEqMapper {
     List<Yq> selectDqjcAndDsc(@Param("eqId") String eqId);
 
     //查询检测审核成功最后一条记录
-    @Select("SELECT  * FROM yq WHERE jcyq_id IN (SELECT jcyq_id FROM yq_eq  WHERE eq_id = #{eqId}  AND `type` = '已上传' )AND jcyq_id <> 5")
+    @Select("SELECT  * FROM yq WHERE jcyq_id IN (SELECT jcyq_id FROM yq_eq  WHERE eq_id = #{eqId}  AND `type` = '已上传'  AND `state` = 1 )AND jcyq_id <> 5 ")
     List<Yq> selectOtherAndJcshcg(String eqId);
 
     //查询检测审核成功最后一条记录
-    @Select("SELECT  * FROM yq WHERE jcyq_id IN (SELECT jcyq_id FROM yq_eq  WHERE eq_id = #{eqId}  AND `type` = '已上传' AND jcyq_id = 5 )")
+    @Select("SELECT  * FROM yq WHERE jcyq_id IN (SELECT jcyq_id FROM yq_eq  WHERE eq_id = #{eqId}  AND `type` = '已上传' AND `state` = 1 ) AND jcyq_id = 5 ")
     List<Yq> selectDqjcAndJcshcg(String eqId);
+
+    //查询检测审核成功最后一条记录
+    @Select("SELECT  * FROM yq WHERE jcyq_id IN (SELECT jcyq_id FROM yq_eq  WHERE eq_id = #{eqId}  AND `type` = '已上传'  AND `state` = 2 )AND jcyq_id <> 5 ")
+    List<Yq> selectOtherAndJcBtg(String eqId);
+
+    //查询检测审核成功最后一条记录
+    @Select("SELECT  * FROM yq WHERE jcyq_id IN (SELECT jcyq_id FROM yq_eq  WHERE eq_id = #{eqId}  AND `type` = '已上传' AND  `state` = 2 ) AND jcyq_id = 5 ")
+    List<Yq> selectDqjcAndJcBtg(String eqId);
 
 
 
@@ -62,6 +70,9 @@ public interface YqEqMapper {
     @Select("select id from yq_eq where jcyq_id=#{jcyqId} and eq_id=#{eqId} order by id limit 1")
     Integer findId(@Param("jcyqId") Integer jcyqId, @Param("eqId") Integer eqId);
 
+    @Select("select count(*) from yq_eq where eq_id=#{eqId} and state = 2")
+    Integer findTotalNum(String eqId);
 
-
+    /*@Select("select * from yq_eq where id = #{yqEqId}")
+    YqEq selectYqEq(Integer yqEqId);*/
 }

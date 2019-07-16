@@ -50,4 +50,6 @@ public interface CcyService {
     void updateState(@Param("dqjcid")Integer dqjcid,@Param("state")Integer state);*/
     //修改审核人意见
     void updateShrJcjy(@Param("ccyId") Integer ccyId, @Param("shrJcjl") String shrJcjl, @Param("auditor") String auditor);
+
+    void updateCcy(Ccy ccy);
 }

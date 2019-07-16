@@ -55,6 +55,7 @@ public class HxjServiceImpl implements HxjService {
 
     @Override
     public void updateHxj(Hxj hxj) {
+        BeanUtils.copyProperties(hxjMapper.findTemplate(), hxj);
         hxjMapper.updateHxj(hxj);
     }
 

@@ -27,7 +27,7 @@ public class Dqjc {
     
     private String dydy2;
 
-    private Double dydyValue;
+    private String dydyValue;
 
     private Byte dydyResult;
 
@@ -243,11 +243,11 @@ public class Dqjc {
         this.jcsm = jcsm == null ? null : jcsm.trim();
     }
 
-    public Double getDydyValue() {
+    public String getDydyValue() {
         return dydyValue;
     }
 
-    public void setDydyValue(Double dydyValue) {
+    public void setDydyValue(String dydyValue) {
         this.dydyValue = dydyValue;
     }
 
@@ -714,4 +714,6 @@ public class Dqjc {
     public void setSpare5(Byte spare5) {
         this.spare5 = spare5;
     }
+
+
 }

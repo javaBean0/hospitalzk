@@ -179,10 +179,8 @@
             if(obj.event === "hands"){
                 if(data.jcyqName == "生命体征模拟器"){
                     location.href="/control/home/look_all/man_life.html?id="+obj.data.jcyqId;
-                }else if(data.jcyqName == "注射设备分析仪"){
+                }else if(data.jcyqName == "注射设备分析仪" || data.jcyqName == "输液设备分析仪"){
                     location.href="/control/home/look_all/injection_pump_man.html?id="+obj.data.jcyqId;
-                }else if(data.jcyqName == "输液设备分析仪"){
-                    location.href="/control/home/look_all/infusion_pump_man.html?id="+obj.data.jcyqId;
                 }else if(data.jcyqName == "婴儿培养箱分析仪"){
                     location.href="/control/home/look_all/baby_table.html?id="+obj.data.jcyqId;
                 }else if(data.jcyqName == "双通道注射泵分析仪"){

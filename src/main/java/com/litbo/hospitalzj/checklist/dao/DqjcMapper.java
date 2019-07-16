@@ -156,4 +156,79 @@ public interface DqjcMapper {
 	@Update("update dqjc set shr_jcjl=#{shrJcjl},auditor=#{auditor},shsj_time=#{shsjTime} where dqjcid=#{dqjcid}")
 	void updateShrJcjy(@Param("dqjcid") Integer dqjcid, @Param("shrJcjl") String shrJcjl, @Param("auditor") String auditor, @Param("shsjTime") Date shsjTime);
 
+	//TODO 电器更新
+	@Update("update dqjc\n" +
+			"    set " +
+			"      jcyq_id = #{jcyqId,jdbcType=INTEGER},\n" +
+			"      eq_id = #{eqId,jdbcType=INTEGER},\n" +
+			"      tester = #{tester,jdbcType=VARCHAR},\n" +
+			"      test_time = #{testTime,jdbcType=TIMESTAMP},\n" +
+			"      auditor = #{auditor,jdbcType=VARCHAR},\n" +
+			"      shsj_time = #{shsjTime,jdbcType=TIMESTAMP},\n" +
+			"      shr_jcjl = #{shrJcjl,jdbcType=VARCHAR},\n" +
+			"      jcjl = #{jcjl,jdbcType=VARCHAR},\n" +
+			"      jcsm = #{jcsm,jdbcType=VARCHAR},\n" +
+			"      dydy1 = #{dydy1,jdbcType=INTEGER},\n" +
+			"      dydy2 = #{dydy2,jdbcType=INTEGER},\n" +
+			"      dydy_value = #{dydyValue,jdbcType=VARCHAR},\n" +
+			"      dydy_result = #{dydyResult,jdbcType=TINYINT},\n" +
+			"      jdzk = #{jdzk,jdbcType=DOUBLE},\n" +
+			"      jdzk_value = #{jdzkValue,jdbcType=DOUBLE},\n" +
+			"      jdzk_result = #{jdzkResult,jdbcType=TINYINT},\n" +
+			"      jyzk = #{jyzk,jdbcType=DOUBLE},\n" +
+			"      jyzk_value = #{jyzkValue,jdbcType=DOUBLE},\n" +
+			"      jyzk_result = #{jyzkResult,jdbcType=TINYINT},\n" +
+			"      ddldl_zc = #{ddldlZc,jdbcType=DOUBLE},\n" +
+			"      ddldl_zc_zx_value = #{ddldlZcZxValue,jdbcType=DOUBLE},\n" +
+			"      ddldl_zc_fx_value = #{ddldlZcFxValue,jdbcType=DOUBLE},\n" +
+			"      ddldl_zc_result = #{ddldlZcResult,jdbcType=TINYINT},\n" +
+			"      ddldl_dy = #{ddldlDy,jdbcType=DOUBLE},\n" +
+			"      ddldl_dy_zxdl_value = #{ddldlDyZxdlValue,jdbcType=DOUBLE},\n" +
+			"      ddldl_dy_fxdl_value = #{ddldlDyFxdlValue,jdbcType=DOUBLE},\n" +
+			"      ddldl_dy_result = #{ddldlDyResult,jdbcType=TINYINT},\n" +
+			"      wkldl_zc = #{wkldlZc,jdbcType=DOUBLE},\n" +
+			"      wkldl_zc_zx_value = #{wkldlZcZxValue,jdbcType=DOUBLE},\n" +
+			"      wkldl_zc_fx_value = #{wkldlZcFxValue,jdbcType=DOUBLE},\n" +
+			"      wkldl_zc_result = #{wkldlZcResult,jdbcType=TINYINT},\n" +
+			"      wkldl_dy = #{wkldlDy,jdbcType=DOUBLE},\n" +
+			"      wkldl_dy_zxdl_value = #{wkldlDyZxdlValue,jdbcType=DOUBLE},\n" +
+			"      wkldl_dy_zxdd_value = #{wkldlDyZxddValue,jdbcType=DOUBLE},\n" +
+			"      wkldl_dy_fxdl_value = #{wkldlDyFxdlValue,jdbcType=DOUBLE},\n" +
+			"      wkldl_dy_fxdd_value = #{wkldlDyFxddValue,jdbcType=DOUBLE},\n" +
+			"      wkldl_dy_result = #{wkldlDyResult,jdbcType=TINYINT},\n" +
+			"      hzldl_zc_zxbf_value = #{hzldlZcZxbfValue,jdbcType=DOUBLE},\n" +
+			"      hzldl_zc_fxbf_value = #{hzldlZcFxbfValue,jdbcType=DOUBLE},\n" +
+			"      hzldl_zc_zxcf_value = #{hzldlZcZxcfValue,jdbcType=DOUBLE},\n" +
+			"      hzldl_zc_fxcf_value = #{hzldlZcFxcfValue,jdbcType=DOUBLE},\n" +
+			"      hzldl_zc_result = #{hzldlZcResult,jdbcType=TINYINT},\n" +
+			"      hzldl_dy_zxdlbf_value = #{hzldlDyZxdlbfValue,jdbcType=DOUBLE},\n" +
+			"      hzldl_dy_zxddbf_value = #{hzldlDyZxddbfValue,jdbcType=DOUBLE},\n" +
+			"      hzldl_dy_fxdlbf_value = #{hzldlDyFxdlbfValue,jdbcType=DOUBLE},\n" +
+			"      hzldl_dy_fxddbf_value = #{hzldlDyFxddbfValue,jdbcType=DOUBLE},\n" +
+			"      hzldl_dy_zxdlcf_value = #{hzldlDyZxdlcfValue,jdbcType=DOUBLE},\n" +
+			"      hzldl_dy_zxddcf_value = #{hzldlDyZxddcfValue,jdbcType=DOUBLE},\n" +
+			"      hzldl_dy_fxdlcf_value = #{hzldlDyFxdlcfValue,jdbcType=DOUBLE},\n" +
+			"      hzldl_dy_fxddcf_value = #{hzldlDyFxddcfValue,jdbcType=DOUBLE},\n" +
+			"      hzldl_dy_result = #{hzldlDyResult,jdbcType=TINYINT},\n" +
+			"      hzfzldl_zc_zxbf_value = #{hzfzldlZcZxbfValue,jdbcType=DOUBLE},\n" +
+			"      hzfzldl_zc_fxbf_value = #{hzfzldlZcFxbfValue,jdbcType=DOUBLE},\n" +
+			"      hzfzldl_zc_zxcf_value = #{hzfzldlZcZxcfValue,jdbcType=DOUBLE},\n" +
+			"      hzfzldl_zc_fxcf_value = #{hzfzldlZcFxcfValue,jdbcType=DOUBLE},\n" +
+			"      hzfzldl_zc_result = #{hzfzldlZcResult,jdbcType=TINYINT},\n" +
+			"      hzfzldl_dy_zxdlbf_value = #{hzfzldlDyZxdlbfValue,jdbcType=DOUBLE},\n" +
+			"      hzfzldl_dy_zxddbf_value = #{hzfzldlDyZxddbfValue,jdbcType=DOUBLE},\n" +
+			"      hzfzldl_dy_fxdlbf_value = #{hzfzldlDyFxdlbfValue,jdbcType=DOUBLE},\n" +
+			"      hzfzldl_dy_fxddbf_value = #{hzfzldlDyFxddbfValue,jdbcType=DOUBLE},\n" +
+			"      hzfzldl_dy_zxdlcf_value = #{hzfzldlDyZxdlcfValue,jdbcType=DOUBLE},\n" +
+			"      hzfzldl_dy_zxddcf_value = #{hzfzldlDyZxddcfValue,jdbcType=DOUBLE},\n" +
+			"      hzfzldl_dy_fxdlcf_value = #{hzfzldlDyFxdlcfValue,jdbcType=DOUBLE},\n" +
+			"      hzfzldl_dy_fxddcf_value = #{hzfzldlDyFxddcfValue,jdbcType=DOUBLE},\n" +
+			"      hzfzldl_dy_result = #{hzfzldlDyResult,jdbcType=TINYINT},\n" +
+			"      state = #{state,jdbcType=INTEGER},\n" +
+			"      shsj = #{shsj,jdbcType=DATE},\n" +
+			"      spare3 = #{spare3,jdbcType=TINYINT},\n" +
+			"      spare4 = #{spare4,jdbcType=TINYINT},\n" +
+			"      spare5 = #{spare5,jdbcType=TINYINT},\n" +
+			"      spare2 = #{spare2,jdbcType=TINYINT} where dqjcid = #{dqjcid,jdbcType=INTEGER}")
+    void updataDqjc(Dqjc dqjc);
 }

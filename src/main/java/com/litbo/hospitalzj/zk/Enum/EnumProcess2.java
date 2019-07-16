@@ -13,7 +13,9 @@ public enum EnumProcess2 {
     DETECTION_OF_AUDIT_IS(9,"检测审核成功"),
     IN_REVIEW(9,"审核中"),
     TO_UPLOAD(10,"待上传"),
-    IS_UPLOAD(11,"已上传");
+    IS_UPLOAD(11,"已上传"),
+    TO_CONFIRM(12, "待确认");
+
 
 
     public Integer getCode() {

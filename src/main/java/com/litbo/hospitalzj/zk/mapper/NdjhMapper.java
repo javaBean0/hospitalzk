@@ -111,4 +111,6 @@ public interface NdjhMapper {
             "    where ndjh_id = #{ndjhId,jdbcType=INTEGER}")
     void updateNdjh(Ndjh ndjh);
 
+    /*@Select("select oount(*) from ndjh where user_id=#{userId} and state=#{state}")
+    Integer subCount(String userId, String state);*/
 }

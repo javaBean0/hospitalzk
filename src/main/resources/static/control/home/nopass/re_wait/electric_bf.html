@@ -97,10 +97,7 @@
             </tr>
             <tr>
                 <td rowspan="5">应用部分</td>
-                <td colspan="6">应用端类型</td>
-                <td style="color:red;" width="163">B型BF型</td>
-                <td width="142">CF型</td>
-                <td></td>
+                <td colspan="9">应用端类型 <span style="color: red;">B/BF 型</span></td>
             </tr>
             <tr>
                 <td rowspan="2">患者漏电流</td>
@@ -160,9 +157,9 @@
     // 获取上个页面传递的类型
     var type = window.location.search;
     var ids = parseInt(type.split("=")[1]);
-    // var thiseqId = parseInt(sessionStorage['thiseqId']);
-    var thissjId = parseInt(sessionStorage['thissjId']);
-    var thisId = parseInt(sessionStorage['thisId']);
+    var yqeqId = parseInt(sessionStorage['yqeqId']);
+    var userEqId = parseInt(sessionStorage["userEqId"]);
+    var eqId = parseInt(sessionStorage["eqId"]);
     $(function(){
     	$.ajax({
             url:"/dqjc/findByDqjcid?dqjcid="+ids,
@@ -308,13 +305,13 @@
         // 上传
         $("#upload").click(function(){
             $.ajax({
-                url:"/dqjc/updateState?yqEqId="+thissjId+"&userEqId="+thisId,
+                url:"/dqjc/updateState2?eqId=" + eqId + "&yqEqId="+yqeqId+"&userEqId="+userEqId,
                 method:"POST",
                 success:function(res){
                     if(res.state === 200){
                         layer.msg("上传成功，请耐心等待管理员审核");
                         setTimeout(function(){
-                            location.href="/control/home/home.html";
+                            location.href="/control/home/nopass/nopass_info.html?id="+eqId;
                         },1000)
                     }else{
                         layer.msg("上传失败");
@@ -330,9 +327,26 @@
         $("#update").click(function(){
             location.href="/control/home/update/write_electric_info.html?id="+ids;
         });
-        // 返回
+        // 暂不上传
         $("#back").click(function () {
-            location.href="/control/home/home.html";
+            $.ajax({
+                url:"/dqjc/updateState3?eqId=" + eqId + "&userEqId=" + userEqId,
+                method:"POST",
+                success:function(res){
+                    if(res.state === 200){
+                        layer.msg("成功");
+                        setTimeout(function(){
+                            location.href="/control/home/nopass/nopass_info.html?id="+eqId;
+                        },1000)
+                    }else{
+                        layer.msg("失败");
+                    }
+                },
+                error:function(data){
+                    layer.msg("请稍后再试");
+                    console.log(data);
+                }
+            });
         })
     })
 </script>

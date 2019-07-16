@@ -121,6 +121,7 @@ public interface CcyMapper {
             "      )")
     @Options(useGeneratedKeys = true, keyProperty = "ccyId", keyColumn = "ccy_id")
     public void save(Ccy ccy);
+
     @Update("update ccy\n" +
             "    set jcyq_id = #{jcyqId,jdbcType=INTEGER},\n" +
             "      eq_id = #{eqId,jdbcType=INTEGER},\n" +

@@ -1,5 +1,6 @@
 package com.litbo.hospitalzj.checklist.controller;
 
+import com.litbo.hospitalzj.checklist.domain.SybC;
 import com.litbo.hospitalzj.checklist.domain.Yepyx;
 import com.litbo.hospitalzj.checklist.domain.YepyxTemplate;
 import com.litbo.hospitalzj.checklist.service.YepyxService;
@@ -63,7 +64,8 @@ public class YepyxController extends BaseController {
     public ResponseResult save(@RequestParam(value = "eqId") String eqId,
                                @RequestParam(value = "jcyqId") String jcyqId,
                                @RequestParam(value = "userEqId") Integer userEqId,
-                               Yepyx yepyx, HttpServletRequest req) {
+                                HttpServletRequest req) {
+        Yepyx yepyx = CommonUtils.toBean(req.getParameterMap(), Yepyx.class);
         int yqEqId = yqEqService.insertBatch(eqId, jcyqId);
         yqEqService.updateType(yqEqId, EnumProcess2.TO_UPLOAD.getMessage());
         //修改状态为待上传
@@ -79,12 +81,41 @@ public class YepyxController extends BaseController {
         return new ResponseResult<>(200, x);
     }
 
-    //数据修改
     @RequestMapping("/updateYepyx")
+    public ResponseResult updateYepyx(
+            @RequestParam("eqId")String eqId,
+            @RequestParam("jcyqId") String jcyqId,
+            HttpSession session,
+            HttpServletRequest req){
+        Yepyx data = yepyxService.findByEqIdandJcyqIdLast1(eqId, jcyqId);
+        Yepyx yepyx = CommonUtils.toBean(req.getParameterMap(), Yepyx.class);
+        yepyx.setPyxId(data.getPyxId());
+
+        //修改yq_eq 得state 和 type
+        int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
+        yqEqService.updateType(yqEqId,EnumProcess2.TO_UPLOAD.getMessage());
+        yqEqService.updateState(yqEqId, 0);
+        //如果未通过的设备关联的仪器为0，修改状态为待上传
+        Integer num = yqEqService.findTotalNum(eqId);
+        Integer userEqId = userEqService.findUserEqByUserIdAndJceqid(getUserIdFromSession(session), eqId);
+        if(num == 0){
+            userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
+        }
+        //更新
+        //dqjcService.updateDqjc(dqjc);
+        yepyxService.update(yepyx);
+        int[] x = {yepyx.getPyxId(), yqEqId, userEqId};
+        return new ResponseResult<>(200, x);
+    }
+
+
+
+    //数据修改
+  /*  @RequestMapping("/updateYepyx")
     public ResponseResult<Void> update(Yepyx yepyx) {
         yepyxService.update(yepyx);
         return new ResponseResult<Void>(200);
-    }
+    }*/
 
     //根据婴儿培养箱id查询设备检测表
     @RequestMapping("/findYepyx")

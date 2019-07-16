@@ -71,4 +71,11 @@ public class CcyServiceImpl implements CcyService {
     public void updateShrJcjy(Integer ccyId, String shrJcjl, String auditor) {
         ccyMapper.updateShrJcjy(ccyId, shrJcjl, auditor, new Date());
     }
+
+    @Override
+    public void updateCcy(Ccy ccy) {
+        CcyTemplate ccyTemplate = ccyMapper.findTemplate();
+        BeanUtils.copyProperties(ccyTemplate, ccy);
+        ccyMapper.updateCcy(ccy);
+    }
 }

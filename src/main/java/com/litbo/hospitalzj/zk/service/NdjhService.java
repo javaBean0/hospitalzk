@@ -32,4 +32,6 @@ public interface NdjhService {
     Integer dshCount(@Param("shrId") String shrId, @Param("state") String state);
 
     void updateNdjh(Ndjh ndjh);
+
+  /*  Integer SubCount(String userId, String message);*/
 }

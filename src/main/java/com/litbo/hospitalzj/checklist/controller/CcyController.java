@@ -2,6 +2,7 @@ package com.litbo.hospitalzj.checklist.controller;
 
 import com.litbo.hospitalzj.checklist.domain.Ccy;
 import com.litbo.hospitalzj.checklist.domain.CcyTemplate;
+import com.litbo.hospitalzj.checklist.domain.Dcsjhy;
 import com.litbo.hospitalzj.checklist.service.CcyService;
 import com.litbo.hospitalzj.checklist.utils.commons.CommonUtils;
 import com.litbo.hospitalzj.controller.BaseController;
@@ -109,9 +110,43 @@ public class CcyController extends BaseController {
         eqZjls.setEqMc(eqById.getEqMc());
         eqZjls.setEqDah(eqById.getEqDah());
         eqZjlsService.insert(eqZjls);
+
+
         int[] x = {ccy.getCcyId(), yqEqId};
         return new ResponseResult<>(200, x);
     }
+
+
+    @RequestMapping("/updataccy")
+    public ResponseResult updataccy(
+            @RequestParam("eqId")String eqId,
+            @RequestParam("jcyqId") String jcyqId,
+            HttpSession session,
+            HttpServletRequest req){
+        Ccy last1 = ccyService.findByEqIdandJcyqIdLast1(eqId, jcyqId);
+        Ccy ccy = CommonUtils.toBean(req.getParameterMap(), Ccy.class);
+        ccy.setCcyId(last1.getCcyId());
+        //修改yq_eq 得state 和 type
+        int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
+        yqEqService.updateType(yqEqId,EnumProcess2.TO_UPLOAD.getMessage());
+        yqEqService.updateState(yqEqId, 0);
+
+        //如果未通过的设备关联的仪器为0，修改状态为待上传
+        Integer num = yqEqService.findTotalNum(eqId);
+        Integer userEqId = userEqService.findUserEqByUserIdAndJceqid(getUserIdFromSession(session), eqId);
+        if(num == 0){
+
+            userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
+        }
+        //更新
+        ccyService.updateCcy(ccy);
+        int[] x = {ccy.getCcyId(), yqEqId,userEqId};
+        return new ResponseResult<>(200, x);
+    }
+
+
+
+
 
 
     //查询电气检测表（最后一条）

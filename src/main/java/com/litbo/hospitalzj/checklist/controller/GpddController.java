@@ -1,5 +1,6 @@
 package com.litbo.hospitalzj.checklist.controller;
 
+import com.litbo.hospitalzj.checklist.domain.Dqjc;
 import com.litbo.hospitalzj.checklist.domain.Gpdd;
 import com.litbo.hospitalzj.checklist.service.GpddService;
 import com.litbo.hospitalzj.checklist.utils.ResponseResult;
@@ -75,12 +76,40 @@ public class GpddController extends BaseController {
         return new ResponseResult<>(200, x);
     }
 
+    @RequestMapping("/updataGpdd")
+    public ResponseResult updataGpdd(
+            @RequestParam("eqId")String eqId,
+            @RequestParam("jcyqId") String jcyqId,
+            HttpSession session,
+            HttpServletRequest req){
+        Gpdd last1 = gpddService.findByEqIdandJcyqIdLast1(eqId, jcyqId);
+        Gpdd gpdd = CommonUtils.toBean(req.getParameterMap(), Gpdd.class);
+        gpdd.setGpddid(last1.getGpddid());
+        //修改yq_eq 得state 和 type
+        int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
+        yqEqService.updateType(yqEqId,EnumProcess2.TO_UPLOAD.getMessage());
+        yqEqService.updateState(yqEqId, 0);
+        //如果未通过的设备关联的仪器为0，修改状态为待上传
+        Integer num = yqEqService.findTotalNum(eqId);
+        Integer userEqId = userEqService.findUserEqByUserIdAndJceqid(getUserIdFromSession(session), eqId);
+        if(num == 0){
+
+            userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
+        }
+        //更新
+        //dqjcService.updateDqjc(dqjc);
+        gpddService.updateGpdd(gpdd);
+        int[] x = {gpdd.getGpddid(), yqEqId,userEqId};
+        return new ResponseResult<>(200, x);
+    }
+
+
     //修改录入数据
-    @RequestMapping("/updateGpdd")
+  /*  @RequestMapping("/updateGpdd")
     public ResponseResult<Void> updateGpdd(Gpdd gpdd) {
         gpddService.updateGpdd(gpdd);
         return new ResponseResult<Void>(200);
-    }
+    }*/
 
     //查询本设备的最后一条
     @RequestMapping("/findGpdd")

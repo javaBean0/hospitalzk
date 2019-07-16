@@ -37,6 +37,7 @@ public class GpddServiceImpl implements GpddService {
     }
     @Override
     public void updateGpdd(Gpdd gpdd) {
+        BeanUtils.copyProperties(gpddMapper.findTemplate(), gpdd);
         gpddMapper.updateGpdd(gpdd);
     }
 

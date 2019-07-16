@@ -5,7 +5,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <title>成人心电监护仪数据表格</title>
+    <title>心电监护仪数据表格</title>
     <link rel="stylesheet" type="text/css" href="../../../../static/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="../../../../static/css/admin.css"/>
     <script src="../../../../static/js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
@@ -18,18 +18,23 @@
             text-align: center;
             margin-top: 30px;
         }
-        .btn{
-            text-align: center;
-        }
         td p{
             font-weight: bold;
+        }
+        .btn{
+            width: 100%;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 <div class="layui-row">
     <div class="col-xs-12">
-        <h2>多参数监护仪质量检测原始记录表(成人)</h2>
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend style="color: #000000;font-weight: bold;text-align: center;margin-bottom: 30px;">多参数监护仪质量检测原始记录表(新生儿)</legend>
+        </fieldset>
         <table class="layui-table">
             <tr>
                 <th rowspan="2" scope="row">心率(次/min)</th>
@@ -155,6 +160,11 @@
             <legend style="color: #000000;font-weight: bold;">检测人信息</legend>
         </fieldset>
         <table class="layui-hide" id="testerInfo"></table>
+        <div class="col-xs-12 btn">
+            <a id="update" class="layui-btn">修改</a>
+            <a id="back" class="layui-btn">暂不上传</a>
+            <button id="upload" class="layui-btn layui-btn-normal">上传</button>
+        </div>
     </div>
 </div>
 <script type="text/html" id="toolbarDemo">
@@ -165,9 +175,12 @@
     // 获取上个页面传递的类型
     var type = window.location.search;
     var ids = parseInt(type.split("=")[1]);
+    var yqeqId = parseInt(sessionStorage['yqeqId']);
+    var userEqId = parseInt(sessionStorage["userEqId"]);
+    var eqId = parseInt(sessionStorage["eqId"]);
     $(function(){
         $.ajax({
-            url:"/jhy/findByDcidM?dcid="+ids,
+            url:"/jhy/findByDcidC?dcid="+ids,
             method:"GET",
             dataType:"JSON",
             success:function(res){
@@ -272,7 +285,7 @@
                 }
             }
         })
-    })
+    });
     //Demo
     layui.use(['table','layer','jquery'],function(){
         var table = layui.table
@@ -282,7 +295,7 @@
             elem:"#testerInfo",
             cellMinWidth:100,
             toolbar: '#toolbarDemo',
-            url:"/jhy/findByDcidM?dcid="+ids,
+            url:"/jhy/findByDcidC?dcid="+ids,
             method:"GET",
             response: {
                 statusName: 'status'
@@ -301,13 +314,58 @@
                 }
             },
             cols:[[
-                {field:'auditor', title:'审核人',align:'center'},
-                {field:'testTime', title:'审核时间',align:'center'},
-                {field:'shrJcjl', title:'审核情况说明',align:'center'}
+                {field:'tester', title:'检测人',align:'center'},
+                {field:'testTime', title:'检测时间',align:'center'},
+                {field:'jcsm', title:'检测情况说明',align:'center'}
             ]]
         });
+        // 上传
+        $("#upload").click(function(){
+            $.ajax({
+                url:"/dqjc/updateState2?eqId=" + eqId + "&yqEqId="+yqeqId+"&userEqId="+userEqId,
+                method:"POST",
+                success:function(res){
+                    if(res.state === 200){
+                        layer.msg("上传成功，请耐心等待管理员审核");
+                        setTimeout(function(){
+                            location.href="/control/home/nopass/nopass_info.html?id="+eqId;
+                        },1000)
+                    }else{
+                        layer.msg("上传失败");
+                    }
+                },
+                error:function(data){
+                    layer.msg("上传失败,请稍后再试");
+                    console.log(data);
+                }
+            })
+        });
+        // 修改
+        $("#update").click(function(){
+            location.href="/control/home/update/write_life_info.html?id="+ids;
+        });
+        // 暂不上传
+        $("#back").click(function () {
+            $.ajax({
+                url:"/dqjc/updateState3?eqId=" + eqId + "&userEqId=" + userEqId,
+                method:"POST",
+                success:function(res){
+                    if(res.state === 200){
+                        layer.msg("成功");
+                        setTimeout(function(){
+                            location.href="/control/home/nopass/nopass_info.html?id="+eqId;
+                        },1000)
+                    }else{
+                        layer.msg("失败");
+                    }
+                },
+                error:function(data){
+                    layer.msg("请稍后再试");
+                    console.log(data);
+                }
+            });
+        })
     })
 </script>
 </body>
-
 </html>

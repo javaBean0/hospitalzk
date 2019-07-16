@@ -27,6 +27,16 @@ public class YqEqServiceImpl implements YqEqService{
 	}
 
 	@Override
+	public List<Yq> selectOtherAndJcBtg(String eqId) {
+		return yqEqMapper.selectOtherAndJcBtg(eqId);
+	}
+
+	@Override
+	public List<Yq> selectDqjcAndJcBtg(String eqId) {
+		return yqEqMapper.selectDqjcAndJcBtg(eqId);
+	}
+
+	@Override
 	public List<Yq> selectOtherAndDsc(String eqId) {
 		return yqEqMapper.selectOtherAndDsc(eqId);
 	}
@@ -80,6 +90,16 @@ public class YqEqServiceImpl implements YqEqService{
 	public Integer findId(Integer jcyqId, Integer eqId) {
 		return yqEqMapper.findId(jcyqId,eqId);
 	}
+
+	@Override
+	public Integer findTotalNum(String eqId) {
+		return yqEqMapper.findTotalNum(eqId);
+	}
+
+	/*@Override
+	public YqEq selectYqEq(Integer yqEqId) {
+		return yqEqMapper.selectYqEq(yqEqId);
+	}*/
 
 
 }

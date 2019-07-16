@@ -68,6 +68,9 @@ public class ZsbServiceImpl implements ZsbService {
 
     @Override
     public void updateChild(SybC sybC) {
+        String tableName = "zsb_c_template";
+        SybCTemplate sybCTemplate = zsbMapper.findTemplate(tableName);
+        BeanUtils.copyProperties(sybCTemplate, sybC);
         zsbMapper.updateChild(sybC);
     }
 
@@ -81,6 +84,9 @@ public class ZsbServiceImpl implements ZsbService {
 
     @Override
     public void updateMan(SybC sybC) {
+        String tableName = "zsb_m_template";
+        SybCTemplate sybCTemplate = zsbMapper.findTemplate(tableName);
+        BeanUtils.copyProperties(sybCTemplate, sybC);
         zsbMapper.updateMan(sybC);
     }
 

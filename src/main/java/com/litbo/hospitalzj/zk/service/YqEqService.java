@@ -17,6 +17,12 @@ public interface YqEqService {
 	List<Yq>  selectDqjcAndJcshcg(String eqId);
 
 	//查询和对应设备关联的仪器信息（待上传）
+	List<Yq> selectOtherAndJcBtg(String eqId);
+
+	//查询和对应设备关联的电器检测仪器信息（待上传）
+	List<Yq>  selectDqjcAndJcBtg(String eqId);
+
+	//查询和对应设备关联的仪器信息（待上传）
 	List<Yq> selectOtherAndDsc(String eqId);
 
 	//查询和对应设备关联的电器检测仪器信息（待上传）
@@ -38,5 +44,8 @@ public interface YqEqService {
 	Integer findId(@Param("jcyqId") Integer jcyqId, @Param("eqId") Integer eqId);
 
 
+	Integer findTotalNum(String eqId);
 
+	//
+   /* YqEq selectYqEq(Integer yqEqId);*/
 }

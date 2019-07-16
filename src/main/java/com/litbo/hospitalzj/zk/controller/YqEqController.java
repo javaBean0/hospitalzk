@@ -91,7 +91,7 @@ public class YqEqController extends BaseController {
             //呼吸机
             Hxj hxj = hxjService.findByEqIdandJcyqIdLast1(eqId, jcyqId);
             return new ResponseResult<>(200, hxj);
-        }else if(eqPm == 5){
+        }/*else if(eqPm == 5 || eqPm == 6){
             //输液泵
             SybC syb = sybService.findByEqIdandJcyqIdLast("syb_c", eqId, jcyqId);
             if(syb == null){
@@ -99,7 +99,7 @@ public class YqEqController extends BaseController {
             }
             return new ResponseResult<>(200, syb);
 
-        }else if(eqPm == 6){
+        }*/else if(eqPm == 5 || eqPm == 6){
             //注射泵
             SybC zsb =zsbService.findByEqIdandJcyqIdLast("zsb_c", eqId, jcyqId);
             if(zsb == null){
@@ -133,6 +133,20 @@ public class YqEqController extends BaseController {
     @RequestMapping("/findDqjcAndJcshcg/{eqId}")
     public ResponseResult<List<Yq>> findDqjcAndJcshcg(@PathVariable String eqId) {
         List<Yq> yqs = yqEqService.selectDqjcAndJcshcg(eqId);
+        return new ResponseResult<List<Yq>>(200, yqs);
+    }
+
+
+    @RequestMapping("/findOtherAndJcBtg/{eqId}")
+    public ResponseResult<List<Yq>> findOtherAndJcBtg(@PathVariable String eqId) {
+        List<Yq> yqs = yqEqService.selectOtherAndJcBtg(eqId);
+        return new ResponseResult<List<Yq>>(200, yqs);
+    }
+
+
+    @RequestMapping("/findDqjcAndJcBtg/{eqId}")
+    public ResponseResult<List<Yq>> findDqjcAndJcBtg(@PathVariable String eqId) {
+        List<Yq> yqs = yqEqService.selectDqjcAndJcBtg(eqId);
         return new ResponseResult<List<Yq>>(200, yqs);
     }
 
