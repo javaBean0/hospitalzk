@@ -205,7 +205,23 @@
             var data = obj.data;
             //console.log(obj)
             if(obj.event === "hands"){
-                location.href="/admin/home/apply/electric_info.html?id="+obj.data.jcyqId;
+                $.ajax({
+                    url:"/dqjc/findByEqIdandJcyqIdLast1?eqId="+ids+"&jcyqId="+obj.data.jcyqId,
+                    method:"GET",
+                    dataType:"JSON",
+                    success:function(res){
+                        if(res.state === 200){
+                            if(res.data.hzldlZcZxbfValue == ""){
+                                location.href="/admin/home/apply/electric_cf.html?id="+obj.data.jcyqId;
+                            }else if(res.data.res.data.hzldlZcZxcfValue == ""){
+                                location.href="/admin/home/apply/electric_bf.html?id="+obj.data.jcyqId;
+                            }else{
+                                location.href="/admin/home/apply/electric_none.html?id="+obj.data.jcyqId;
+                            }
+                        }
+                    }
+                })
+                //location.href="/admin/home/apply/electric_info.html?id="+obj.data.jcyqId;
             }
         });
 		  $("#sbumitUp").click(function(){
