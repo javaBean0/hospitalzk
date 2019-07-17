@@ -258,7 +258,23 @@
             if(obj.event === "hands1"){
                 location.href="/control/home/look_all/electric.html?id="+obj.data.jcyqId;
             }else if(obj.event == "hands2"){
-                location.href="/control/home/nopass/re_check/write_electric_info.html?id="+obj.data.jcyqId;
+                $.ajax({
+                    url:"/yqEq/findByEqIdAndJcyqId/" + ids + "/"  + obj.data.jcyqId,
+                    method:"GET",
+                    dataType:"JSON",
+                    success:function(res){
+                        if(res.state === 200){
+                            if(res.data.hzldlZcZxbfValue == ""){
+                                location.href="/control/home/nopass/re_check/write_electric_cf.html?id="+obj.data.jcyqId;
+                            }else if(res.data.res.data.hzldlZcZxcfValue == ""){
+                                location.href="/control/home/nopass/re_check/write_electric_bf.html?id="+obj.data.jcyqId;
+                            }else{
+                                location.href="/control/home/nopass/re_check/write_electric_none.html?id="+obj.data.jcyqId;
+                            }
+                        }
+                    }
+                })
+                //location.href="/control/home/nopass/re_check/write_electric_info.html?id="+obj.data.jcyqId;
             }
         });
     });
