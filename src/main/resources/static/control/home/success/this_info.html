@@ -196,7 +196,22 @@
             var data = obj.data;
             //console.log(obj)
             if(obj.event === "hands"){
-                location.href="/control/home/success/look/electric.html?id="+obj.data.jcyqId;
+                $.ajax({
+                    url:"/yqEq/findByEqIdAndJcyqId/" + ids + "/"  + obj.data.jcyqId,
+                    method:"GET",
+                    dataType:"JSON",
+                    success:function(res){
+                        if(res.state === 200){
+                            if(res.data.hzldlZcZxbfValue == ""){
+                                location.href="/control/home/look/electric_cf.html?id="+obj.data.jcyqId;
+                            }else if(res.data.res.data.hzldlZcZxcfValue == ""){
+                                location.href="/control/home/look/electric_bf.html?id="+obj.data.jcyqId;
+                            }else{
+                                location.href="/control/home/look/electric_none.html?id="+obj.data.jcyqId;
+                            }
+                        }
+                    }
+                });
             }
         });
     });
