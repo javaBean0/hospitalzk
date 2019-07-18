@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../../../../static/css/all.min.css"/>
     <script type="text/javascript" src="../../../../static/js/jquery-3.3.1.min.js"></script>
     <script src="../../../../static/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <script src="breath.js"></script>
     <!--[if IE 8]>
     <script type="text/javascript" src="../../../../static/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
@@ -54,67 +55,59 @@
             <fieldset class="layui-elem-field layui-field-title">
                 <legend style="color: #555555;">呼吸机设定值 (ml) —— <span class="sign">400</span></legend>
             </fieldset>
-            <div class="layui-form-item col-md-6 col-xs-12">
+            <div class="layui-form-item col-md-5 col-xs-12">
                 <label class="layui-form-label">1</label>
                 <div class="layui-input-block">
-                    <input type="text" name="cqzh11" placeholder="呼吸机监测值 1 " autocomplete="off" class="layui-input">
-                    <b></b>
+                    <input type="text" id="cqzh11" name="cqzh11" placeholder="呼吸机监测值 1 " autocomplete="off" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item col-md-6 col-xs-12">
+            <div class="layui-form-item col-md-5 col-xs-12">
                 <label class="layui-form-label">2</label>
                 <div class="layui-input-block">
-                    <input type="text" name="cqzh12" placeholder="呼吸机监测值 2 " autocomplete="off" class="layui-input">
-                    <b></b>
+                    <input type="text" id="cqzh12" name="cqzh12" placeholder="呼吸机监测值 2 " autocomplete="off" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item col-md-6 col-xs-12">
+            <div class="layui-form-item col-md-5 col-xs-12">
                 <label class="layui-form-label">3</label>
                 <div class="layui-input-block">
-                    <input type="text" name="cqzh13" placeholder="呼吸机监测值 3 " autocomplete="off" class="layui-input">
-                    <b></b>
+                    <input type="text" id="cqzh13" name="cqzh13" placeholder="呼吸机监测值 3 " autocomplete="off" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item col-md-6 col-xs-12">
+            <div class="layui-form-item col-md-5 col-xs-12">
                 <label class="layui-form-label">平均值</label>
                 <div class="layui-input-block">
-                    <input type="text" name="cqzhp11" placeholder="平均值 (呼吸机监测值)" autocomplete="off" class="layui-input">
-                    <b></b>
+                    <input type="text" id="cqzhp11" name="cqzhp11" placeholder="平均值 (呼吸机监测值)" autocomplete="off" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item col-md-6 col-xs-12">
+            <div class="layui-form-item col-md-5 col-xs-12">
                 <label class="layui-form-label">1</label>
                 <div class="layui-input-block">
-                    <input type="text" name="cqzc11" placeholder="测试仪测量值 1 " autocomplete="off" class="layui-input">
-                    <b></b>
+                    <input type="text" id="cqzc11" name="cqzc11" placeholder="测试仪测量值 1 " autocomplete="off" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item col-md-6 col-xs-12">
+            <div class="layui-form-item col-md-5 col-xs-12">
                 <label class="layui-form-label">2</label>
                 <div class="layui-input-block">
-                    <input type="text" name="cqzc12" placeholder="测试仪测量值 2 " autocomplete="off" class="layui-input">
-                    <b></b>
+                    <input type="text" id="cqzc12" name="cqzc12" placeholder="测试仪测量值 2 " autocomplete="off" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item col-md-6 col-xs-12">
+            <div class="layui-form-item col-md-5 col-xs-12">
                 <label class="layui-form-label">3</label>
                 <div class="layui-input-block">
-                    <input type="text" name="cqzc13" placeholder="测试仪测量值 3 " autocomplete="off" class="layui-input">
-                    <b></b>
+                    <input type="text" id="cqzc13" name="cqzc13" placeholder="测试仪测量值 3 " autocomplete="off" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item col-md-6 col-xs-12">
+            <div class="layui-form-item col-md-5 col-xs-12">
                 <label class="layui-form-label">平均值</label>
                 <div class="layui-input-block">
-                    <input type="text" name="cqzcp12" placeholder="平均值 (测试仪测量值)" autocomplete="off" class="layui-input">
-                    <b></b>
+                    <input type="text" id="cqzcp12" name="cqzcp12" placeholder="平均值 (测试仪测量值)" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item col-md-6 col-xs-12">
                 <label class="layui-form-label">示值误差</label>
                 <div class="layui-input-block">
-                    <input type="text" name="cqz1Swc" placeholder="示值误差" autocomplete="off" class="layui-input">
-                    <b></b>
+                    <input type="text" id="cqz1Swc" name="cqz1Swc" placeholder="示值误差" autocomplete="off" class="layui-input">
+                    <b id="wc1"></b>
                 </div>
             </div>
             <fieldset class="layui-elem-field layui-field-title">
@@ -1193,6 +1186,7 @@
             , laydate = layui.laydate;
         $(function(){
             $("#isUser").val(userName);
+
         });
         laydate.render({
             elem:"#date",
