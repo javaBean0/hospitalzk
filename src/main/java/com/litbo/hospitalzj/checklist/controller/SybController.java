@@ -125,6 +125,8 @@ public class SybController extends BaseController {
         SybC syb_m = sybService.findByEqIdandJcyqIdLast("syb_c", eqId, jcyqId);
         SybC sybC = CommonUtils.toBean(req.getParameterMap(), SybC.class);
         sybC.setId(syb_m.getId());
+        //更新
+        sybService.updateChild(sybC);
         //修改yq_eq 得state 和 type
         int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
         yqEqService.updateType(yqEqId,EnumProcess2.TO_UPLOAD.getMessage());
@@ -135,9 +137,7 @@ public class SybController extends BaseController {
         if(num == 0){
             userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
         }
-        //更新
-        //dqjcService.updateDqjc(dqjc);
-        sybService.updateChild(sybC);
+
         long[] x={sybC.getId(),yqEqId,userEqId};
         return new ResponseResult(200, x);
     }
@@ -189,6 +189,8 @@ public class SybController extends BaseController {
         SybC syb_m = sybService.findByEqIdandJcyqIdLast("syb_m", eqId, jcyqId);
         SybC sybC = CommonUtils.toBean(req.getParameterMap(), SybC.class);
         sybC.setId(syb_m.getId());
+        //更新
+        sybService.updateMan(sybC);
         //修改yq_eq 得state 和 type
         int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
         yqEqService.updateType(yqEqId,EnumProcess2.TO_UPLOAD.getMessage());
@@ -199,9 +201,6 @@ public class SybController extends BaseController {
         if(num == 0){
             userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
         }
-        //更新
-        //dqjcService.updateDqjc(dqjc);
-        sybService.updateMan(sybC);
         long[] x={sybC.getId(),yqEqId,userEqId};
         return new ResponseResult(200, x);
     }

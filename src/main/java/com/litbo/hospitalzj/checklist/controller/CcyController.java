@@ -126,6 +126,8 @@ public class CcyController extends BaseController {
         Ccy last1 = ccyService.findByEqIdandJcyqIdLast1(eqId, jcyqId);
         Ccy ccy = CommonUtils.toBean(req.getParameterMap(), Ccy.class);
         ccy.setCcyId(last1.getCcyId());
+        //更新
+        ccyService.updateCcy(ccy);
         //修改yq_eq 得state 和 type
         int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
         yqEqService.updateType(yqEqId,EnumProcess2.TO_UPLOAD.getMessage());
@@ -138,8 +140,6 @@ public class CcyController extends BaseController {
 
             userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
         }
-        //更新
-        ccyService.updateCcy(ccy);
         int[] x = {ccy.getCcyId(), yqEqId,userEqId};
         return new ResponseResult<>(200, x);
     }

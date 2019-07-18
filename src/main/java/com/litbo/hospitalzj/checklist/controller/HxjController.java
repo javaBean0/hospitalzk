@@ -88,6 +88,8 @@ public class HxjController extends BaseController {
         Hxj last1 = hxjService.findByEqIdandJcyqIdLast1(eqId, jcyqId);
         Hxj hxj = CommonUtils.toBean(req.getParameterMap(), Hxj.class);
         hxj.setHxjid(last1.getHxjid());
+        //更新
+        hxjService.updateHxj(hxj);
         //修改yq_eq 得state 和 type
         int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
         yqEqService.updateType(yqEqId,EnumProcess2.TO_UPLOAD.getMessage());
@@ -101,8 +103,7 @@ public class HxjController extends BaseController {
             userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
         }
 
-        //更新
-        hxjService.updateHxj(hxj);
+
         int[] x={hxj.getHxjid(),yqEqId,userEqId};
         return new ResponseResult(200, x);
     }

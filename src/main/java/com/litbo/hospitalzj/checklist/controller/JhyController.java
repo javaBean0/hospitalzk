@@ -152,6 +152,8 @@ public class JhyController extends BaseController {
 		Dcsjhy last = dcsjhyService.findByEqIdandJcyqIdLast("dcsjhy_m", eqId, jcyqId);
 		Dcsjhy dcsjhy = CommonUtils.toBean(req.getParameterMap(), Dcsjhy.class);
 		dcsjhy.setDcid(last.getDcid());
+		//更新
+		dcsjhyService.updateMen(dcsjhy);
 		//修改yq_eq 得state 和 type待上传
 		int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
 		yqEqService.updateType(yqEqId,EnumProcess2.TO_UPLOAD.getMessage());
@@ -163,8 +165,6 @@ public class JhyController extends BaseController {
 
 			userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
 		}
-		//更新
-		dcsjhyService.updateMen(dcsjhy);
 		int[] x={dcsjhy.getDcid(),yqEqId,userEqId};
 		return new ResponseResult<>(200, x);
 	}
@@ -223,6 +223,8 @@ public class JhyController extends BaseController {
 		Dcsjhy last = dcsjhyService.findByEqIdandJcyqIdLast("dcsjhy_c", eqId, jcyqId);
 		Dcsjhy dcsjhy = CommonUtils.toBean(req.getParameterMap(), Dcsjhy.class);
 		dcsjhy.setDcid(last.getDcid());
+		//更新
+		dcsjhyService.updateChild(dcsjhy);
 		//修改yq_eq 得state 和 type
 		int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
 		yqEqService.updateType(yqEqId,EnumProcess2.TO_UPLOAD.getMessage());
@@ -233,8 +235,7 @@ public class JhyController extends BaseController {
 		if(num == 0){
 			userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
 		}
-		//更新
-		dcsjhyService.updateChild(dcsjhy);
+
 		int[] x={dcsjhy.getDcid(),yqEqId, userEqId,userEqId};
 		return new ResponseResult<>(200, x);
 	}

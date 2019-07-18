@@ -90,7 +90,8 @@ public class YepyxController extends BaseController {
         Yepyx data = yepyxService.findByEqIdandJcyqIdLast1(eqId, jcyqId);
         Yepyx yepyx = CommonUtils.toBean(req.getParameterMap(), Yepyx.class);
         yepyx.setPyxId(data.getPyxId());
-
+        //更新
+        yepyxService.update(yepyx);
         //修改yq_eq 得state 和 type
         int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
         yqEqService.updateType(yqEqId,EnumProcess2.TO_UPLOAD.getMessage());
@@ -101,9 +102,6 @@ public class YepyxController extends BaseController {
         if(num == 0){
             userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
         }
-        //更新
-        //dqjcService.updateDqjc(dqjc);
-        yepyxService.update(yepyx);
         int[] x = {yepyx.getPyxId(), yqEqId, userEqId};
         return new ResponseResult<>(200, x);
     }

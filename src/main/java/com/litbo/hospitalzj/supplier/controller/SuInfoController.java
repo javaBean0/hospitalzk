@@ -110,9 +110,9 @@ public class SuInfoController extends BaseController {
 	public ResponseResult<Void> sendMail(
             @RequestParam("suId") Integer suId,
 	        @RequestParam("email") String email,
-			@RequestParam("suMc") String suMc,
-			@RequestParam("password") String password) throws MessagingException {
-		suInfoService.sendEmail(suId,suMc,email,password);
+			@RequestParam("suMc") String suMc
+			) throws MessagingException {
+		suInfoService.sendEmail(suId,suMc,email,"123456");
 		return new ResponseResult<>(SUCCESS);
 	}
 }
