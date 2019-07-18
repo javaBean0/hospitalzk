@@ -326,9 +326,9 @@
                 dataType:"JSON",
                 success:function(res){
                     if(res.state === 200){
-                        layer.msg("同意成功，请为供应商设置密码");
+                        layer.msg("同意审核成功，已将默认密码发送至此供应商邮箱！");
                         setTimeout(function(){
-                            location.href="/apply_manage/supplier/set_user.html?id="+ids;
+                            location.href="/apply_manage/home/supplier_check.html";
                         },1000);
                     }else{
                         layer.msg("失败");
