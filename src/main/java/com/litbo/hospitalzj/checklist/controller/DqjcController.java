@@ -119,6 +119,8 @@ public class DqjcController extends BaseController {
         Dqjc last1 = dqjcService.findByEqIdandJcyqIdLast1(eqId, jcyqId);
         Dqjc dqjc = CommonUtils.toBean(req.getParameterMap(), Dqjc.class);
         dqjc.setDqjcid(last1.getDqjcid());
+        //更新
+        dqjcService.updateDqjc(dqjc);
         //修改yq_eq 得state 和 type
         int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
         yqEqService.updateType(yqEqId,EnumProcess2.TO_UPLOAD.getMessage());
@@ -131,12 +133,10 @@ public class DqjcController extends BaseController {
 
             userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
         }
-
-        //更新
-        dqjcService.updateDqjc(dqjc);
         int[] x = {dqjc.getDqjcid(), yqEqId,userEqId};
         return new ResponseResult<>(200, x);
     }
+
 
 
     //查询电气检测表（最后一条）

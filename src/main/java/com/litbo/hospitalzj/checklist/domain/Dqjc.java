@@ -137,6 +137,8 @@ public class Dqjc {
 
     private Integer state;
 
+    private Date shsj;
+
     private Byte spare2;
 
     private Byte spare3;
@@ -681,6 +683,14 @@ public class Dqjc {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public Date getShsj() {
+        return shsj;
+    }
+
+    public void setShsj(Date shsj) {
+        this.shsj = shsj;
     }
 
     public Byte getSpare2() {

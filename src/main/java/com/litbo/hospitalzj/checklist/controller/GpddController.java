@@ -85,6 +85,8 @@ public class GpddController extends BaseController {
         Gpdd last1 = gpddService.findByEqIdandJcyqIdLast1(eqId, jcyqId);
         Gpdd gpdd = CommonUtils.toBean(req.getParameterMap(), Gpdd.class);
         gpdd.setGpddid(last1.getGpddid());
+        //更新
+        gpddService.updateGpdd(gpdd);
         //修改yq_eq 得state 和 type
         int yqEqId=yqEqService.insertBatch(eqId,jcyqId);
         yqEqService.updateType(yqEqId,EnumProcess2.TO_UPLOAD.getMessage());
@@ -96,9 +98,7 @@ public class GpddController extends BaseController {
 
             userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
         }
-        //更新
-        //dqjcService.updateDqjc(dqjc);
-        gpddService.updateGpdd(gpdd);
+
         int[] x = {gpdd.getGpddid(), yqEqId,userEqId};
         return new ResponseResult<>(200, x);
     }
