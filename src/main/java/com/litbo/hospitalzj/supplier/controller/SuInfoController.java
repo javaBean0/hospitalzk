@@ -66,11 +66,35 @@ public class SuInfoController extends BaseController {
         suInfoService.update(suInfo);
         return new ResponseResult<Void>(SUCCESS);
     }
+
+
+    // 发邮件，改状态
     @RequestMapping("/updateStateIs")
-    public ResponseResult<Void> updateStateIs(Integer suId) {
-        suInfoService.updateState(suId,1);
-        return new ResponseResult<Void>(SUCCESS);
+    public ResponseResult<Integer> updateStateIs(Integer suId) {
+        try {
+            SuInfoAndZzInfo suinfo=suInfoService.findSuinfoById(suId);
+            sendMail(suId, suinfo.getSuEmail(), suinfo.getSuMc());
+            suInfoService.updateState(suId,1);
+            return new ResponseResult<Integer>(200, 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseResult<Integer>(500, 2);
+        }
     }
+
+    //发送密码和用户
+    //@RequestMapping("/mail")
+    public void sendMail(
+            @RequestParam("suId") Integer suId,
+            @RequestParam("email") String email,
+            @RequestParam("suMc") String suMc
+    ) throws MessagingException {
+        String password = email.substring(0, 4);
+        suInfoService.sendEmail(suId,suMc,email,password);
+
+    }
+
+
     @RequestMapping("/updateStateNot")
     public ResponseResult<Void> updateStateNot(Integer suId) {
         suInfoService.updateState(suId,2);
@@ -105,14 +129,5 @@ public class SuInfoController extends BaseController {
         suInfoService.updatePwd(suId,password);
         return new ResponseResult<Void>(SUCCESS);
     }
-    //发送密码和用户
-    @RequestMapping("/mail")
-	public ResponseResult<Void> sendMail(
-            @RequestParam("suId") Integer suId,
-	        @RequestParam("email") String email,
-			@RequestParam("suMc") String suMc
-			) throws MessagingException {
-		suInfoService.sendEmail(suId,suMc,email,"123456");
-		return new ResponseResult<>(SUCCESS);
-	}
+
 }

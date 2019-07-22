@@ -21,4 +21,6 @@ public interface SuInfoService {
     void updatePwd(@Param("suId") Integer suId, @Param("password") String password);
     public SuInfo login(String suMc, String password) throws UserNotFoundException, PasswordNotMatchException;
     void sendEmail(Integer suId, String suMc, String email, String password);
+    //根据id查数据
+    SuInfoAndZzInfo findSuinfoById(Integer suId);
 }

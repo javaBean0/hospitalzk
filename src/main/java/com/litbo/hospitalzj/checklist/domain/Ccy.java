@@ -147,6 +147,26 @@ public class Ccy {
 
     private String jyResult;
 
+    private String zxnl;
+
+    private String zdnl;
+
+    public String getZxnl() {
+        return zxnl;
+    }
+
+    public void setZxnl(String zxnl) {
+        this.zxnl = zxnl;
+    }
+
+    public String getZdnl() {
+        return zdnl;
+    }
+
+    public void setZdnl(String zdnl) {
+        this.zdnl = zdnl;
+    }
+
     public Integer getCcyId() {
         return ccyId;
     }

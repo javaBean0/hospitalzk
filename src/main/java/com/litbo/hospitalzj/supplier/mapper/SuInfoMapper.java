@@ -70,4 +70,7 @@ public interface SuInfoMapper {
 	@Select("SELECT * FROM su_info WHERE su_mc LIKE '%${suMc}%' and is_delete=0")
 	List<SuInfo> findBySuMcLike(@Param("suMc") String suMc);
 
+
+    @Select("select * from su_info where su_id=#{suId} and is_delete=0")
+    SuInfoAndZzInfo findSuinfoById(Integer suId);
 }

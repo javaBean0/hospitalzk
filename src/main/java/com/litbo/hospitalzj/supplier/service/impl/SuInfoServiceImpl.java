@@ -13,11 +13,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
 import java.util.List;
 
 @Service
+@Transactional
 public class SuInfoServiceImpl implements SuInfoService {
     @Autowired
     private SuInfoMapper suInfoMapper;
@@ -119,4 +121,10 @@ public class SuInfoServiceImpl implements SuInfoService {
         suInfoMapper.updatePwd(suId,password);
 		mailSender.send(message);
 	}
+
+    @Override
+    public SuInfoAndZzInfo findSuinfoById(Integer suId) {
+	    return suInfoMapper.findSuinfoById(suId);
+
+    }
 }
