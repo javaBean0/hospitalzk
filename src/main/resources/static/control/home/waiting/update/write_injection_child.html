@@ -101,19 +101,19 @@
             <div class="layui-form-item col-md-5 col-xs-12">
                 <label class="layui-form-label">H</label>
                 <div class="layui-input-block">
-                    <input type="text" name="bjsjH" placeholder="H" autocomplete="off" class="layui-input">
+                    <input type="text" id="bjsjH" name="bjsjH" placeholder="H" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item col-md-5 col-xs-12">
                 <label class="layui-form-label">M</label>
                 <div class="layui-input-block">
-                    <input type="text" name="bjsjM" placeholder="M" autocomplete="off" class="layui-input">
+                    <input type="text" id="bjsjM" name="bjsjM" placeholder="M" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item col-md-5 col-xs-12">
                 <label class="layui-form-label">L</label>
                 <div class="layui-input-block">
-                    <input type="text" name="bjsjL" placeholder="L" autocomplete="off" class="layui-input">
+                    <input type="text" id="bjsjL" name="bjsjL" placeholder="L" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <fieldset class="layui-elem-field layui-field-title">
@@ -237,7 +237,17 @@
             success:function(res){
                 console.log(res);
                 if(res.data != null && res.data != ""){
-                    
+                    $("#pjll1").val(res.data.pjll1);
+                    $("#pjll2").val(res.data.pjll2);
+                    $("#bjszH").val(res.data.bjszH);
+                    $("#bjszM").val(res.data.bjszM);
+                    $("#bjszL").val(res.data.bjszL);
+                    $("#bjsjH").val(res.data.bjsjH);
+                    $("#bjsjM").val(res.data.bjsjM);
+                    $("#bjsjL").val(res.data.bjsjL);
+                    $("#bjylH").val(res.data.bjylH);
+                    $("#bjylM").val(res.data.bjylM);
+                    $("#bjylL").val(res.data.bjylL);
                     // 检测人
                     $("#tester").val(res.data.tester);
                     $("#date").val(res.data.testTime);

@@ -57,7 +57,7 @@
             <div class="layui-form-item col-md-5 col-xs-12">
                 <label class="layui-form-label">阻抗（欧）</label>
                 <div class="layui-input-block">
-                    <input type="text" name="spare3" placeholder="阻抗（欧）" autocomplete="off" class="layui-input">
+                    <input type="text" id="spare3" name="spare3" placeholder="阻抗（欧）" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <fieldset class="layui-elem-field layui-field-title">
@@ -106,7 +106,7 @@
             <div class="layui-form-item col-md-5 col-xs-12">
                 <label class="layui-form-label">阻抗（欧）</label>
                 <div class="layui-input-block">
-                    <input type="text" name="spare4" placeholder="阻抗（欧）" autocomplete="off" class="layui-input">
+                    <input type="text" id="spare4" name="spare4" placeholder="阻抗（欧）" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <fieldset class="layui-elem-field layui-field-title">
@@ -320,7 +320,27 @@
             success:function(res){
                 console.log(res);
                 if(res.data != null && res.data != ""){
-                    
+                    $("#spare3").val(res.data.spare3);
+                    $("#djdqValue1").val(res.data.djdqValue1);
+                    $("#djdqValue2").val(res.data.djdqValue2);
+                    $("#djdqValue3").val(res.data.djdqValue3);
+                    $("#djdqValue4").val(res.data.djdqValue4);
+                    $("#spare4").val(res.data.spare4);
+                    $("#djdnValue1").val(res.data.djdnValue1);
+                    $("#djdnValue2").val(res.data.djdnValue2);
+                    $("#djdnValue3").val(res.data.djdnValue3);
+                    $("#djdnValue4").val(res.data.djdnValue4);
+                    $("#spare5").val(res.data.spare5);
+                    $("#sjdnValue1").val(res.data.sjdnValue1);
+                    $("#sjdnValue2").val(res.data.sjdnValue2);
+                    $("#sjdnValue3").val(res.data.sjdnValue3);
+                    $("#sjdnValue4").val(res.data.sjdnValue4);
+                    $("#ssldDjdq").val(res.data.ssldDjdq);
+                    $("#ssldDjdn").val(res.data.ssldDjdn);
+                    $("#zxldDjdq").val(res.data.zxldDjdq);
+                    $("#zxldDjdn").val(res.data.zxldDjdn);
+                    $("#ssldSjdn").val(res.data.ssldSjdn);
+                    $("#zxldSjdn").val(res.data.zxldSjdn);
                     // 检测人
                     $("#tester").val(res.data.tester);
                     $("#date").val(res.data.testTime);

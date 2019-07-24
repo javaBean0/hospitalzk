@@ -382,7 +382,35 @@
             success:function(res){
                 console.log(res);
                 if(res.data != null && res.data != ""){
-                    
+                    $("#zxnl").val(res.data.zxnl);
+                    $("#sfnlValue1").val(res.data.sfnlValue1);
+                    $("#sfnlWc1").val(res.data.sfnlWc1);
+                    $("#sfnlValue2").val(res.data.sfnlValue2);
+                    $("#sfnlWc2").val(res.data.sfnlWc2);
+                    $("#sfnlValue3").val(res.data.sfnlValue3);
+                    $("#sfnlWc3").val(res.data.sfnlWc3);
+                    $("#zdnl").val(res.data.zdnl);
+                    $("#sfnlValue6").val(res.data.sfnlValue6);
+                    $("#sfnlWc6").val(res.data.sfnlWc6);
+                    $("#sfnlValue4").val(res.data.sfnlValue4);
+                    $("#sfnlWc4").val(res.data.sfnlWc4);
+                    $("#sfnlValue5").val(res.data.sfnlValue5);
+                    $("#sfnlWc5").val(res.data.sfnlWc5);
+                    $("#sfnlValue71").val(res.data.sfnlValue71);
+                    $("#sfnlValue72").val(res.data.sfnlValue72);
+                    $("#sfnlValue73").val(res.data.sfnlValue73);
+                    $("#sfnlWc7").val(res.data.sfnlWc7);
+                    $("#sfnlValue81").val(res.data.sfnlValue81);
+                    $("#sfnlValue82").val(res.data.sfnlValue82);
+                    $("#sfnlValue83").val(res.data.sfnlValue83);
+                    $("#sfnlWc8").val(res.data.sfnlWc8);
+                    $("#cdsjValue").val(res.data.cdsjValue);
+                    $("#tbmsSj").val(res.data.tbmsSj);
+                    $("#xlszValue1").val(res.data.xlszValue1);
+                    $("#xlszValue2").val(res.data.xlszValue2);
+                    $("#xlszValue3").val(res.data.xlszValue3);
+                    $("#xlszValue4").val(res.data.xlszValue4);
+                    $("#xlszValue5").val(res.data.xlszValue5);
                     // 检测人
                     $("#tester").val(res.data.tester);
                     $("#date").val(res.data.testTime);
