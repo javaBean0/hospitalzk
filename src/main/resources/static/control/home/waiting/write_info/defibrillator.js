@@ -2,7 +2,7 @@ window.onload = function(){
     // 最小能量值
     $("#sfnlValue1").blur(function(){
         $("#sfnlWc1").val(parseInt($("#zxnl").val()) - parseInt($("#sfnlValue1").val()));
-        if($("#sfnlWc1").val > -0.15 && $("#sfnlWc1").val() < 0.15){
+        if($("#sfnlWc1").val() > -0.15 && $("#sfnlWc1").val() < 0.15){
             $("#wc1").text("符合");
             $("#wc1").removeClass("no").addClass("is");
         }else{
@@ -13,7 +13,7 @@ window.onload = function(){
     // 30
     $("#sfnlValue2").blur(function(){
         $("#sfnlWc2").val(30 - parseInt($("#sfnlValue2").val()));
-        if($("#sfnlWc2").val > -0.15 && $("#sfnlWc2").val() < 0.15){
+        if($("#sfnlWc2").val() > -0.15 && $("#sfnlWc2").val() < 0.15){
             $("#wc2").text("符合");
             $("#wc2").removeClass("no").addClass("is");
         }else{
@@ -24,7 +24,7 @@ window.onload = function(){
     // 50
     $("#sfnlValue3").blur(function(){
         $("#sfnlWc3").val(50 - parseInt($("#sfnlValue3").val()));
-        if($("#sfnlWc3").val > -0.15 && $("#sfnlWc3").val() < 0.15){
+        if($("#sfnlWc3").val() > -0.15 && $("#sfnlWc3").val() < 0.15){
             $("#wc3").text("符合");
             $("#wc3").removeClass("no").addClass("is");
         }else{
@@ -35,7 +35,7 @@ window.onload = function(){
     // 最大能量值
     $("#sfnlValue6").blur(function(){
         $("#sfnlWc6").val(parseInt($("#zdnl").val()) - parseInt($("#sfnlValue6").val()));
-        if($("#sfnlWc6").val > -0.15 && $("#sfnlWc6").val() < 0.15){
+        if($("#sfnlWc6").val() > -0.15 && $("#sfnlWc6").val() < 0.15){
             $("#wc4").text("符合");
             $("#wc4").removeClass("no").addClass("is");
         }else{
@@ -46,7 +46,7 @@ window.onload = function(){
     // 100
     $("#sfnlValue4").blur(function(){
         $("#sfnlWc4").val(100 - parseInt($("#sfnlValue4").val()));
-        if($("#sfnlWc4").val > -0.15 && $("#sfnlWc4").val() < 0.15){
+        if($("#sfnlWc4").val() > -0.15 && $("#sfnlWc4").val() < 0.15){
             $("#wc5").text("符合");
             $("#wc5").removeClass("no").addClass("is");
         }else{
@@ -57,7 +57,7 @@ window.onload = function(){
     // 200
     $("#sfnlValue5").blur(function(){
         $("#sfnlWc5").val(200 - parseInt($("#sfnlValue5").val()));
-        if($("#sfnlWc5").val > -0.15 && $("#sfnlWc5").val() < 0.15){
+        if($("#sfnlWc5").val() > -0.15 && $("#sfnlWc5").val() < 0.15){
             $("#wc6").text("符合");
             $("#wc6").removeClass("no").addClass("is");
         }else{
@@ -68,7 +68,7 @@ window.onload = function(){
     // 20 前 中 后
     $("#sfnlValue73").blur(function(){
         $("#sfnlWc7").val(20 - (parseInt($("#sfnlValue71").val())+parseInt($("#sfnlValue72").val())+parseInt($("#sfnlValue73").val()))/3);
-        if($("#sfnlWc7").val > -0.15 && $("#sfnlWc7").val() < 0.15){
+        if($("#sfnlWc7").val() > -0.15 && $("#sfnlWc7").val() < 0.15){
             $("#wc7").text("符合");
             $("#wc7").removeClass("no").addClass("is");
         }else{
@@ -79,7 +79,7 @@ window.onload = function(){
     // 200 前 中 后
     $("#sfnlValue83").blur(function(){
         $("#sfnlWc8").val(200 - (parseInt($("#sfnlValue81").val())+parseInt($("#sfnlValue82").val())+parseInt($("#sfnlValue83").val()))/3);
-        if($("#sfnlWc8").val > -0.15 && $("#sfnlWc8").val() < 0.15){
+        if($("#sfnlWc8").val() > -0.15 && $("#sfnlWc8").val() < 0.15){
             $("#wc8").text("符合");
             $("#wc8").removeClass("no").addClass("is");
         }else{

@@ -94,9 +94,9 @@
             <tr>
                 <td>充电时间(s)≤20s</td>
                 <td id="cdsjValue" colspan="3">&nbsp;</td>
-                <td id="is2" colspan="3">□符合 □不符合</td>
+                <td id="is2" colspan="3"></td>
                 <td colspan="2">内部放电</td>
-                <td id="nbfdResult" colspan="3">□符合 □不符合</td>
+                <td id="nbfdResult" colspan="3"></td>
             </tr>
             <tr>
                 <td>同步模式</td>
@@ -189,7 +189,7 @@
                     $("#sfnlValue82").append(res.data.sfnlValue82);
                     $("#sfnlValue83").append(res.data.sfnlValue83);
                     $("#sfnlWc8").append(res.data.sfnlWc8);
-                    if($("#sfnlWc1").val() >= -0.15 && $("#sfnlWc1").val() <= 0.15 && $("#sfnlWc2").val() >= -0.15 && $("#sfnlWc2").val() <= 0.15 && $("#sfnlWc3").val() >= -0.15 && $("#sfnlWc3").val() <= 0.15 && $("#sfnlWc4").val() >= -0.15 && $("#sfnlWc4").val() <= 0.15 && $("#sfnlWc5").val() >= -0.15 && $("#sfnlWc5").val() <= 0.15 && $("#sfnlWc6").val() >= -0.15 && $("#sfnlWc6").val() <= 0.15 && $("#sfnlWc7").val() >= -0.15 && $("#sfnlWc7").val() <= 0.15 && $("#sfnlWc8").val() >= -0.15 && $("#sfnlWc8").val() <= 0.15){
+                    if(res.data.sfnlWc1 >= -0.15 && res.data.sfnlWc1 <= 0.15 && res.data.sfnlWc2 >= -0.15 && res.data.sfnlWc2 <= 0.15 && res.data.sfnlWc3 >= -0.15 && res.data.sfnlWc3 <= 0.15 && res.data.sfnlWc4 >= -0.15 && res.data.sfnlWc4 <= 0.15 && res.data.sfnlWc5 >= -0.15 && res.data.sfnlWc5 <= 0.15 && res.data.sfnlWc6 >= -0.15 && res.data.sfnlWc6 <= 0.15 && res.data.sfnlWc7 >= -0.15 && res.data.sfnlWc7 <= 0.15 && res.data.sfnlWc8 >= -0.15 && res.data.sfnlWc8 <= 0.15){
                         $("#is1").append("<p style='color:green;'>符合</p>");
                     }else{
                         $("#is1").append("<p style='color:red;'>不符合</p>")

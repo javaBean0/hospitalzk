@@ -72,9 +72,12 @@ public class SuInfoController extends BaseController {
     @RequestMapping("/updateStateIs")
     public ResponseResult<Integer> updateStateIs(Integer suId) {
         try {
+            long before = System.currentTimeMillis();
             SuInfoAndZzInfo suinfo=suInfoService.findSuinfoById(suId);
             sendMail(suId, suinfo.getSuEmail(), suinfo.getSuMc());
             suInfoService.updateState(suId,1);
+            long after = System.currentTimeMillis();
+            System.out.println("耗时： " + (after - before));
             return new ResponseResult<Integer>(200, 1);
         } catch (Exception e) {
             e.printStackTrace();
