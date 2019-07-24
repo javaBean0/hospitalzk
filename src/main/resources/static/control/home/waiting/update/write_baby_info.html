@@ -557,7 +557,7 @@
             <div class="layui-form-item layui-form-text col-md-6">
                 <label class="layui-form-label">检测情况说明</label>
                 <div class="layui-input-block">
-                    <textarea name="jcsm" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    <textarea id="jcsm" name="jcsm" placeholder="请输入内容" class="layui-textarea"></textarea>
                 </div>
             </div>
             <div class="layui-form-item btn">
@@ -572,43 +572,55 @@
     // 获取上个页面传递的类型
     var type = window.location.search;
     var ids = parseInt(type.split("=")[1]);
-    sessionStorage["thisjcyqId"]=ids;
+    // sessionStorage["thisjcyqId"]=ids;
+    var thisjcyqId = parseInt(sessionStorage['thisjcyqId']);
     var thiseqId = parseInt(sessionStorage['thiseqId']);
-    var userName = sessionStorage["userName"];
-    var thisId = parseInt(sessionStorage['thisId']);
-    layui.use(['element','jquery','form','layer','laydate'], function() {
+    $(function(){
+        $.ajax({
+            url:"/yepyx/findByPyxId?pyxId="+ids,
+            method:"GET",
+            dataType:"JSON",
+            success:function(res){
+                console.log(res);
+                if(res.data != null && res.data != ""){
+                    
+                    // 检测人
+                    $("#tester").val(res.data.tester);
+                    $("#date").val(res.data.testTime);
+                    $("#jcsm").val(res.data.jcsm);
+                }
+            }
+        })
+    });
+     //Demo
+     layui.use(['element','jquery','form','layer','laydate'], function(){
         var element = layui.element
-            , $ = layui.jquery
-            , form = layui.form
-            , layer = layui.layer
-            , laydate = layui.laydate;
-        $(function(){
-            $("#isUser").val(userName);
-        });
+            ,   $ = layui.jquery
+            ,   form = layui.form
+            ,   layer = layui.layer
+            ,   laydate = layui.laydate;
         laydate.render({
-            elem:"#date",
-            type:"datetime"
+            elem:"#date"
         });
-        form.on("submit(saveAll)",function(data){
+        form.on('submit(saveAll)',function (data) {
             console.log(data.field);
             $.ajax({
-                url:"/yepyx/save?eqId="+thiseqId+"&jcyqId="+ids+"&userEqId="+thisId,
+                url:"?eqId="+thiseqId+"&jcyqId="+thisjcyqId,
                 method:"POST",
                 data:data.field,
                 dataType:"JSON",
-                success:function(res){
+                success:function (res) {
                     if(res.state === 200){
-                        sessionStorage["thissjId"] = res.data[1];
                         setTimeout(function(){
-                            location.href = "/control/home/waiting/wait_info/baby_table.html?id="+res.data[0];
+                            location.href = "/control/home/waiting/wait_info/baby_table.html?id="+res.data;
                         },1000);
-                        layer.msg("保存成功,正在生成表格");
+                        layer.msg("修改成功,正在生成表格");
                     }else{
                         layer.msg("提交失败");
                     }
                 },
-                error:function(data){
-                    layer.msg("请稍后再试");
+                error:function (data) {
+                    layer.msg("提交失败");
                     console.log(data);
                 }
             });

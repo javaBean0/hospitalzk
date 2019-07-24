@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../../../../static/css/all.min.css"/>
     <script type="text/javascript" src="../../../../static/js/jquery-3.3.1.min.js"></script>
     <script src="../../../../static/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-    <script src="breath.js"></script>
+    <script src="../write_info/breath.js"></script>
     <!--[if IE 8]>
     <script type="text/javascript" src="../../../../static/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
@@ -1062,43 +1062,189 @@
     // 获取上个页面传递的类型
     var type = window.location.search;
     var ids = parseInt(type.split("=")[1]);
-    sessionStorage["thisjcyqId"]=ids;
+    // sessionStorage["thisjcyqId"]=ids;
+    var thisjcyqId = parseInt(sessionStorage['thisjcyqId']);
     var thiseqId = parseInt(sessionStorage['thiseqId']);
-    var userName = sessionStorage["userName"];
-    var thisId = parseInt(sessionStorage['thisId']);
-    layui.use(['element','jquery','form','layer','laydate'], function() {
+    $(function(){
+        $.ajax({
+            url:"/hxj/findByHxjId?hxjId="+ids,
+            method:"GET",
+            dataType:"JSON",
+            success:function(res){
+                console.log(res);
+                if(res.data != null && res.data != ""){
+                    $("#cqzh11").val(res.data.cqzh11);
+                    $("#cqzh12").val(res.data.cqzh12);
+                    $("#cqzh13").val(res.data.cqzh13);
+                    $("#cqzhp11").val(res.data.cqzhp11);
+                    $("#cqzc11").val(res.data.cqzc11);
+                    $("#cqzc12").val(res.data.cqzc12);
+                    $("#cqzc13").val(res.data.cqzc13);
+                    $("#cqzcp12").val(res.data.cqzcp12);
+                    $("#cqz1Swc").val(res.data.cqz1Swc);
+                    $("#cqzh21").val(res.data.cqzh21);
+                    $("#cqzh22").val(res.data.cqzh22);
+                    $("#cqzh23").val(res.data.cqzh23);
+                    $("#cqzhp21").val(res.data.cqzhp21);
+                    $("#cqzc21").val(res.data.cqzc21);
+                    $("#cqzc22").val(res.data.cqzc22);
+                    $("#cqzc23").val(res.data.cqzc23);
+                    $("#cqzcp22").val(res.data.cqzcp22);
+                    $("#cqz2Swc").val(res.data.cqz2Swc);
+                    $("#cqzh31").val(res.data.cqzh31);
+                    $("#cqzh32").val(res.data.cqzh32);
+                    $("#cqzh33").val(res.data.cqzh33);
+                    $("#cqzhp31").val(res.data.cqzhp31);
+                    $("#cqzc31").val(res.data.cqzc31);
+                    $("#cqzc32").val(res.data.cqzc32);
+                    $("#cqzc33").val(res.data.cqzc33);
+                    $("#cqzcp32").val(res.data.cqzcp32);
+                    $("#cqz3Swc").val(res.data.cqz3Swc);
+                    $("#qztqh11").val(res.data.qztqh11);
+                    $("#qztqh12").val(res.data.qztqh12);
+                    $("#qztqh13").val(res.data.qztqh13);
+                    $("#qztqhp11").val(res.data.qztqhp11);
+                    $("#qztqc11").val(res.data.qztqc11);
+                    $("#qztqc12").val(res.data.qztqc12);
+                    $("#qztqc13").val(res.data.qztqc13);
+                    $("#qztqcp12").val(res.data.qztqcp12);
+                    $("#qztq1Swc").val(res.data.qztq1Swc);
+                    $("#qztqh21").val(res.data.qztqh21);
+                    $("#qztqh22").val(res.data.qztqh22);
+                    $("#qztqh23").val(res.data.qztqh23);
+                    $("#qztqhp21").val(res.data.qztqhp21);
+                    $("#qztqc21").val(res.data.qztqc21);
+                    $("#qztqc22").val(res.data.qztqc22);
+                    $("#qztqc23").val(res.data.qztqc23);
+                    $("#qztqcp22").val(res.data.qztqcp22);
+                    $("#qztq2Swc").val(res.data.qztq2Swc);
+                    $("#qztqh31").val(res.data.qztqh31);
+                    $("#qztqh32").val(res.data.qztqh32);
+                    $("#qztqh33").val(res.data.qztqh33);
+                    $("#qztqhp31").val(res.data.qztqhp31);
+                    $("#qztqc31").val(res.data.qztqc31);
+                    $("#qztqc32").val(res.data.qztqc32);
+                    $("#qztqc33").val(res.data.qztqc33);
+                    $("#qztqcp32").val(res.data.qztqcp32);
+                    $("#qztq3Swc").val(res.data.qztq3Swc);
+                    $("#xryh11").val(res.data.xryh11);
+                    $("#xryh12").val(res.data.xryh12);
+                    $("#xryh13").val(res.data.xryh13);
+                    $("#xryhp11").val(res.data.xryhp11);
+                    $("#xryc11").val(res.data.xryc11);
+                    $("#xryc12").val(res.data.xryc12);
+                    $("#xryc13").val(res.data.xryc13);
+                    $("#xrycp12").val(res.data.xrycp12);
+                    $("#xry1Swc").val(res.data.xry1Swc);
+                    $("#xryh21").val(res.data.xryh21);
+                    $("#xryh22").val(res.data.xryh22);
+                    $("#xryh23").val(res.data.xryh23);
+                    $("#xryhp21").val(res.data.xryhp21);
+                    $("#xryc21").val(res.data.xryc21);
+                    $("#xryc22").val(res.data.xryc22);
+                    $("#xryc23").val(res.data.xryc23);
+                    $("#xrycp22").val(res.data.xrycp22);
+                    $("#xry2Swc").val(res.data.xry2Swc);
+                    $("#xryh31").val(res.data.xryh31);
+                    $("#xryh32").val(res.data.xryh32);
+                    $("#xryh33").val(res.data.xryh33);
+                    $("#xryhp31").val(res.data.xryhp31);
+                    $("#xryc31").val(res.data.xryc31);
+                    $("#xryc32").val(res.data.xryc32);
+                    $("#xryc33").val(res.data.xryc33);
+                    $("#xrycp32").val(res.data.xrycp32);
+                    $("#xry3Swc").val(res.data.xry3Swc);
+                    $("#xqfh11").val(res.data.xqfh11);
+                    $("#xqfh12").val(res.data.xqfh12);
+                    $("#xqfh13").val(res.data.xqfh13);
+                    $("#xqfhp11").val(res.data.xqfhp11);
+                    $("#xqfc11").val(res.data.xqfc11);
+                    $("#xqfc12").val(res.data.xqfc12);
+                    $("#xqfc13").val(res.data.xqfc13);
+                    $("#xqfcp12").val(res.data.xqfcp12);
+                    $("#xqf1Swc").val(res.data.xqf1Swc);
+                    $("#xqfh21").val(res.data.xqfh21);
+                    $("#xqfh22").val(res.data.xqfh22);
+                    $("#xqfh23").val(res.data.xqfh23);
+                    $("#xqfhp21").val(res.data.xqfhp21);
+                    $("#xqfc21").val(res.data.xqfc21);
+                    $("#xqfc22").val(res.data.xqfc22);
+                    $("#xqfc23").val(res.data.xqfc23);
+                    $("#xqfcp22").val(res.data.xqfcp22);
+                    $("#xqf2Swc").val(res.data.xqf2Swc);
+                    $("#xqfh31").val(res.data.xqfh31);
+                    $("#xqfh32").val(res.data.xqfh32);
+                    $("#xqfh33").val(res.data.xqfh33);
+                    $("#xqfhp31").val(res.data.xqfhp31);
+                    $("#xqfc31").val(res.data.xqfc31);
+                    $("#xqfc32").val(res.data.xqfc32);
+                    $("#xqfc33").val(res.data.xqfc33);
+                    $("#xqfcp32").val(res.data.xqfcp32);
+                    $("#xqf3Swc").val(res.data.xqf3Swc);
+                    $("#hqmh11").val(res.data.hqmh11);
+                    $("#hqmh12").val(res.data.hqmh12);
+                    $("#hqmh13").val(res.data.hqmh13);
+                    $("#hqmhp11").val(res.data.hqmhp11);
+                    $("#hqmc11").val(res.data.hqmc11);
+                    $("#hqmc12").val(res.data.hqmc12);
+                    $("#hqmc13").val(res.data.hqmc13);
+                    $("#hqmcp12").val(res.data.hqmcp12);
+                    $("#hqm1Swc").val(res.data.hqm1Swc);
+                    $("#hqmh21").val(res.data.hqmh21);
+                    $("#hqmh22").val(res.data.hqmh22);
+                    $("#hqmh23").val(res.data.hqmh23);
+                    $("#hqmhp21").val(res.data.hqmhp21);
+                    $("#hqmc21").val(res.data.hqmc21);
+                    $("#hqmc22").val(res.data.hqmc22);
+                    $("#hqmc23").val(res.data.hqmc23);
+                    $("#hqmcp22").val(res.data.hqmcp22);
+                    $("#hqm2Swc").val(res.data.hqm2Swc);
+                    $("#hqmh31").val(res.data.hqmh31);
+                    $("#hqmh32").val(res.data.hqmh32);
+                    $("#hqmh33").val(res.data.hqmh33);
+                    $("#hqmhp31").val(res.data.hqmhp31);
+                    $("#hqmc31").val(res.data.hqmc31);
+                    $("#hqmc32").val(res.data.hqmc32);
+                    $("#hqmc33").val(res.data.hqmc33);
+                    $("#hqmcp32").val(res.data.hqmcp32);
+                    $("#hqm3Swc").val(res.data.hqm3Swc);
+                    // 检测人
+                    $("#tester").val(res.data.tester);
+                    $("#date").val(res.data.testTime);
+                    $("#jcsm").val(res.data.jcsm);
+                }
+            }
+        })
+    });
+     //Demo
+     layui.use(['element','jquery','form','layer','laydate'], function(){
         var element = layui.element
-            , $ = layui.jquery
-            , form = layui.form
-            , layer = layui.layer
-            , laydate = layui.laydate;
-        $(function(){
-            $("#isUser").val(userName);
-        });
+            ,   $ = layui.jquery
+            ,   form = layui.form
+            ,   layer = layui.layer
+            ,   laydate = layui.laydate;
         laydate.render({
-            elem:"#date",
-            type:"datetime"
+            elem:"#date"
         });
-        form.on("submit(saveAll)",function(data){
+        form.on('submit(saveAll)',function (data) {
             console.log(data.field);
             $.ajax({
-                url:"/hxj/save?eqId="+thiseqId+"&jcyqId="+ids+"&userEqId="+thisId,
+                url:"?eqId="+thiseqId+"&jcyqId="+thisjcyqId,
                 method:"POST",
                 data:data.field,
                 dataType:"JSON",
-                success:function(res){
+                success:function (res) {
                     if(res.state === 200){
-                        sessionStorage["thissjId"] = res.data[1];
                         setTimeout(function(){
-                            location.href = "/control/home/waiting/wait_info/breathing_machine_table.html?id="+res.data[0];
+                            location.href = "/control/home/waiting/wait_info/breathing_machine_table.html?id="+res.data;
                         },1000);
-                        layer.msg("保存成功,正在生成表格");
+                        layer.msg("修改成功,正在生成表格");
                     }else{
                         layer.msg("提交失败");
                     }
                 },
-                error:function(data){
-                    layer.msg("请稍后再试");
+                error:function (data) {
+                    layer.msg("提交失败");
                     console.log(data);
                 }
             });
