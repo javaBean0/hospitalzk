@@ -531,11 +531,11 @@ window.onload = function(){
     });
 
     $("#Minp16").focus(function () {
-        $("#Mp16").text("允许误差 ± 3%");
+        $("#Mp16").text("允许误差 ± 4 mmHg");
         $("#Mp16").removeClass("no").removeClass("is");
     });
     $("#Minp17").focus(function () {
-        $("#Mp17").text("允许误差 ± 3%");
+        $("#Mp17").text("允许误差 ± 4 mmHg");
         $("#Mp17").removeClass("no").removeClass("is");
     });
     $("#Minp17").blur(function () {
@@ -553,7 +553,7 @@ window.onload = function(){
     });
 
     $("#Minp18").focus(function () {
-        $("#Mp18").text("<= 6 mmHg ");
+        $("#Mp18").text("<= 6 mmHg / min");
         $("#Mp18").removeClass("no").removeClass("is");
     });
     $("#Minp18").blur(function () {

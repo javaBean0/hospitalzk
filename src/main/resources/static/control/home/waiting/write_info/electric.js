@@ -4,7 +4,7 @@ window.onload = function(){
         $("#p1").removeClass("no").removeClass("is");
     });
     $("#inp1").blur(function () {
-        if($(this).val()>198 && $(this).val()<242 || $(this).val() == "OL"){
+        if($(this).val()>198 && $(this).val()<242){
             $("#p1").text("√ 符合");
             $("#p1").removeClass("no").addClass("is");
         }else{
@@ -30,7 +30,7 @@ window.onload = function(){
         $("#p3").removeClass("no").removeClass("is");
     });
     $("#inp3 ").blur(function () {
-        if($(this).val() >= 10){
+        if($(this).val() >= 10  || $(this).val() == "OL"){
             $("#p3").text("√ 符合");
             $("#p3").removeClass("no").addClass("is")
         }else{
