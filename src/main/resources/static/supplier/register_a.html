@@ -14,6 +14,8 @@
     <script type="text/javascript" src="../static/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="../static/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../static/js/data.js"></script>
+    <script src="../static/js/province.js"></script>
     <style>
         .layui-elem-field{
             width: 100%;
@@ -23,7 +25,6 @@
         }
         .layui-form{
             display: flex;
-            justify-content: center;
             align-items: center;
             flex-wrap: wrap;
         }
@@ -40,18 +41,35 @@
         </fieldset>
         <div class="col-xs-12">
             <form class="layui-form layui-form-pane" action="">
-                <div class="layui-form-item col-md-4">
+                <div class="layui-form-item col-md-6">
                     <label class="layui-form-label"><span style="color: red;">*</span>企业名称</label>
                     <div class="layui-input-block">
                         <input type="text" name="suMc" class="layui-input" autocomplete="off" lay-verify="required">
                     </div>
                 </div>
-                <div class="layui-form-item col-md-4">
+                <div class="layui-form-item col-md-8">
+                    <label class="layui-form-label">所在省份</label>
+                    <div class="layui-input-inline">
+                        <select name="suSf" id="suSf" lay-filter="suSf">
+                            <option value="">请选择省</option>
+                        </select>
+                    </div>
+                    <label class="layui-form-label">所在城市</label>
+                    <div class="layui-input-inline">
+                        <select name="suCs" id="suCs" lay-filter="suCs">
+                            <option value="">请选择市</option>
+                        </select>
+                    </div>
+                    <label class="layui-form-label">所在区县</label>
+                    <div class="layui-input-inline">
+                        <select name="suXq" id="suXq" lay-filter="suXq">
+                            <option value="">请选择县/区</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- <div class="layui-form-item col-md-4">
                     <label class="layui-form-label">所在省份</label>
                     <div class="layui-input-block">
-                        <!--<select id="sheng" name="suSf" lay-filter="test1" lay-search>-->
-                            <!--<option value=""></option>-->
-                        <!--</select>-->
                         <input type="text" name="suSf" class="layui-input" autocomplete="off">
                     </div>
                 </div>
@@ -66,7 +84,7 @@
                     <div class="layui-input-block">
                         <input type="text" name="suXq" class="layui-input" autocomplete="off">
                     </div>
-                </div>
+                </div> -->
                 <div class="layui-form-item col-md-4">
                     <label class="layui-form-label"><span style="color: red;">*</span>企业法人</label>
                     <div class="layui-input-block">
@@ -112,7 +130,7 @@
                 <div class="layui-form-item col-md-4">
                     <label class="layui-form-label"><span style="color: red;">*</span>联系电话</label>
                     <div class="layui-input-block">
-                        <input type="text" name="suLxrdh" class="layui-input" autocomplete="off" lay-verify="required">
+                        <input type="text" name="suLxrdh" class="layui-input" autocomplete="off" lay-verify="phone">
                     </div>
                 </div>
                 <div class="layui-form-item col-md-4">
@@ -136,7 +154,7 @@
                 <div class="layui-form-item col-md-4">
                     <label class="layui-form-label"><span style="color: red;">*</span>公司邮箱</label>
                     <div class="layui-input-block">
-                        <input type="text" name="suEmail" class="layui-input" autocomplete="off" lay-verify="required">
+                        <input type="text" name="suEmail" class="layui-input" autocomplete="off" lay-verify="email">
                     </div>
                 </div>
                 <div class="layui-form-item col-md-4">
@@ -151,7 +169,7 @@
                         <input type="text" name="suWz" class="layui-input" autocomplete="off">
                     </div>
                 </div>
-                <div class="layui-form-item col-md-6">
+                <div class="layui-form-item col-md-8">
                     <label class="layui-form-label">备注</label>
                     <div class="layui-input-block">
                         <input type="text" name="bz" class="layui-input" autocomplete="off">
@@ -198,7 +216,15 @@
                 });
                 return false;
             });
-        })
+        });
+        var defaults = {
+            s1: 'suSf',
+            s2: 'suCs',
+            s3: 'suXq',
+            v1: null,
+            v2: null,
+            v3: null
+        };
     </script>
 </body>
 </html>
