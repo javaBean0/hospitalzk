@@ -10,6 +10,7 @@ import com.litbo.hospitalzj.supplier.util.Message;
 import com.litbo.hospitalzj.supplier.util.StringRandom;
 import com.litbo.hospitalzj.supplier.vo.EqHtVo;
 import com.litbo.hospitalzj.util.ResponseResult;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -50,7 +51,7 @@ public class HtInfoController extends BaseController {
         return new ResponseResult<Integer>(SUCCESS, htInfo.getHtId());
     }
 
-    //设置状态
+    //设置状态，预约验收
     @RequestMapping("/yyys")
     public ResponseResult<Void> updataStatePerfect(String view, Integer htId) {
         if ("同意".equals(view)) {
@@ -93,8 +94,35 @@ public class HtInfoController extends BaseController {
     public ResponseResult<Void> updataStatePerfectThree(Integer htId) {
         htinfoService.updateHtInfoState(htId, EnumProcess.ACCEPT_OVER.getMessage());
         htLcService.InsertHtLc(htId, EnumProcess.ACCEPT_OVER.getMessage(), new Date());
-        eqInfoMapper.update(htId, 1);
+        eqInfoMapper.update(htId);
         return new ResponseResult<Void>(SUCCESS);
+    }
+
+    //审核验收不通过
+    @RequestMapping("/ysbtg")
+    public ResponseResult<Void> updataStatePerfectThree2(Integer htId) {
+        htinfoService.updateHtInfoState(htId, EnumProcess.WAIT_ACCEPT_YS_NOT.getMessage());
+        htLcService.InsertHtLc(htId, EnumProcess.WAIT_ACCEPT_YS_NOT.getMessage(), new Date());
+        //eqInfoMapper.update(htId, 1);
+        return new ResponseResult<Void>(SUCCESS);
+    }
+
+    //查询合同状态为 “同意验收”的数量，
+    @RequestMapping("/countTyys")
+    public ResponseResult selectCountTyys(){
+        String type = "同意验收";
+        int num = htinfoService.count(type);
+        return new ResponseResult(200,num);
+    }
+
+    //查询合同状态为 “等待审核验收 + 同意验收”的数量
+    @RequestMapping("/countTyysAndDdshys")
+    public ResponseResult countTyysAndDdshys(){
+        String type1 = "同意验收";
+        String type2 = "等待审核验收";
+        int num1 = htinfoService.count(type1);
+        int num2 = htinfoService.count(type2);
+        return new ResponseResult(200,num1 + num2);
     }
 
     @RequestMapping("/updateInfo")
@@ -134,7 +162,7 @@ public class HtInfoController extends BaseController {
         message.setFrom(Sender);
         message.setTo(email);
         message.setSubject("主题:南方医院合同验证码验证");
-        message.setText("您的医院系统合同验证码是"+htYzm+","
+        message.setText("您的医院系统合同验证码是: "+htYzm+" ,"
                 + "此验证码是您查询合同流程的重要依据，请妥善管理！"
                 + "如有遗失，请联系系统管理员，谢谢合作！！！");
         mailSender.send(message);

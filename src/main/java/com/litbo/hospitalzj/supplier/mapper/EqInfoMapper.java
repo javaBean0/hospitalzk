@@ -3,6 +3,7 @@ package com.litbo.hospitalzj.supplier.mapper;
 import com.litbo.hospitalzj.supplier.entity.EqInfo;
 import com.litbo.hospitalzj.supplier.vo.SelHtEqVo;
 import org.apache.ibatis.annotations.*;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -116,8 +117,8 @@ public interface EqInfoMapper {
 			"    where eq_id = #{eqId,jdbcType=INTEGER}")
 	Integer updateInfo(EqInfo eqinfo);
 
-	@Update("update eq_info set eq_state = #{eqState,jdbcType=INTEGER} where ht_ids=#{htIds}")
-	Integer update(Integer htIds, Integer eqState);
+	@Update("update eq_info set eq_state = 1 where ht_ids=#{htIds,jdbcType=INTEGER}")
+	Integer update(Integer htIds);
 
 	@Select("select * from eq_info where eq_state=1")
 	List<EqInfo> selectByState();
