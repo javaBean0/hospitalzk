@@ -41,4 +41,5 @@ public interface HtInfoService {
 	void HtJC(Integer htId);
 
 	int count(@Param("htState") String htState);
+
 }

@@ -99,7 +99,7 @@
         // 不同意
         $("#noPass").click(function(){
             $.ajax({
-                url:"?htId="+ids,
+                url:"/htInfo/ysbtg?htId="+ids,
                 method:"POST",
                 dataType:"JSON",
                 success:function(res){
@@ -118,7 +118,7 @@
         // 同意
         $("#pass").click(function(){
             $.ajax({
-                url:"?htId="+ids,
+                url:"/htInfo/yswc?htId="+ids,
                 method:"POST",
                 dataType:"JSON",
                 success:function(res){

@@ -182,7 +182,6 @@
                 $("input:checkbox[name='djhwSbwg']:checked").each(function(i){
                     arr[i] = $(this).val();
                 });
-                alert(arr);
                 //  替换 data.field.djhwBz的数据为拼接后的字符串
                 data.field.djhwSbwg=arr.join(",");
 
@@ -190,7 +189,6 @@
                 $("input:checkbox[name='djhwSxwj']:checked").each(function(i){
                     arr1[i] = $(this).val();
                 });
-                alert(arr1);
                 //  替换 data.field.djhwBz的数据为拼接后的字符串
                 data.field.djhwSxwj=arr1.join(",");
                 $.ajax({

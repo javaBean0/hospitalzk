@@ -189,16 +189,6 @@
         <div class="col-xs-12 btn">
             <a id="uploadInfo" class="layui-btn layui-btn-normal">提交</a>
         </div>
-        <div id="codeBody">
-            <h1>验证码信息</h1>
-            <p>
-                恭喜您提交验收信息成功，系统生成的验证码为:
-                <br>
-                <span id="code"></span>
-                <br>
-                请妥善保存验证码，以方便您查看本次合同验收进度。
-            </p>
-        </div>
     </div>
 </div>
 <script type="text/html" id="upInfo">
@@ -215,19 +205,6 @@
     var ids = parseInt(type.split("=")[1]);
     sessionStorage["htId"] = ids;
     var email = "";
-    // 随机四位验证码
-    var code;
-    function createCode(){
-        code = "";
-        var codeLength = 4;
-        var codeV = document.getElementById("code");
-        var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
-        for(var i=0;i<codeLength;i++){
-            var index = Math.floor(Math.random()*36);
-            code += random[index];
-        }
-        codeV.innerHTML = code;
-    }
     //Demo
     layui.use(['layer','jquery','table','upload','form'], function(){
         var layer = layui.layer
@@ -236,8 +213,6 @@
             ,   upload = layui.upload
             ,   form = layui.form;
         $(function(){
-            // 调用随机验证码
-            createCode();
             $.ajax({
                 url:"/htInfo/selectOne?htId="+ids,
                 method:"GET",
@@ -483,40 +458,19 @@
                 dataType:"JSON",
                 success:function(res){
                     if(res.state === 200){
-                        layer.msg("验证码已发送至您的邮箱，请注意查收");
+                        console.log("成功");
                     }else{
-                        layer.msg("发送失败");
+                        console.log("失败");
                     }
                 },
                 error:function(data){
-                    console.log(data);
-                    layer.msg("请稍后再试");
+                    console.log("请稍后再试");
                 }
-            })
-            // layer.open({
-            //     type:1,
-            //     title:"验证码信息",
-            //     content:$("#codeBody"),
-            //     area:["300px","400px"],
-            //     maxmin:true,
-            //     btn:["确认"],
-            //     yes:function(){
-            //         $.ajax({
-            //             url:"/htInfo/updateYzm?htId="+ids,
-            //             method:"POST",
-            //             data:{"htYzm":code},
-            //             dataType:"JSON",
-            //             success:function(res){
-            //                 location.href = "/supplier/home/schedule.html";
-            //             },
-            //             error:function(data){
-            //                 layer.msg("服务器错误");
-            //                 console.log(data);
-            //             }
-            //         });
-            //         layer.closeAll();
-            //     }
-            // });
+            });
+            layer.msg("申请提交成功，请留意邮箱验证以便查询申请状态！")
+            setTimeout(function () {
+                location.href = "/supplier/home/schedule.html";
+            },2000);
         });
     });
 </script>
