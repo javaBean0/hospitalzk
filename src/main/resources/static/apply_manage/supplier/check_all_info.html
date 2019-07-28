@@ -327,20 +327,20 @@
                 success:function(res){
                     console.log(res);
                     if(res.state === 200){
-                        layer.msg("同意审核成功，已将默认密码发送至此供应商邮箱！");
-                        location.href="/apply_manage/home/supplier_check.html";
-                        // setTimeout(function(){
-                        //
-                        // },100);
+                       console.log("成功")
                     }else{
-                        layer.msg("失败");
+                        console.log("失败")
                     }
                 },
                 error:function(data){
                     layer.msg("请稍后再试");
                     console.log(data);
                 }
-            })
+            });
+            layer.msg("同意审核成功，已将默认密码发送至此供应商邮箱！");
+            setTimeout(function(){
+                location.href="/apply_manage/home/supplier_check.html";
+            },1000);
         });
         // 驳回
         $("#miss").click(function(){
@@ -350,19 +350,23 @@
                 dataType:"JSON",
                 success:function(res){
                     if(res.state === 200){
-                        layer.msg("注册申请驳回成功");
-                        setTimeout(function(){
-                               location.href="/apply_manage/home/supplier_check.html";
-                        },1000);
+                        console.log("成功")
+
                     }else{
-                        layer.msg("失败");
+                        console.log("失败")
                     }
                 },
+
+
                 error:function(data){
                     layer.msg("请稍后再试");
                     console.log(data);
                 }
             })
+            layer.msg("注册申请驳回成功");
+            setTimeout(function(){
+                location.href="/apply_manage/home/supplier_check.html";
+            },1000);
         });
         // 查看文件
         $("#lookYyzz").click(function(){

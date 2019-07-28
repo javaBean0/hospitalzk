@@ -109,15 +109,13 @@ public class SuInfoServiceImpl implements SuInfoService {
 	 * 发送用户以及密码
 	 * @throws MessagingException
 	 */
-	@Override
-	public void sendEmail(Integer suId,String suMc,String email,String password){
+	public void sendEmail(Integer suId,String email,String password
+            ,String subject, String text){
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setFrom(Sender);
 		message.setTo(email); 
-		message.setSubject("主题:南方医院账户密码验证");
-		message.setText("您的医院系统登录用户名是"+suMc+","
-				+ "登录密码是"+password+",请妥善管理！"
-				+ "如有遗失，请联系系统管理员，谢谢合作！！！");
+		message.setSubject(subject);
+		message.setText(text);
         suInfoMapper.updatePwd(suId,password);
 		mailSender.send(message);
 	}

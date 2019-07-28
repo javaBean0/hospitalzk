@@ -5,7 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 public class SybC {
-    private Long id;
+    private Integer id;
 
     private Integer jcyqId;
 
@@ -99,11 +99,11 @@ public class SybC {
         this.shsjTime = shsjTime;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -15,6 +15,7 @@ import com.litbo.hospitalzj.zk.service.EqInfoService;
 import com.litbo.hospitalzj.zk.service.UserEqService;
 import com.litbo.hospitalzj.zk.service.YqEqService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -74,6 +75,17 @@ public class GpddController extends BaseController {
         eqZjlsService.insert(eqZjls);
         int[] x = {gpdd.getGpddid(), yqEqId};
         return new ResponseResult<>(200, x);
+    }
+
+
+    //只根据id更新检测数据
+    @RequestMapping("/updataNow/{id}")
+    public com.litbo.hospitalzj.util.ResponseResult updataNow(@PathVariable("id")Integer id, HttpServletRequest req){
+        Gpdd gpdd = CommonUtils.toBean(req.getParameterMap(), Gpdd.class);
+        gpdd.setGpddid(id);
+        //更新
+        gpddService.updateGpdd(gpdd);
+        return new com.litbo.hospitalzj.util.ResponseResult(200, id);
     }
 
     @RequestMapping("/updataGpdd")

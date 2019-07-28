@@ -15,6 +15,7 @@ import com.litbo.hospitalzj.zk.service.EqInfoService;
 import com.litbo.hospitalzj.zk.service.UserEqService;
 import com.litbo.hospitalzj.zk.service.YqEqService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -80,6 +81,17 @@ public class YepyxController extends BaseController {
         int[] x = {yepyx.getPyxId(), yqEqId};
         return new ResponseResult<>(200, x);
     }
+
+    //只根据id更新检测数据
+    @RequestMapping("/updataNow/{id}")
+    public ResponseResult updataNow(@PathVariable("id")Integer id,HttpServletRequest req){
+        Yepyx yepyx = CommonUtils.toBean(req.getParameterMap(), Yepyx.class);
+        yepyx.setPyxId(id);
+        //更新
+        yepyxService.update(yepyx);
+        return new ResponseResult(200, id);
+    }
+
 
     @RequestMapping("/updateYepyx")
     public ResponseResult updateYepyx(

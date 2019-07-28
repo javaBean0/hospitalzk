@@ -92,7 +92,7 @@ public class WjscController extends BaseController {
         File path = new File(ResourceUtils.getURL("classpath:").getPath());
         System.out.println(path);
         if (!path.exists()) path = new File("");
-        File upload = new File(path.getAbsolutePath(), "static/");
+        File upload = new File(path.getAbsolutePath(), "static" + File.separator);
         System.out.println(upload);
         if (!upload.exists()) upload.mkdirs();
         String path1 = upload.getAbsolutePath() + filePath;

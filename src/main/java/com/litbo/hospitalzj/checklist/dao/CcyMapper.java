@@ -194,8 +194,8 @@ public interface CcyMapper {
             "      xlsz_result = #{xlszResult,jdbcType=VARCHAR},\n" +
             "      sgbj_result = #{sgbjResult,jdbcType=VARCHAR},\n" +
             "      bjx_result = #{bjxResult,jdbcType=VARCHAR},\n" +
-            "      jy_result = #{jyResult,jdbcType=VARCHAR}\n" +
-            "      zxnl = #{zxnl,jdbcType=VARCHAR}\n" +
+            "      jy_result = #{jyResult,jdbcType=VARCHAR},\n" +
+            "      zxnl = #{zxnl,jdbcType=VARCHAR},\n" +
             "      zdnl = #{zdnl,jdbcType=VARCHAR}\n" +
             "    where ccy_id = #{ccyId,jdbcType=INTEGER}")
     void updateCcy(Ccy ccy);
