@@ -182,6 +182,7 @@
                 </div>
             </form>
         </div>
+        <button id="open" class="layui-btn">示范一个公告层</button>
     </div>
     <script>
         layui.use(['jquery','layer','form','upload'],function(){
@@ -189,6 +190,10 @@
             ,   upload = layui.upload
             ,   $ = layui.jquery
             ,   form = layui.form;
+            $("#open").click(function(){
+                //示范一个公告层
+                
+            });
             form.on('submit(nextTap)', function(data){
                 console.log(data.field);
                 $.ajax({
@@ -200,7 +205,28 @@
                     	console.log(res.state);
                         if(res.state === 200){
                             setTimeout(function(){
-                                location.href = "/supplier/register_b.html?id="+res.data;
+                                // location.href = "/supplier/register_b.html?id="+res.data;
+                                layer.open({
+                                    type: 1
+                                    ,title: "选择类型" //不显示标题栏
+                                    ,closeBtn: false
+                                    ,area: '300px;'
+                                    ,shade: 0.8
+                                    ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                                    ,btn: ['三证合一', '普通填写']
+                                    ,btnAlign: 'c'
+                                    ,moveType: 1 //拖拽模式，0或者1
+                                    ,content: '<div style="padding: 30px; line-height: 22px; background-color: snow; color: #000000; text-align:center; font-weight: 300;">请选择您要添加的证照信息类型</div>'
+                                    ,success: function(layero){
+                                        var btn = layero.find('.layui-layer-btn');
+                                        btn.find('.layui-layer-btn0').attr({
+                                            href: "/supplier/register_t.html?id="+res.data
+                                        });
+                                        btn.find('.layui-layer-btn1').attr({
+                                            href: "/supplier/register_n.html?id="+res.data
+                                        });
+                                    }
+                                });
                             }, 1000);
                             layer.msg("提交成功");
                         }else if(res.state === 603){
