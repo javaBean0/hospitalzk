@@ -15,14 +15,39 @@
             margin-top: 30px;
             margin-bottom: 40px;
         }
+        td{
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 <div class="layui-row">
     <div class="col-xs-12">
         <fieldset class="layui-elem-field layui-field-title">
-            <legend style="color: #0C0C0C;font-size: 22px;text-align: center;">签名</legend>
+            <legend style="color: #0C0C0C;font-size: 22px;text-align: center;">上传签名照</legend>
         </fieldset>
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <th style="width: 50%;">文件类型</th>
+                <th style="width: 50%;">上传</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>签名照片</td>
+                <td>
+                    <div class="layui-upload">
+                        <button type="button" name="file" class="layui-btn" id="htwj">上传文件</button>
+                        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                            预览图：
+                            <div class="layui-upload-list" id="htwjImg"></div>
+                        </blockquote>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
         <div class="col-xs-12 btn">
             <a id="back" class="layui-btn layui-btn-primary">返回</a>
             <a id="upload" class="layui-btn layui-btn-normal">提交</a>
@@ -38,6 +63,31 @@
         var $ = layui.jquery
             , layer = layui.layer
             , upload = layui.upload;
+            // 合同文件上传
+        upload.render({
+            elem: '#htwj'
+           ,url: '/wjsc/insertHtwj?sourceId='+ids+'&type='+1
+            /*,url: '/accept/uploadFile?htIds='+ids*/
+            ,multiple: true
+            ,accept:"file"
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#htwjImg').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+                });
+            }
+            ,done:function(res){
+                if(res.state === 200){
+                    layer.msg("上传成功");
+                }else{
+                    layer.msg(res.message);
+                }
+            },
+            error:function(data){
+                layer.msg("上传失败,请稍后再试");
+                console.log(data);
+            }
+        });
         $("#back").click(function(){
             window.history.back();
         });
