@@ -17,6 +17,7 @@ import com.litbo.hospitalzj.zk.service.EqInfoService;
 import com.litbo.hospitalzj.zk.service.UserEqService;
 import com.litbo.hospitalzj.zk.service.YqEqService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,6 +65,20 @@ public class DqjcController extends BaseController {
         dqjcService.updateTemplate(dqjcTemplate);
         return new ResponseResult<Void>(200);
     }
+
+
+    //只根据id更新检测数据
+    @RequestMapping("/updataNow/{id}")
+    public ResponseResult updataNow(@PathVariable("id")Integer id, HttpServletRequest req){
+        Dqjc dqjc = CommonUtils.toBean(req.getParameterMap(), Dqjc.class);
+        dqjc.setDqjcid(id);
+        dqjc.setState(0);
+        //更新
+        dqjcService.updateDqjc(dqjc);
+        return new ResponseResult(200, id);
+    }
+
+
 
     /**
      * 插入模板表数据

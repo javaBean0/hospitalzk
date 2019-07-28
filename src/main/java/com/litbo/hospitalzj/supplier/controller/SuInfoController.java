@@ -70,39 +70,53 @@ public class SuInfoController extends BaseController {
 
     // 发邮件，改状态
     @RequestMapping("/updateStateIs")
-    public ResponseResult<Integer> updateStateIs(Integer suId) {
+    public ResponseResult updateStateIs(Integer suId) {
         try {
-            long before = System.currentTimeMillis();
             SuInfoAndZzInfo suinfo=suInfoService.findSuinfoById(suId);
-            sendMail(suId, suinfo.getSuEmail(), suinfo.getSuMc());
+            String subject = "主题:南方医院账户密码验证";
+            String password = suinfo.getSuEmail().substring(0, 4);
+            String text = "您的医院系统登录用户名是"+ suinfo.getSuMc() + "," + "登录密码是"
+                    + password +",请妥善管理！如有遗失，请联系系统管理员，谢谢合作！！！";
+
+            sendMail(suId, suinfo.getSuEmail(), password,subject, text);
             suInfoService.updateState(suId,1);
-            long after = System.currentTimeMillis();
-            System.out.println("耗时： " + (after - before));
-            return new ResponseResult<Integer>(200, 1);
+            return new ResponseResult<>(200);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseResult<Integer>(500, 2);
+            return new ResponseResult<>(500);
         }
     }
 
     //发送密码和用户
     //@RequestMapping("/mail")
-    public void sendMail(
-            @RequestParam("suId") Integer suId,
-            @RequestParam("email") String email,
-            @RequestParam("suMc") String suMc
+    public void sendMail(Integer suId,String email,String password,
+             String subject, String text
     ) throws MessagingException {
-        String password = email.substring(0, 4);
-        suInfoService.sendEmail(suId,suMc,email,password);
+        suInfoService.sendEmail(suId,email,password,subject, text);
 
     }
 
 
     @RequestMapping("/updateStateNot")
-    public ResponseResult<Void> updateStateNot(Integer suId) {
-        suInfoService.updateState(suId,2);
-        return new ResponseResult<Void>(SUCCESS);
+    public ResponseResult updateStateNot(Integer suId) {
+        try {
+            SuInfoAndZzInfo suinfo=suInfoService.findSuinfoById(suId);
+            String subject = "主题:南方医院注册通知";
+            String text = "对不起! 您的注册申请未通过审核！";
+            sendMail(suId, suinfo.getSuEmail(), null,subject, text);
+            suInfoService.updateState(suId,2);
+            return new ResponseResult<>(200);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            return new ResponseResult<>(500);
+        }
+
     }
+
+
+
+
+
     @RequestMapping("/findBySuMcLike")
     public ResponseResult<List<SuInfo>> findBySuMcLike(String suMc) {
         List<SuInfo> data=suInfoService.findBySuMcLike(suMc);

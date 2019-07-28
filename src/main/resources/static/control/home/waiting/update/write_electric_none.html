@@ -211,7 +211,7 @@
                     $("#inp12").val(res.data.wkldlDyFxdlValue);
                     $("#inp13").val(res.data.wkldlDyFxddValue);
                     // 检测人信息
-                    $("#tester").val(res.data.tester);
+                    $("#isUser").val(res.data.tester);
                     $("#date").val(res.data.testTime);
                     $("#jcsm").val(res.data.jcsm);
                 }
@@ -231,14 +231,14 @@
         form.on("submit(saveAll)",function(data){
             console.log(data.field);
             $.ajax({
-                url:"/dqjc/save?eqId="+thiseqId+"&jcyqId="+thisjcyqId,
+                url:"/dqjc/updataNow/" + ids,
                 method:"POST",
                 data:data.field,
                 dataType:"JSON",
                 success:function(res){
                     if(res.state === 200){
                         setTimeout(function(){
-                            location.href = "/control/home/waiting/wait_info/electric_none.html?id="+res.data;
+                            location.href = "/control/home/waiting/wait_info/electric_none.html?id="+ids;
                         },1000);
                         layer.msg("修改成功,正在生成表格");
                     }else{

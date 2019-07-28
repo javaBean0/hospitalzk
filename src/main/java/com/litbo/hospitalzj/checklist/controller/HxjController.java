@@ -16,6 +16,7 @@ import com.litbo.hospitalzj.zk.service.UserEqService;
 import com.litbo.hospitalzj.zk.service.YqEqService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -77,6 +78,19 @@ public class HxjController extends BaseController {
         int[] x={hxj.getHxjid(),yqEqId};
         return new ResponseResult(200, x);
     }
+
+    //只根据id更新检测数据
+    @RequestMapping("/updataNow/{id}")
+    public com.litbo.hospitalzj.util.ResponseResult updataNow(@PathVariable("id")Integer id, HttpServletRequest req){
+        Hxj hxj = CommonUtils.toBean(req.getParameterMap(), Hxj.class);
+        hxj.setHxjid(id);
+        //更新
+        hxjService.updateHxj(hxj);
+        return new com.litbo.hospitalzj.util.ResponseResult(200, id);
+    }
+
+
+
 
     //修改录入数据
     @RequestMapping("/updataHxj")

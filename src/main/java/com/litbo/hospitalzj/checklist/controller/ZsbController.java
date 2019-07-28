@@ -16,6 +16,7 @@ import com.litbo.hospitalzj.zk.service.TabEqService;
 import com.litbo.hospitalzj.zk.service.UserEqService;
 import com.litbo.hospitalzj.zk.service.YqEqService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -121,6 +122,29 @@ public class ZsbController extends BaseController {
         long[] x={sybC.getId(),yqEqId};
         return new ResponseResult<>(200,x);
     }
+
+
+    //只根据id更新检测数据
+    @RequestMapping("/updataNowChild/{id}")
+    public com.litbo.hospitalzj.util.ResponseResult updataNowChild(@PathVariable("id")Integer id, HttpServletRequest req){
+        SybC zsb_c = CommonUtils.toBean(req.getParameterMap(), SybC.class);
+        zsb_c.setId(id);
+        //更新
+        zsbService.updateChild(zsb_c);
+        return new com.litbo.hospitalzj.util.ResponseResult(200, id);
+    }
+
+
+    //只根据id更新检测数据
+    @RequestMapping("/updataNowMan/{id}")
+    public com.litbo.hospitalzj.util.ResponseResult updataNowMan(@PathVariable("id")Integer id, HttpServletRequest req){
+        SybC zsb_m = CommonUtils.toBean(req.getParameterMap(), SybC.class);
+        zsb_m.setId(id);
+        //更新
+        zsbService.updateMan(zsb_m);
+        return new com.litbo.hospitalzj.util.ResponseResult(200, id);
+    }
+
 
     @RequestMapping("/updateChild")
     public ResponseResult updateChild(

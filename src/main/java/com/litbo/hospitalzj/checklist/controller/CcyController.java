@@ -3,6 +3,7 @@ package com.litbo.hospitalzj.checklist.controller;
 import com.litbo.hospitalzj.checklist.domain.Ccy;
 import com.litbo.hospitalzj.checklist.domain.CcyTemplate;
 import com.litbo.hospitalzj.checklist.domain.Dcsjhy;
+import com.litbo.hospitalzj.checklist.domain.Yepyx;
 import com.litbo.hospitalzj.checklist.service.CcyService;
 import com.litbo.hospitalzj.checklist.utils.commons.CommonUtils;
 import com.litbo.hospitalzj.controller.BaseController;
@@ -16,6 +17,7 @@ import com.litbo.hospitalzj.zk.service.EqInfoService;
 import com.litbo.hospitalzj.zk.service.UserEqService;
 import com.litbo.hospitalzj.zk.service.YqEqService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -144,7 +146,15 @@ public class CcyController extends BaseController {
         return new ResponseResult<>(200, x);
     }
 
-
+    //只根据id更新检测数据
+    @RequestMapping("/updataNow/{id}")
+    public ResponseResult updataNow(@PathVariable("id")Integer id, HttpServletRequest req){
+        Ccy ccy = CommonUtils.toBean(req.getParameterMap(), Ccy.class);
+        ccy.setCcyId(id);
+        //更新
+        ccyService.updateCcy(ccy);
+        return new ResponseResult(200, id);
+    }
 
 
 
