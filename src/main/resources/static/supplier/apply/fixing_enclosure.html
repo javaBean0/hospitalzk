@@ -75,7 +75,7 @@
                 </div>
                 <div class="inp layui-form-item col-md-12 col-xs-12">
                     <div class="layui-input-block">
-                        <button type="reset" class="layui-btn layui-btn-primary">返回</button>
+                        <button id="back" class="layui-btn layui-btn-primary">返回</button>
                         <button class="layui-btn layui-btn-normal" lay-submit lay-filter="nextTap">添加</button>
                     </div>
                 </div>
@@ -96,6 +96,9 @@
                 elem: '#date' //指定元素
             });
             var form = layui.form;
+            $("#back").click(function(){
+                window.history.back();
+            });
             //监听提交
             form.on('submit(nextTap)', function(data){
                 console.log(data.field);
