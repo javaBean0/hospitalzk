@@ -140,7 +140,7 @@
             </tbody>
         </table>
         <div class="col-xs-12 btn">
-            <a id="jumDdhdj" class="layui-btn layui-btn-normal">到货登记</a>
+            <a id="jumDdhdj" class="layui-btn layui-btn-normal">三方签名</a>
         </div>
     </div>
 </div>
@@ -309,7 +309,7 @@
                 dataType:"JSON",
                 success:function(res){
                     if(res.state ===200){
-                        location.href="/apply_manage/apply_manage/arrival_info.html?htIds="+ids;
+                        location.href="/apply_manage/apply_manage/ele_sign.html?htIds="+ids;
                     }else{
                         layer.msg("失败");
                     }
