@@ -46,63 +46,63 @@
                 <td class="bg">医院自编资产号</td>
                 <td>&nbsp;</td>
                 <td class="bg">设备名称</td>
-                <td>&nbsp;</td>
+                <td id="eqMc">&nbsp;</td>
                 <td class="bg">数量</td>
-                <td>&nbsp;</td>
+                <td id="eqNum">&nbsp;</td>
             </tr>
             <tr>
                 <td class="bg">合同号</td>
-                <td>&nbsp;</td>
+                <td id="htHthao">&nbsp;</td>
                 <td class="bg">设备所属科室</td>
-                <td>&nbsp;</td>
+                <td id="eqSyks">&nbsp;</td>
                 <td class="bg">安装地点</td>
-                <td>&nbsp;</td>
+                <td id="eqAzdd">&nbsp;</td>
             </tr>
             <tr>
                 <td class="bg">规格型号</td>
-                <td>&nbsp;</td>
+                <td id="eqXh">&nbsp;</td>
                 <td class="bg">合同到货期</td>
-                <td>&nbsp;</td>
+                <td id="htDhtime">&nbsp;</td>
                 <td class="bg">合同索赔期</td>
-                <td>&nbsp;</td>
+                <td id="htQytime">&nbsp;</td>
             </tr>
             <tr>
                 <td class="bg">合同价格</td>
-                <td>&nbsp;</td>
+                <td id="htZje">&nbsp;</td>
                 <td class="bg">生产厂家</td>
-                <td>&nbsp;</td>
+                <td id="eqCscs">&nbsp;</td>
                 <td class="bg">国别</td>
-                <td>&nbsp;</td>
+                <td id="eqGb">&nbsp;</td>
             </tr>
             <tr>
                 <td class="bg">合同保修期限</td>
-                <td colspan="2">&nbsp;</td>
+                <td id="eqBxq" colspan="2">&nbsp;</td>
                 <td class="bg">到货验收日期</td>
-                <td colspan="2">&nbsp;</td>
+                <td id="htYssj" colspan="2">&nbsp;</td>
             </tr>
             <tr>
                 <td class="bg">设备出厂编号</td>
-                <td colspan="2">&nbsp;</td>
+                <td id="eqScbh" colspan="2">&nbsp;</td>
                 <td class="bg">设备出厂日期</td>
-                <td colspan="2">&nbsp;</td>
+                <td id="eqCcdate" colspan="2">&nbsp;</td>
             </tr>
             <tr>
                 <td class="bg">代理商及联系人</td>
-                <td colspan="2">&nbsp;</td>
+                <td id="eqShLxr" colspan="2">&nbsp;</td>
                 <td class="bg">联系人手机号</td>
-                <td colspan="2">&nbsp;</td>
+                <td id="eqShLxrdh" colspan="2">&nbsp;</td>
             </tr>
             <tr>
                 <td class="bg">包装</td>
-                <td colspan="5">&nbsp;</td>
+                <td id="djhwBzxx" colspan="5">&nbsp;</td>
             </tr>
             <tr>
                 <td class="bg">防倾斜运输变色标记</td>
-                <td colspan="5">&nbsp;</td>
+                <td id="djhwYsbs" colspan="5">&nbsp;</td>
             </tr>
             <tr>
                 <td class="bg">设备外观</td>
-                <td colspan="5">&nbsp;</td>
+                <td id="djhwSbwg" colspan="5">&nbsp;</td>
             </tr>
             <tr>
                 <td class="bg" colspan="2">按合同和装箱单，核对设备到货实际配置、型号、规格、数量</td>
@@ -113,7 +113,9 @@
                 <td>设备完好，按要求完成安装，仪器测试正常</td>
                 <td>是否有设备安装调试报告</td>
                 <td class="bg">安装工程师(签名)</td>
-                <td>&nbsp;</td>
+                <td>
+                    <img style="width: 60px;height: 20px;" id="htAzgcsqm" src="" alt="">
+                </td>
                 <td>日期：</td>
             </tr>
             <tr>
@@ -177,8 +179,47 @@
     //Demo
     layui.use(['jquery','form','layer'], function(){
         var $ = layui.jquery
-            , layer = layui.layer
-            , form = layui.form;
+            , layer = layui.layer;
+        $(function(){
+            $.ajax({
+                url:"/htInfo/ysbg/"+ids,
+                method:"GET",
+                dataType:"JSON",
+                success:function(res){
+                    console.log(res.data);
+                    if(res.state === 200){
+                        console.log(res.data[0]);
+                        $("#htHthao").append(res.data[0].htHthao);
+                        $("#htDhtime").append(res.data[0].htDhtime);
+                        $("#htQytime").append(res.data[0].htQytime);
+                        $("#htZje").append(res.data[0].htZje);
+                        $("#htYssj").append(res.data[0].htYssj);
+                        $("#htAzgcsqm").attr("src",res.data[0].htAzgcsqm);
+                        $("#djhwBzxx").append(res.data[1].djhwBzxx);
+                        $("#djhwYsbs").append(res.data[1].djhwYsbs);
+                        $("#djhwSbwg").append(res.data[1].djhwSbwg);
+                        $("#eqBxq").append(res.data[2][0].eqBxq + "（月）");
+                        $("#eqAzdd").append(res.data[2][0].eqAzdd);
+                        $("#eqMc").append(res.data[2][0].eqMc);
+                        $("#eqNum").append(res.data[2][0].eqNum);
+                        $("#eqSyks").append(res.data[2][0].eqSyks);
+                        $("#eqXh").append(res.data[2][0].eqXh);
+                        $("#eqCscs").append(res.data[2][0].eqCscs);
+                        $("#eqGb").append(res.data[2][0].eqGb);
+                        $("#eqScbh").append(res.data[2][0].eqScbh);
+                        $("#eqCcdate").append(res.data[2][0].eqCcdate);
+                        $("#eqShLxr").append(res.data[2][0].eqShLxr);
+                        $("#eqShLxrdh").append(res.data[2][0].eqShLxrdh);
+                    }else{
+                        layer.msg("失败");
+                    }
+                },
+                error:function(data){
+                    console.log(data);
+                    layer.msg("请稍后再试")
+                }
+            })
+        })
     });
 </script>
 </body>
