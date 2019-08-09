@@ -290,6 +290,7 @@
     </div>
 </div>
 <script>
+    var ids = parseInt(sessionStorage['id']);
     $(function(){
         // 企业类型字典
         function qylxList(){
@@ -342,9 +343,6 @@
         }
         jglxList();
     });
-    // 获取上个页面传递的类型
-    var type = window.location.search;
-    var ids = parseInt(type.split("=")[1]);
     layui.use(['jquery','layer','form','upload','laydate','element'],function(){
         var $ = layui.jquery
             ,layer = layui.layer
