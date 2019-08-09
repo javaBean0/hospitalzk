@@ -85,10 +85,18 @@
                         <input type="text" name="suFzr" class="layui-input" autocomplete="off">
                     </div>
                 </div>
+                <!--<div class="layui-form-item col-md-4">-->
+                    <!--<label class="layui-form-label"><span style="color: red;">*</span>开户银行</label>-->
+                    <!--<div class="layui-input-block">-->
+                        <!--<input type="text" name="suKhyh" class="layui-input" autocomplete="off" lay-verify="required">-->
+                    <!--</div>-->
+                <!--</div>-->
                 <div class="layui-form-item col-md-4">
                     <label class="layui-form-label"><span style="color: red;">*</span>开户银行</label>
                     <div class="layui-input-block">
-                        <input type="text" name="suKhyh" class="layui-input" autocomplete="off" lay-verify="required">
+                        <select id="suKhyh" name="suKhyh" lay-verify="" lay-search>
+                            <option value=""></option>
+                        </select>
                     </div>
                 </div>
                 <div class="layui-form-item col-md-4">
@@ -166,11 +174,39 @@
         </div>
     </div>
     <script>
+        $(function(){
+            // 所有银行字典
+            function qylxList(){
+                // 清空当前列表
+                $("#suKhyh").empty();
+                // 添加默认选项
+                var op = '<option value=""></option>';
+                $("#suKhyh").append(op);
+                // 发出ajax请求，并处理结果
+                $.ajax({
+                    url:"/qylx/bank",
+                    method: "GET",
+                    dataType: "JSON",
+                    async:false,
+                    "success":function(json){
+                        // 遍历加载新列表项
+                        var list = json.data;
+                        for (var i = 0; i < list.length; i++) {
+                            console.log(list[i].bName + " - " + list[i].bName);
+                            op = '<option value="' + list[i].bName + '">' + list[i].bName + '</option>';
+                            $("#suKhyh").append(op);
+                        }
+                    }
+                });
+            }
+            qylxList();
+        });
         layui.use(['jquery','layer','form','upload'],function(){
             var layer = layui.layer
             ,   upload = layui.upload
             ,   $ = layui.jquery
             ,   form = layui.form;
+
             form.on('submit(nextTap)', function(data){
                 console.log(data.field);
                 $.ajax({

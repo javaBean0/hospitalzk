@@ -317,22 +317,10 @@
             location.href="/apply_manage/file/ht_accept_file.html?id="+5;
         });
         $("#jumDdhdj").click(function(){
-            $.ajax({
-                url:"/sgdjhw/insert?htIds="+ids,
-                method:"POST",
-                dataType:"JSON",
-                success:function(res){
-                    if(res.state ===200){
-                        location.href="/apply_manage/apply_manage/ele_sign.html?htIds="+ids;
-                    }else{
-                        layer.msg("失败");
-                    }
-                },
-                error:function(data){
-                    layer.msg("请稍后再试");
-                    console.log(data);
-                }
-            });
+            layer.msg("审核通过，将进行电子签名。");
+            setTimeout(function(){
+                location.href="/apply_manage/apply_manage/ele_gysqm.html?id="+ids;
+            },1000);
         });
     })
 </script>

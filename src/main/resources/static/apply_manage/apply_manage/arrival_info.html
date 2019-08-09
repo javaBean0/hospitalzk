@@ -55,12 +55,12 @@
                         <div class="layui-form-item col-md-10">
                             <label class="layui-form-label">包装信息</label>
                             <div style="display: flex;" class="layui-input-block">
-                                <input type="checkbox" name="new1" value="木箱" title="木箱" checked>
-                                <input type="text" name="new11" class="layui-input">
-                                <input type="checkbox" name="new1" value="纸箱" title="纸箱">
-                                <input type="text" name="new12" class="layui-input">
-                                <input type="checkbox" name="new1" value="铁箱" title="铁箱">
-                                <input type="text" name="new13" class="layui-input">
+                                <input type="checkbox" name="djhwBzxx" value="木箱" title="木箱" checked>
+                                <input type="text" name="djhwMxxx" class="layui-input">
+                                <input type="checkbox" name="djhwBzxx" value="纸箱" title="纸箱">
+                                <input type="text" name="djhwZxxx" class="layui-input">
+                                <input type="checkbox" name="djhwBzxx" value="铁箱" title="铁箱">
+                                <input type="text" name="djhwTxxx" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item col-md-8">
@@ -97,27 +97,27 @@
                             <div class="layui-input-block" style="display: flex;flex-wrap: wrap;">
                                 <div style="display: flex;">
                                     <input type="checkbox" name="djhwSxwj" value="合格证/进口设备出厂检测报告" title="合格证/进口设备出厂检测报告" checked>
-                                    <input type="text" class="layui-input" name="1">
+                                    <input type="text" class="layui-input" name="djhwHgzxx">
                                 </div>
                                 <div style="display: flex;">
                                     <input type="checkbox" name="djhwSxwj" value="电子光盘" title="电子光盘">
-                                    <input type="text" class="layui-input" name="2">
+                                    <input type="text" class="layui-input" name="djhwGpxx">
                                 </div>
                                 <div style="display: flex;">
                                     <input type="checkbox" name="djhwSxwj" value="中文操作说明书" title="中文操作说明书">
-                                    <input type="text" class="layui-input" name="3">
+                                    <input type="text" class="layui-input" name="djhwCzsmxx">
                                 </div>
                                 <div style="display: flex;">
                                     <input type="checkbox" name="djhwSxwj" value="中文维修手册" title="中文维修手册">
-                                    <input type="text" class="layui-input" name="4">
+                                    <input type="text" class="layui-input" name="djhwWxscxx">
                                 </div>
                                 <div style="display: flex;">
                                     <input type="checkbox" name="djhwSxwj" value="设备原理线图" title="设备原理线图">
-                                    <input type="text" class="layui-input" name="5">
+                                    <input type="text" class="layui-input" name="djhwSbylxx">
                                 </div>
                                 <div style="display: flex;">
                                     <input type="checkbox" name="djhwSxwj" value="备注" title="备注">
-                                    <input type="text" class="layui-input" name="6">
+                                    <input type="text" class="layui-input" name="djhwBz">
                                 </div>
                             </div>
                         </div>
@@ -198,6 +198,7 @@
         // 获取上个页面传递的类型
         var type = window.location.search;
         var ids = parseInt(type.split("=")[1]);
+
         //Demo
         layui.use(['element','jquery','form','layer','upload'], function(){
             var element = layui.element
@@ -207,21 +208,29 @@
             ,   upload = layui.upload;
             //监听提交
             form.on('submit(submit)', function(data){
-                var arr = new Array();
-                $("input:checkbox[name='djhwSbwg']:checked").each(function(i){
-                    arr[i] = $(this).val();
-                });
-                //  替换 data.field.djhwBz的数据为拼接后的字符串
-                data.field.djhwSbwg=arr.join(",");
-
                 var arr1 = new Array();
-                $("input:checkbox[name='djhwSxwj']:checked").each(function(i){
+                $("input:checkbox[name='djhwBzxx']:checked").each(function(i){
                     arr1[i] = $(this).val();
                 });
                 //  替换 data.field.djhwBz的数据为拼接后的字符串
-                data.field.djhwSxwj=arr1.join(",");
+                data.field.djhwBzxx=arr1.join(",");
+
+                var arr2 = new Array();
+                $("input:checkbox[name='djhwSbwg']:checked").each(function(i){
+                    arr2[i] = $(this).val();
+                });
+                //  替换 data.field.djhwBz的数据为拼接后的字符串
+                data.field.djhwSbwg=arr2.join(",");
+
+                var arr3 = new Array();
+                $("input:checkbox[name='djhwSxwj']:checked").each(function(i){
+                    arr3[i] = $(this).val();
+                });
+                //  替换 data.field.djhwBz的数据为拼接后的字符串
+                data.field.djhwSxwj=arr3.join(",");
+                console.log(data.field);
                 $.ajax({
-                    url:"/sgdjhw/updateInfo?htIds="+ids,
+                    url:"/sgdjhw/insert?htIds="+ids,
                     method:"POST",
                     data:data.field,
                     dataType:"JSON",
@@ -229,12 +238,11 @@
                         if(res.state === 200){
                             layer.msg("提交成功,将开箱验收核对数据");
                             setTimeout(function(){
-                                // if(obj.data.htGzspd == "无"){
-                                //     location.href="/apply_manage/apply_manage/check_ht_info.html?id="+obj.data.htId;
-                                // }else{
-                                //     location.href="/apply_manage/apply_manage/check_sg_info.html?id="+obj.data.htId;
-                                // }
-                                location.href="/apply_manage/apply_manage/ele_sign.html?id="+ids;
+                                if(res.data == 2){
+                                    location.href="/apply_manage/apply_manage/check_ht_info.html?id="+ids;
+                                }else{
+                                    location.href="/apply_manage/apply_manage/check_sg_info.html?id="+ids;
+                                }
                             },1000);
                         }else{
                             layer.msg("提交失败")

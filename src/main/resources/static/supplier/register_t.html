@@ -102,7 +102,7 @@
                 </div>
             </div>
             <div class="layui-form-item col-md-4">
-                <label class="layui-form-label">长期有限</label>
+                <label class="layui-form-label">长期有效</label>
                 <div class="layui-input-block isbor">
                     <input type="radio" name="zzYyyx" value="是" title="是" checked>
                     <input type="radio" name="zzYyyx" value="否" title="否">
@@ -174,11 +174,11 @@
             <div class="layui-form-item col-md-4">
                 <label class="layui-form-label"><span style="color: red;">*</span>截止日期</label>
                 <div class="layui-input-block">
-                    <input id="date4" type="text" name="zzJyjzrq" class="layui-input" autocomplete="off" lay-verify="required">
+                    <input id="date5" type="text" name="zzJyjzrq" class="layui-input" autocomplete="off" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item col-md-4">
-                <label class="layui-form-label">长期有限</label>
+                <label class="layui-form-label">长期有效</label>
                 <div class="layui-input-block isbor">
                     <input type="radio" name="zzJyyx" value="是" title="是" checked>
                     <input type="radio" name="zzJyyx" value="否" title="否">
@@ -399,7 +399,7 @@
                                 });
                         },1000);
                     }else if(res.state === 603){
-                        layer.msg("213456789");
+                        layer.msg("此公司名称已存在，请确认后再试！");
                     }else{
                         layer.msg("提交失败");
                     }

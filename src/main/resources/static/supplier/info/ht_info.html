@@ -455,7 +455,7 @@
             $.ajax({
                 url:"/htInfo/updateYzm?htId="+ids+"&email="+email,
                 method:"POST",
-                dataType:"JSON",
+                dataType:"JSON"/*,
                 success:function(res){
                     if(res.state === 200){
                         console.log("成功");
@@ -465,7 +465,7 @@
                 },
                 error:function(data){
                     console.log("请稍后再试");
-                }
+                }*/
             });
             layer.msg("申请提交成功，请留意邮箱验证以便查询申请状态！")
             setTimeout(function () {
