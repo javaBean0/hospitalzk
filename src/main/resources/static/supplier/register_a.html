@@ -217,6 +217,7 @@
                     success:function(res){
                     	console.log(res.state);
                         if(res.state === 200){
+                            sessionStorage['id'] = res.data;
                             setTimeout(function(){
                                 // location.href = "/supplier/register_b.html?id="+res.data;
                                 layer.open({
@@ -233,10 +234,10 @@
                                     ,success: function(layero){
                                         var btn = layero.find('.layui-layer-btn');
                                         btn.find('.layui-layer-btn0').attr({
-                                            href: "/supplier/register_t.html?id="+res.data
+                                            href: "/supplier/register_t.html"
                                         });
                                         btn.find('.layui-layer-btn1').attr({
-                                            href: "/supplier/register_n.html?id="+res.data
+                                            href: "/supplier/register_n.html"
                                         });
                                     }
                                 });
