@@ -337,7 +337,7 @@
                 }
             },
             error:function(data){
-                layer.msg("上传失败,请稍后再试");
+                layer.msg("上传失败,请检查您的网络状态！");
                 console.log(data);
             }
         });
@@ -361,7 +361,7 @@
                 }
             },
             error:function(data){
-                layer.msg("上传失败,请稍后再试");
+                layer.msg("上传失败,请检查您的网络状态！");
                 console.log(data);
             }
         });
@@ -396,8 +396,6 @@
                                     }
                                 });
                         },1000);
-                    }else if(res.state === 603){
-                        layer.msg("此公司名称已存在，请确认后再试！");
                     }else{
                         layer.msg("提交失败");
                     }
