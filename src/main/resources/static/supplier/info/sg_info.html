@@ -176,7 +176,7 @@
 </script>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="addChildFix">添加附属设备</a>
-    <a class="layui-btn layui-btn-xs" lay-event="delete">删除</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
 </script>
 <script>
     // // 随机四位验证码
@@ -277,7 +277,7 @@
                 {field:'eqShLxr', title:'售后联系人',align:'center'},
                 {field:'eqShLxrdh', title:'售后联系电话',align:'center'},
                 {field:'eqShLb', title:'设备类别',align:'center'},
-                {fixed: 'right', title:'操作',minWidth:250, toolbar: '#barDemo',align:'center'}
+                {fixed: 'right', title:'操作',minWidth:150, toolbar: '#barDemo',align:'center'}
             ]]
         });
         //监听行工具事件
@@ -332,7 +332,7 @@
                 }
             },
             error:function(data){
-                layer.msg("上传失败,请稍后再试");
+                layer.msg("上传失败,请检查您的网络状态！");
                 console.log(data);
             }
         });
@@ -356,7 +356,7 @@
                 }
             },
             error:function(data){
-                layer.msg("上传失败,请稍后再试");
+                layer.msg("上传失败,请检查您的网络状态！");
                 console.log(data);
             }
         });
@@ -380,7 +380,7 @@
                 }
             }
             , error: function (data) {
-                layer.msg("上传失败,请稍后再试");
+                layer.msg("上传失败,请检查您的网络状态！");
                 console.log(data);
             }
         });
@@ -404,7 +404,7 @@
                 }
             }
             ,error:function(data){
-                layer.msg("上传失败,请稍后再试");
+                layer.msg("上传失败,请检查您的网络状态！");
                 console.log(data);
             }
         });
