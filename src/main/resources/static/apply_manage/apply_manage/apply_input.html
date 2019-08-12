@@ -186,9 +186,7 @@
                 method:"GET",
                 dataType:"JSON",
                 success:function(res){
-                    console.log(res.data);
                     if(res.state === 200){
-                        console.log(res.data[0]);
                         $("#htHthao").append(res.data[0].htHthao);
                         $("#htDhtime").append(res.data[0].htDhtime);
                         $("#htQytime").append(res.data[0].htQytime);
