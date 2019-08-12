@@ -217,7 +217,7 @@
                     success:function(res){
                     	console.log(res.state);
                         if(res.state === 200){
-                            sessionStorage['id'] = res.data;
+                            sessionStorage['ids'] = res.data;
                             setTimeout(function(){
                                 // location.href = "/supplier/register_b.html?id="+res.data;
                                 layer.open({
@@ -265,7 +265,6 @@
             v2: null,
             v3: null
         };
-        // parent.location.reload();
     </script>
 </body>
 </html>

@@ -233,6 +233,7 @@
                           layer.msg("审核结果保存成功");
                           setTimeout(function(){
                               location.href="/admin/home/check_apply.html";
+                              parent.location.reload();
                           },1000);
                       }else{
                           layer.msg("保存失败");

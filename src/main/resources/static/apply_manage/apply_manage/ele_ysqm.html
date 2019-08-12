@@ -35,7 +35,7 @@
                     <div class="col-xs-12">
                         <!-- <h3>签名</h3> -->
                         <p>请在此签名</p>
-                        <div class="js-signature" data-width="600" data-height="200" data-border="1px solid black" data-line-color="#000000" data-auto-fit="true"></div>
+                        <div class="js-signature" data-width="500" data-height="250" data-border="1px solid black" data-line-color="#000000" data-auto-fit="true"></div>
                         <p style="width: 100%;text-align: center;">
                             <a id="back" class="layui-btn layui-btn-primary">返回</a>
                             <button id="clearBtn" class="layui-btn layui-btn-normal" onclick="clearCanvas();">清除</button>
@@ -100,9 +100,10 @@
                 dataType:"JSON",
                 success:function(res){
                     if(res.state === 200){
-                        layer.msg("保存成功");
+                        layer.msg("保存成功,请通知此供应商完善资料！");
                         setTimeout(function(){
                             location.href="/apply_manage/home/apply_manage.html";
+                            parent.location.reload();
                         },1000);
                     }else{
                         layer.msg("提交失败");

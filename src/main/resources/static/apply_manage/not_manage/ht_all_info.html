@@ -328,9 +328,10 @@
           layer.msg("提交失败,请稍后再试");
       }
     });
-      layer.msg("提交成功,已将审核结果通知此供应商。");
+    layer.msg("提交成功,已将审核结果通知此供应商。");
     setTimeout(function(){
       location.href="/apply_manage/home/not_manage.html";
+      parent.location.reload();
     },2000);
     return false;
   });

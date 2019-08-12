@@ -97,7 +97,7 @@
                                   handle.append("<p style='color:red;'>正在审核电子资料，请耐心等待...</p>");
                               }else if(rate == "验收审核不通过"){
                                   handle.append("<a class='layui-btn layui-btn-sm layui-btn-normal' lay-event='upload'>重新上传</a>");
-                              }else if(rate == "验收通过"){
+                              }else if(rate == "验收完成"){
                                   handle.append("<a class='layui-btn layui-btn-sm layui-btn-normal' lay-event='stamp'>查看验收单</a>");
                               }
                               return{
@@ -156,7 +156,7 @@
             // }else{
             //     location.href="/supplier/checked/look_sga_info.html?htId="+obj.data.htId;
             // }
-            location.href="/apply_manage/apply_manage/apply_input.html?htId="+obj.data.htId;
+            location.href="/supplier/home/stamp.html?htId="+obj.data.htId;
         }
       });
     });

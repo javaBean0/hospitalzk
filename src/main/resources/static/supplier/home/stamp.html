@@ -114,7 +114,7 @@
                 <td>是否有设备安装调试报告</td>
                 <td class="bg">安装工程师(签名)</td>
                 <td>
-                    <img style="width: 100px;height: 50px;" id="htAzgcsqm" src="" alt="">
+                    <img style="width: 60px;height: 20px;" id="htAzgcsqm" src="" alt="">
                 </td>
                 <td id="azgcsqmTime">日期：</td>
             </tr>
@@ -149,7 +149,7 @@
                 <td colspan="2">&nbsp;</td>
                 <td class="bg">设备器材科主任(签名)</td>
                 <td>&nbsp;</td>
-                <td style="text-align: left;">日期:</td>
+                <td style="text-align: left;">日期：</td>
             </tr>
             <tr>
                 <td class="bg">设备售后服务公司名称</td>
@@ -163,8 +163,7 @@
     </div>
     <div class="col-xs-12 btn">
         <a id="back" class="layui-btn layui-btn-primary">返回</a>
-        <!--<a class="layui-btn">修改</a>-->
-        <button id="send" class="layui-btn layui-btn-normal">发送给此供应商打印</button>
+        <button id="print" class="layui-btn layui-btn-normal">打印</button>
     </div>
 </div>
 <script>
@@ -192,8 +191,8 @@
                         $("#htQytime").append(res.data[0].htQytime);
                         $("#htZje").append(res.data[0].htZje);
                         $("#htYssj").append(res.data[0].htYssj);
-                        $("#azgcsqmTime").append(res.data[0].azgcsqmTime);
                         $("#htAzgcsqm").attr("src",res.data[0].htAzgcsqm);
+                        $("#azgcsqmTime").append(res.data[0].azgcsqmTime);
                         $("#djhwBzxx").append(res.data[1].djhwBzxx);
                         $("#djhwYsbs").append(res.data[1].djhwYsbs);
                         $("#djhwSbwg").append(res.data[1].djhwSbwg);
@@ -217,11 +216,7 @@
                     console.log(data);
                     layer.msg("请稍后再试")
                 }
-            });
-            $("#send").click(function(){
-                location.href="/apply_manage/home/apply_manage.html";
-                parent.location.reload();
-            });
+            })
         })
     });
 </script>
