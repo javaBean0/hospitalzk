@@ -61,9 +61,15 @@
                 </div>
             </div>
             <div class="layui-form-item col-md-5">
-                <label class="layui-form-label">合同总金额</label>
-                <div class="layui-input-block">
-                    <input type="text" name="htZje" placeholder="合同总金额(默认元,若美元请加“美元”单位)" class="layui-input" autocomplete="off" lay-verify="required">
+                <label class="layui-form-label"><span style="color: red;">*</span>合同总金额</label>
+                <div class="layui-input-block" style="display: flex;">
+                    <input type="text" name="htZje" placeholder="合同总金额" class="layui-input" autocomplete="off" lay-verify="required">
+                    <div style="display: flex;align-items: center;justify-content: center;margin-left: 6%;">
+                        <span>元</span>
+                        <input type="radio" name="htJedw" value="元" checked>
+                        <span style="width: 30px;">美元</span>
+                        <input type="radio" name="htJedw" value="美元">
+                    </div>
                 </div>
             </div>
             <div class="layui-form-item col-md-5">

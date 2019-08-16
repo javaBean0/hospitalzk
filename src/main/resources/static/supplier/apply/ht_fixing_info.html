@@ -115,7 +115,7 @@
                 <div class="layui-form-item col-md-5">
                     <label class="layui-form-label"><span style="color: red;">*</span>出厂日期</label>
                     <div class="layui-input-block">
-                        <input type="text" id="date" name="eqCcdate" class="layui-input" autocomplete="off" lay-verify="required">
+                        <input type="text" name="eqCcdate" class="layui-input" autocomplete="off" lay-verify="required">
                     </div>
                 </div>
                 <div class="layui-form-item col-md-5">
@@ -246,14 +246,14 @@
             ,   laydate = layui.laydate
             ,   layer = layui.layer
             ,   $ = layui.jquery;
-            laydate.render({
-                elem: '#date' //指定元素
-            });
+            // laydate.render({
+            //     elem: '#date' //指定元素
+            // });
             var form = layui.form;
             //监听提交
             form.on('submit(addFix)',function(data){
                 $.ajax({
-                    url:"/eqInfo/insert?htIds="+ids,
+                    url:"/eqInfo/insertBat?htIds="+ids,
                     method:"POST",
                     data:data.field,
                     dataType:"JSON",

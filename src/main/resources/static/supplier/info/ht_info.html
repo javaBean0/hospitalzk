@@ -225,7 +225,7 @@
                         $("#htGhsdh").append(res.data.htGhsdh);
                         $("#htHthao").append(res.data.htHthao);
                         $("#htZhbhao").append(res.data.htZhbhao);
-                        $("#htZje").append(res.data.htZje);
+                        $("#htZje").append(res.data.htZje + res.data.htJedw);
                         $("#htQytime").append(res.data.htQytime);
                         $("#htDhtime").append(res.data.htDhtime);
                         $("#htBz").append(res.data.htBz);
@@ -246,7 +246,7 @@
         table.render({
             elem:"#sbInfo"
             ,cellMinWidth: 130
-            ,url:"/eqInfo/selectEqInfo?htIds="+ids
+            ,url:"/eqInfo/selectGroupEqInfo?htIds="+ids
             ,method:"GET"
             ,response: {
                 statusName: 'status' //规定数据状态的字段名称，默认：code
