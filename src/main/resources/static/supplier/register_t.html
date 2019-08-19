@@ -235,6 +235,8 @@
             </table>
             <div class="layui-form-item col-md-12 btn">
                 <div class="layui-input-block">
+                        <a id="back" class="layui-btn layui-btn-primary">返回</a>
+                        <a id="szhy" class="layui-btn" >旧版三证</a>
                     <button class="layui-btn layui-btn-normal layui-btn-lg" lay-submit lay-filter="upFile">提交</button>
                 </div>
             </div>
@@ -364,6 +366,14 @@
                 layer.msg("上传失败,请检查您的网络状态！");
                 console.log(data);
             }
+        });
+        // 返回
+        $("#back").click(function(){
+            window.history.back();
+        });
+        // 旧版三证
+        $("#szhy").click(function(){
+            location.href="/supplier/register_n.html";
         });
         // 提交
         form.on('submit(upFile)', function(data){
