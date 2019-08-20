@@ -101,6 +101,9 @@
             </tr>
             </tbody>
         </table>
+        <div style="text-align:center;margin-top:20px;">
+            <button id="updateHt" class="layui-btn">修改</button>
+        </div>
         <fieldset class="layui-elem-field layui-field-title">
             <legend>设备信息</legend>
         </fieldset>
@@ -283,6 +286,9 @@
                 {field:'fileName', title:'文件名称',align:'center'},
                 {field: 'picture', title: '图片', width: 150,templet:'<div><img src="{{ d.picture }}"></div>'},
             ]]
+        });
+        $("#updateHt").click(function(){
+            location.href="/apply_manage/update/update_ht_info.html?id="+ids;
         });
         //监听行工具事件
         table.on('tool(handle)', function(obj){
