@@ -41,7 +41,7 @@ window.onload = function(){
     });
     // L
     $("#bjylL").blur(function(){
-        if($("#bjylL").val() >= ($("#bjszL").val() - ($("#bjszL").val()*0.2)) && $("#bjylL").val() <= ($("#bjszL").val() + ($("#bjszL").val()*0.2))){
+        if($("#bjylL").val() >= 200 && $("#bjylL").val() <= 400){
             $("#wc5").text("符合");
             $("#wc5").removeClass("no").addClass("is");
         }else{

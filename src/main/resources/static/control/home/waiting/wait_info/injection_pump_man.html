@@ -147,7 +147,7 @@
                     $("#bjylH").append(res.data.bjylH);
                     $("#bjylM").append(res.data.bjylM);
                     $("#bjylL").append(res.data.bjylL);
-                    if(res.data.bjylH >= (res.data.bjszH - res.data.bjszH * 0.2) && res.data.bjylH <= (res.data.bjszH + res.data.bjszH * 0.2) && res.data.bjylM >= (res.data.bjszM - res.data.bjszM * 0.2) && res.data.bjylM <= (res.data.bjszM + res.data.bjszM * 0.2) && res.data.bjylL >= (res.data.bjszL - res.data.bjszL * 0.2) && res.data.bjylL <= (res.data.bjszL + res.data.bjszL * 0.2)){
+                    if(res.data.bjylH >= (res.data.bjszH - res.data.bjszH * 0.2) && res.data.bjylH <= (res.data.bjszH + res.data.bjszH * 0.2) && res.data.bjylM >= (res.data.bjszM - res.data.bjszM * 0.2) && res.data.bjylM <= (res.data.bjszM + res.data.bjszM * 0.2) && res.data.bjylL >= 200 && res.data.bjylL <= 400){
                         $("#is2").append("<p style='color:green;'>符合</p>")
                     }else{
                         $("#is2").append("<p style='color:red;'>不符合</p>")

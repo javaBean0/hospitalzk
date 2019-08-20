@@ -1,8 +1,8 @@
 window.onload = function(){
     // 最小能量值
     $("#sfnlValue1").blur(function(){
-        $("#sfnlWc1").val(parseFloat($("#zxnl").val()) - parseFloat($("#sfnlValue1").val()));
-        if($("#sfnlWc1").val() > ($("#zxnl").val() - 4) && $("#sfnlWc1").val() < ($("#zxnl").val() + 4)){
+        $("#sfnlWc1").val(Math.abs(parseFloat($("#zxnl").val()) - parseFloat($("#sfnlValue1").val())).toFixed(1));
+        if($("#sfnlWc1").val() >= 0 && $("#sfnlWc1").val() <= 4){
             $("#wc1").text("符合");
             $("#wc1").removeClass("no").addClass("is");
         }else{
@@ -12,8 +12,8 @@ window.onload = function(){
     });
     // 30
     $("#sfnlValue2").blur(function(){
-        $("#sfnlWc2").val(30 - parseFloat($("#sfnlValue2").val()));
-        if($("#sfnlWc2").val() > 25.5 && $("#sfnlWc2").val() < 34.5){
+        $("#sfnlWc2").val(Math.abs(30 - parseFloat($("#sfnlValue2").val())).toFixed(1));
+        if($("#sfnlWc2").val() >= 0 && $("#sfnlWc2").val() <= 4.5){
             $("#wc2").text("符合");
             $("#wc2").removeClass("no").addClass("is");
         }else{
@@ -23,8 +23,8 @@ window.onload = function(){
     });
     // 50
     $("#sfnlValue3").blur(function(){
-        $("#sfnlWc3").val(50 - parseFloat($("#sfnlValue3").val()));
-        if($("#sfnlWc3").val() > - 42.5 && $("#sfnlWc3").val() < 57.5){
+        $("#sfnlWc3").val(Math.abs(50 - parseFloat($("#sfnlValue3").val())).toFixed(1));
+        if($("#sfnlWc3").val() >= 0 && $("#sfnlWc3").val() <= 7.5){
             $("#wc3").text("符合");
             $("#wc3").removeClass("no").addClass("is");
         }else{
@@ -34,8 +34,8 @@ window.onload = function(){
     });
     // 最大能量值
     $("#sfnlValue6").blur(function(){
-        $("#sfnlWc6").val(parseFloat($("#zdnl").val()) - parseFloat($("#sfnlValue6").val()));
-        if($("#sfnlWc6").val() > - ($("#zdnl").val() - $("#zdnl").val()*0.15) && $("#sfnlWc6").val() < ($("#zdnl").val() + $("#zdnl").val()*0.15)){
+        $("#sfnlWc6").val(Math.abs(parseFloat($("#zdnl").val()) - parseFloat($("#sfnlValue6").val())).toFixed(1));
+        if($("#sfnlWc6").val() >= 0 && $("#sfnlWc6").val() <= $("#zdnl").val()*0.15){
             $("#wc4").text("符合");
             $("#wc4").removeClass("no").addClass("is");
         }else{
@@ -45,8 +45,8 @@ window.onload = function(){
     });
     // 100
     $("#sfnlValue4").blur(function(){
-        $("#sfnlWc4").val(100 - parseFloat($("#sfnlValue4").val()));
-        if($("#sfnlWc4").val() > - 85 && $("#sfnlWc4").val() < 115){
+        $("#sfnlWc4").val(Math.abs(100 - parseFloat($("#sfnlValue4").val())).toFixed(1));
+        if($("#sfnlWc4").val() >= 0 && $("#sfnlWc4").val() <= 15){
             $("#wc5").text("符合");
             $("#wc5").removeClass("no").addClass("is");
         }else{
@@ -56,8 +56,8 @@ window.onload = function(){
     });
     // 200
     $("#sfnlValue5").blur(function(){
-        $("#sfnlWc5").val(200 - parseFloat($("#sfnlValue5").val()));
-        if($("#sfnlWc5").val() > - 170 && $("#sfnlWc5").val() < 230){
+        $("#sfnlWc5").val(Math.abs(200 - parseFloat($("#sfnlValue5").val())).toFixed(1));
+        if($("#sfnlWc5").val() >= 0 && $("#sfnlWc5").val() <= 30){
             $("#wc6").text("符合");
             $("#wc6").removeClass("no").addClass("is");
         }else{
@@ -67,8 +67,8 @@ window.onload = function(){
     });
     // 20 前 中 后
     $("#sfnlValue73").blur(function(){
-        $("#sfnlWc7").val(20 - ((parseFloat($("#sfnlValue71").val())+parseFloat($("#sfnlValue72").val())+parseInt($("#sfnlValue73").val()))/3).toFixed(1));
-        if($("#sfnlWc7").val() > - 16 && $("#sfnlWc7").val() < 24){
+        $("#sfnlWc7").val(Math.abs(20 - ((parseFloat($("#sfnlValue71").val())+parseFloat($("#sfnlValue72").val())+parseInt($("#sfnlValue73").val()))/3).toFixed(1)).toFixed(1));
+        if($("#sfnlWc7").val() >= 0 && $("#sfnlWc7").val() <= 4){
             $("#wc7").text("符合");
             $("#wc7").removeClass("no").addClass("is");
         }else{
@@ -78,8 +78,8 @@ window.onload = function(){
     });
     // 200 前 中 后
     $("#sfnlValue83").blur(function(){
-        $("#sfnlWc8").val(200 - ((parseFloat($("#sfnlValue81").val())+parseFloat($("#sfnlValue82").val())+parseInt($("#sfnlValue83").val()))/3).toFixed(1));
-        if($("#sfnlWc8").val() > - 170 && $("#sfnlWc8").val() < 230){
+        $("#sfnlWc8").val(Math.abs(parseFloat($("#zdnl2").val()) - ((parseFloat($("#sfnlValue81").val())+parseFloat($("#sfnlValue82").val())+parseInt($("#sfnlValue83").val()))/3)).toFixed(1));
+        if($("#sfnlWc8").val() >= 0 && $("#sfnlWc8").val() <= $("#zdnl2").val()*0.15){
             $("#wc8").text("符合");
             $("#wc8").removeClass("no").addClass("is");
         }else{

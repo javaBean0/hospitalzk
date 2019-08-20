@@ -77,7 +77,7 @@
                 <td style="width: 7%;">中</td>
                 <td style="width: 7%;">后</td>
                 <td id="sfnlWc7" style="width: 9%;" rowspan="2">&nbsp;</td>
-                <td style="width: 9%;" rowspan="2">200</td>
+                <td id="zdnl2" style="width: 9%;" rowspan="2">最大能量值:</td>
                 <td style="width: 7%;">前</td>
                 <td style="width: 7%;">中</td>
                 <td style="width: 7%;">后</td>
@@ -189,7 +189,8 @@
                     $("#sfnlValue82").append(res.data.sfnlValue82);
                     $("#sfnlValue83").append(res.data.sfnlValue83);
                     $("#sfnlWc8").append(res.data.sfnlWc8);
-                    if(res.data.sfnlWc1 >= -0.15 && res.data.sfnlWc1 <= 0.15 && res.data.sfnlWc2 >= -0.15 && res.data.sfnlWc2 <= 0.15 && res.data.sfnlWc3 >= -0.15 && res.data.sfnlWc3 <= 0.15 && res.data.sfnlWc4 >= -0.15 && res.data.sfnlWc4 <= 0.15 && res.data.sfnlWc5 >= -0.15 && res.data.sfnlWc5 <= 0.15 && res.data.sfnlWc6 >= -0.15 && res.data.sfnlWc6 <= 0.15 && res.data.sfnlWc7 >= -0.15 && res.data.sfnlWc7 <= 0.15 && res.data.sfnlWc8 >= -0.15 && res.data.sfnlWc8 <= 0.15){
+                    $("#zdnl2").append(res.data.zdnl2);
+                    if(res.data.sfnlWc1 >= 0 && res.data.sfnlWc1 <= 4 && res.data.sfnlWc2 >= 0 && res.data.sfnlWc2 <= 4.5 && res.data.sfnlWc3 >= 0 && res.data.sfnlWc3 <= 7.5 && res.data.sfnlWc4 >= 0 && res.data.sfnlWc4 <= 15 && res.data.sfnlWc5 >= 0 && res.data.sfnlWc5 <= 30 && res.data.sfnlWc6 >= 0 && res.data.sfnlWc6 <= res.data.zdnl*0.15 && res.data.sfnlWc7 >= 0 && res.data.sfnlWc7 <= 4 && res.data.sfnlWc8 >= 0 && res.data.sfnlWc8 <= res.data.zdnl2*0.15){
                         $("#is1").append("<p style='color:green;'>符合</p>");
                     }else{
                         $("#is1").append("<p style='color:red;'>不符合</p>")

@@ -11,7 +11,7 @@ window.onload = function(){
         // 温度T5测量平均值T5a (℃)
         $("#wdt5").val(t5sP);
         //  温度偏差
-        $("#wdpc").val(Math.abs(taP - t5sP));
+        $("#wdpc").val((Math.abs(taP - t5sP)).toFixed(1));
         if($("#wdpc").val() <= 0.8){
             $("#wc1").text("符合");
             $("#wc1").removeClass("no").addClass("is");
@@ -20,7 +20,7 @@ window.onload = function(){
             $("#wc1").removeClass("is").addClass("no");
         }
         // 波动度
-        $("#bdd").val(Math.max(Math.abs(parseFloat($("#t5sWd1").val()) - At5sP),Math.abs(parseFloat($("#t5sWd2").val()) - At5sP),Math.abs(parseFloat($("#t5sWd3").val()) - At5sP),Math.abs(parseFloat($("#t5sWd4").val()) - At5sP),Math.abs(parseFloat($("#t5sWd5").val()) - At5sP),Math.abs(parseFloat($("#t5sWd6").val()) - At5sP),Math.abs(parseFloat($("#t5sWd7").val()) - At5sP),Math.abs(parseFloat($("#t5sWd8").val()) - At5sP),Math.abs(parseFloat($("#t5sWd9").val()) - At5sP),Math.abs(parseFloat($("#t5sWd10").val()) - At5sP),Math.abs(parseFloat($("#t5sWd11").val()) - At5sP),Math.abs(parseFloat($("#t5sWd12").val()) - At5sP),Math.abs(parseFloat($("#t5sWd13").val()) - At5sP),Math.abs(parseFloat($("#t5sWd14").val()) - At5sP),Math.abs(parseFloat($("#t5sWd15").val()) - At5sP)));
+        $("#bdd").val((Math.max(Math.abs(parseFloat($("#t5sWd1").val()) - At5sP),Math.abs(parseFloat($("#t5sWd2").val()) - At5sP),Math.abs(parseFloat($("#t5sWd3").val()) - At5sP),Math.abs(parseFloat($("#t5sWd4").val()) - At5sP),Math.abs(parseFloat($("#t5sWd5").val()) - At5sP),Math.abs(parseFloat($("#t5sWd6").val()) - At5sP),Math.abs(parseFloat($("#t5sWd7").val()) - At5sP),Math.abs(parseFloat($("#t5sWd8").val()) - At5sP),Math.abs(parseFloat($("#t5sWd9").val()) - At5sP),Math.abs(parseFloat($("#t5sWd10").val()) - At5sP),Math.abs(parseFloat($("#t5sWd11").val()) - At5sP),Math.abs(parseFloat($("#t5sWd12").val()) - At5sP),Math.abs(parseFloat($("#t5sWd13").val()) - At5sP),Math.abs(parseFloat($("#t5sWd14").val()) - At5sP),Math.abs(parseFloat($("#t5sWd15").val()) - At5sP))).toFixed(1));
         if($("#bdd").val() <= 0.8){
             $("#wc3").text("符合");
             $("#wc3").removeClass("no").addClass("is");
@@ -31,7 +31,7 @@ window.onload = function(){
     });
     $("#wdt4").blur(function(){
         // 均匀性
-        $("#jyx").val(Math.max(Math.abs(parseFloat($("#wdt1").val()) - At5sP),Math.abs(parseFloat($("#wdt2").val()) - At5sP),Math.abs(parseFloat($("#wdt3").val()) - At5sP),Math.abs(parseFloat($("#wdt4").val()) - At5sP)));
+        $("#jyx").val((Math.max(Math.abs(parseFloat($("#wdt1").val()) - At5sP),Math.abs(parseFloat($("#wdt2").val()) - At5sP),Math.abs(parseFloat($("#wdt3").val()) - At5sP),Math.abs(parseFloat($("#wdt4").val()) - At5sP))).toFixed(1));
         if($("#jyx").val() <= 0.8){
             $("#wc2").text("符合");
             $("#wc2").removeClass("no").addClass("is");
@@ -43,7 +43,7 @@ window.onload = function(){
     $("#kzwd").blur(function(){
         // 温控偏差
         var Mwkpc = parseFloat($("#kzwd").val()) - At5sP;
-        $("#wkpc").val(Math.abs(Mwkpc));
+        $("#wkpc").val((Math.abs(Mwkpc)).toFixed(1));
         if($("#wkpc").val() <= 1.5){
             $("#wc4").text("符合");
             $("#wc4").removeClass("no").addClass("is");

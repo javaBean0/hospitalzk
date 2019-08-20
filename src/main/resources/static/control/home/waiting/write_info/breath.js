@@ -7,7 +7,7 @@ window.onload = function(){
     $("#cqzc13").blur(function(){
         $("#cqzcp12").val(((parseFloat($("#cqzc11").val())+parseFloat($("#cqzc12").val())+parseFloat($("#cqzc13").val()))/3).toFixed(1));
         $("#cqz1Swc").val(((parseFloat($("#cqzhp11").val())-parseFloat($("#cqzcp12").val()))/parseFloat($("#cqzcp12").val())).toFixed(1));
-        if($("#cqz1Swc").val() >= 340 && $("#cqz1Swc").val() <= 460){
+        if($("#cqz1Swc").val() >= 0 && $("#cqz1Swc").val() <= 60){
             $("#wc1").text("符合");
             $("#wc1").removeClass("no").addClass("is");
         }else{
@@ -22,7 +22,7 @@ window.onload = function(){
     $("#cqzc23").blur(function(){
         $("#cqzcp22").val(((parseFloat($("#cqzc21").val())+parseFloat($("#cqzc22").val())+parseFloat($("#cqzc23").val()))/3).toFixed(1));
         $("#cqz2Swc").val(((parseFloat($("#cqzhp21").val())-parseFloat($("#cqzcp22").val()))/parseFloat($("#cqzcp22").val())).toFixed(1));
-        if($("#cqz2Swc").val() >= 510 && $("#cqz2Swc").val() <= 690){
+        if($("#cqz2Swc").val() >= 0 && $("#cqz2Swc").val() <= 90){
             $("#wc2").text("符合");
             $("#wc2").removeClass("no").addClass("is");
         }else{
@@ -37,7 +37,7 @@ window.onload = function(){
     $("#cqzc33").blur(function(){
         $("#cqzcp32").val(((parseFloat($("#cqzc31").val())+parseFloat($("#cqzc32").val())+parseFloat($("#cqzc33").val()))/3).toFixed(1));
         $("#cqz3Swc").val(((parseFloat($("#cqzhp31").val())-parseFloat($("#cqzcp32").val()))/parseFloat($("#cqzcp32").val())).toFixed(1));
-        if($("#cqz3Swc").val() >= 680 && $("#cqz3Swc").val() <= 920){
+        if($("#cqz3Swc").val() >= 0 && $("#cqz3Swc").val() <= 120){
             $("#wc3").text("符合");
             $("#wc3").removeClass("no").addClass("is");
         }else{
@@ -53,7 +53,7 @@ window.onload = function(){
     $("#qztqc13").blur(function(){
         $("#qztqcp12").val(((parseFloat($("#qztqc11").val())+parseFloat($("#qztqc12").val())+parseFloat($("#qztqc13").val()))/3).toFixed(1));
         $("#qztq1Swc").val(((parseFloat($("#qztqhp11").val())-parseFloat($("#qztqcp12").val()))/parseFloat($("#qztqcp12").val())).toFixed(1));
-        if($("#qztq1Swc").val() >= 9 && $("#qztq1Swc").val() <= 11){
+        if($("#qztq1Swc").val() >= 0 && $("#qztq1Swc").val() <= 1){
             $("#wc4").text("符合");
             $("#wc4").removeClass("no").addClass("is");
         }else{
@@ -68,7 +68,7 @@ window.onload = function(){
     $("#qztqc23").blur(function(){
         $("#qztqcp22").val(((parseFloat($("#qztqc21").val())+parseFloat($("#qztqc22").val())+parseFloat($("#qztqc23").val()))/3).toFixed(1));
         $("#qztq2Swc").val(((parseFloat($("#qztqhp21").val())-parseFloat($("#qztqcp22").val()))/parseFloat($("#qztqcp22").val())).toFixed(1));
-        if($("#qztq2Swc").val() >= 22.5 && $("#qztq2Swc").val() <= 27.5){
+        if($("#qztq2Swc").val() >= 0 && $("#qztq2Swc").val() <= 2.5){
             $("#wc5").text("符合");
             $("#wc5").removeClass("no").addClass("is");
         }else{
@@ -83,7 +83,7 @@ window.onload = function(){
     $("#qztqc33").blur(function(){
         $("#qztqcp32").val(((parseFloat($("#qztqc31").val())+parseFloat($("#qztqc32").val())+parseFloat($("#qztqc33").val()))/3).toFixed(1));
         $("#qztq3Swc").val(((parseFloat($("#qztqhp31").val())-parseFloat($("#qztqcp32").val()))/parseFloat($("#qztqcp32").val())).toFixed(1));
-        if($("#qztq3Swc").val() >= 36 && $("#qztq3Swc").val() <= 44){
+        if($("#qztq3Swc").val() >= 0 && $("#qztq3Swc").val() <= 4){
             $("#wc6").text("符合");
             $("#wc6").removeClass("no").addClass("is");
         }else{
@@ -98,8 +98,8 @@ window.onload = function(){
     });
     $("#xryc13").blur(function(){
         $("#xrycp12").val(((parseFloat($("#xryc11").val())+parseFloat($("#xryc12").val())+parseFloat($("#xryc13").val()))/3).toFixed(1));
-        $("#xry1Swc").val(parseFloat($("#xryhp11").val())-parseFloat($("#xrycp12").val()));
-        if($("#xry1Swc").val() >= 19.95 && $("#xry1Swc").val() <= 22.05){
+        $("#xry1Swc").val((parseFloat($("#xryhp11").val())-parseFloat($("#xrycp12").val())).toFixed(1));
+        if($("#xry1Swc").val() >= 0 && $("#xry1Swc").val() <= 1.05){
             $("#wc7").text("符合");
             $("#wc7").removeClass("no").addClass("is");
         }else{
@@ -114,7 +114,7 @@ window.onload = function(){
     $("#xryc23").blur(function(){
         $("#xrycp22").val(((parseFloat($("#xryc21").val())+parseFloat($("#xryc22").val())+parseFloat($("#xryc23").val()))/3).toFixed(1));
         $("#xry2Swc").val(parseFloat($("#xryhp21").val())-parseFloat($("#xrycp22").val()));
-        if($("#xry2Swc").val() >= 57 && $("#xry2Swc").val() <= 63){
+        if($("#xry2Swc").val() >= 0 && $("#xry2Swc").val() <= 3){
             $("#wc8").text("符合");
             $("#wc8").removeClass("no").addClass("is");
         }else{
@@ -128,8 +128,8 @@ window.onload = function(){
     });
     $("#xryc33").blur(function(){
         $("#xrycp32").val(((parseFloat($("#xryc31").val())+parseFloat($("#xryc32").val())+parseFloat($("#xryc33").val()))/3).toFixed(1));
-        $("#xry3Swc").val(parseFloat($("#xryhp31").val())-parseFloat($("#xrycp32").val()));
-        if($("#xry3Swc").val() >= 95 && $("#xry3Swc").val() <= 105){
+        $("#xry3Swc").val((parseFloat($("#xryhp31").val())-parseFloat($("#xrycp32").val())).toFixed(1));
+        if($("#xry3Swc").val() >= 0 && $("#xry3Swc").val() <= 5){
             $("#wc9").text("符合");
             $("#wc9").removeClass("no").addClass("is");
         }else{
@@ -144,8 +144,8 @@ window.onload = function(){
     });
     $("#xqfc13").blur(function(){
         $("#xqfcp12").val(((parseFloat($("#xqfc11").val())+parseFloat($("#xqfc12").val())+parseFloat($("#xqfc13").val()))/3).toFixed(1));
-        $("#xqf1Swc").val(parseFloat($("#xqfhp11").val())-parseFloat($("#xqfcp12").val()));
-        if($("#xqf1Swc").val() >= 7 && $("#xqf1Swc").val() <= 13){
+        $("#xqf1Swc").val((parseFloat($("#xqfhp11").val())-parseFloat($("#xqfcp12").val())).toFixed(1));
+        if($("#xqf1Swc").val() >= 0 && $("#xqf1Swc").val() <= 3){
             $("#wc10").text("符合");
             $("#wc10").removeClass("no").addClass("is");
         }else{
@@ -159,8 +159,8 @@ window.onload = function(){
     });
     $("#xqfc23").blur(function(){
         $("#xqfcp22").val(((parseFloat($("#xqfc21").val())+parseFloat($("#xqfc22").val())+parseFloat($("#xqfc23").val()))/3).toFixed(1));
-        $("#xqf2Swc").val(parseFloat($("#xqfhp21").val())-parseFloat($("#xqfcp22").val()));
-        if($("#xqf2Swc").val() >= 17 && $("#xqf2Swc").val() <= 23){
+        $("#xqf2Swc").val((parseFloat($("#xqfhp21").val())-parseFloat($("#xqfcp22").val())).toFixed(1));
+        if($("#xqf2Swc").val() >= 0 && $("#xqf2Swc").val() <= 3){
             $("#wc11").text("符合");
             $("#wc11").removeClass("no").addClass("is");
         }else{
@@ -174,8 +174,8 @@ window.onload = function(){
     });
     $("#xqfc33").blur(function(){
         $("#xqfcp32").val(((parseFloat($("#xqfc31").val())+parseFloat($("#xqfc32").val())+parseFloat($("#xqfc33").val()))/3).toFixed(1));
-        $("#xqf3Swc").val(parseFloat($("#xqfhp31").val())-parseFloat($("#xqfcp32").val()));
-        if($("#xqf3Swc").val() >= 27 && $("#xqf3Swc").val() <= 33){
+        $("#xqf3Swc").val((parseFloat($("#xqfhp31").val())-parseFloat($("#xqfcp32").val())).toFixed(1));
+        if($("#xqf3Swc").val() >= 0 && $("#xqf3Swc").val() <= 3){
             $("#wc12").text("符合");
             $("#wc12").removeClass("no").addClass("is");
         }else{
@@ -190,8 +190,8 @@ window.onload = function(){
     });
     $("#hqmc13").blur(function(){
         $("#hqmcp12").val(((parseFloat($("#hqmc11").val())+parseFloat($("#hqmc12").val())+parseFloat($("#hqmc13").val()))/3).toFixed(1));
-        $("#hqm1Swc").val(parseFloat($("#hqmhp11").val())-parseFloat($("#hqmcp12").val()));
-        if($("#hqm1Swc").val() >= 0 && $("#hqm1Swc").val() <= 4){
+        $("#hqm1Swc").val((parseFloat($("#hqmhp11").val())-parseFloat($("#hqmcp12").val())).toFixed(1));
+        if($("#hqm1Swc").val() >= 0 && $("#hqm1Swc").val() <= 2){
             $("#wc13").text("符合");
             $("#wc13").removeClass("no").addClass("is");
         }else{
@@ -205,8 +205,8 @@ window.onload = function(){
     });
     $("#hqmc23").blur(function(){
         $("#hqmcp22").val(((parseFloat($("#hqmc21").val())+parseFloat($("#hqmc22").val())+parseFloat($("#hqmc23").val()))/3).toFixed(1));
-        $("#hqm2Swc").val(parseFloat($("#hqmhp21").val())-parseFloat($("#hqmcp22").val()));
-        if($("#hqm2Swc").val() >= 3 && $("#hqm2Swc").val() <= 7){
+        $("#hqm2Swc").val((parseFloat($("#hqmhp21").val())-parseFloat($("#hqmcp22").val())).toFixed(1));
+        if($("#hqm2Swc").val() >= 0 && $("#hqm2Swc").val() <= 2){
             $("#wc14").text("符合");
             $("#wc14").removeClass("no").addClass("is");
         }else{
@@ -220,8 +220,8 @@ window.onload = function(){
     });
     $("#hqmc33").blur(function(){
         $("#hqmcp32").val(((parseFloat($("#hqmc31").val())+parseFloat($("#hqmc32").val())+parseFloat($("#hqmc33").val()))/3).toFixed(1));
-        $("#hqm3Swc").val(parseFloat($("#hqmhp31").val())-parseFloat($("#hqmcp32").val()));
-        if($("#hqm3Swc").val() >= 13 && $("#hqm3Swc").val() <= 17){
+        $("#hqm3Swc").val((parseFloat($("#hqmhp31").val())-parseFloat($("#hqmcp32").val())).toFixed(1));
+        if($("#hqm3Swc").val() >= 0 && $("#hqm3Swc").val() <= 2){
             $("#wc15").text("符合");
             $("#wc15").removeClass("no").addClass("is");
         }else{
