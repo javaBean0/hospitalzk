@@ -80,7 +80,7 @@
             ,   laydate = layui.laydate;
         // 获取原数据
         $.ajax({
-            url:"?jcyqId="+ids,
+            url:"/yq/findById?jcyqId="+ids,
             method:"POST",
             dataType:"JSON",
             success:function(res){
@@ -102,7 +102,7 @@
         form.on("submit(create)",function(data){
             console.log(data.field);
             $.ajax({
-                url:"?jcyqId="+ids,
+                url:"/yq/update?jcyqId="+ids,
                 method:"POST",
                 data:data.field,
                 dataType:"JSON",

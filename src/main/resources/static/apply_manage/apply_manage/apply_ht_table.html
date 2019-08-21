@@ -43,87 +43,87 @@
         </fieldset>
         <table class="layui-table">
             <tr>
-              <td width="16%">医院自编资产号</td>
-              <td width="16%">&nbsp;</td>
-              <td width="16%">使用科室</td>
-              <td width="16%">&nbsp;</td>
-              <td width="16%">安装地点</td>
-              <td width="16%">&nbsp;</td>
+              <td style="width:15%;">医院自编资产号</td>
+              <td style="width:15%;">&nbsp;</td>
+              <td style="width:15%;">使用科室</td>
+              <td id="htSyks" style="width:15%;">&nbsp;</td>
+              <td style="width:15%;">安装地点</td>
+              <td id="htAzdd" style="width:15%;">&nbsp;</td>
             </tr>
             <tr>
               <td>合同号</td>
-              <td>&nbsp;</td>
+              <td id="htHthao">&nbsp;</td>
               <td>合同签约期</td>
-              <td>&nbsp;</td>
+              <td id="htQytime">&nbsp;</td>
               <td>到货验收期</td>
-              <td>（取现场开箱点收确认的时间）</td>
+              <td id="htDhtime"></td>
             </tr>
             <tr>
               <td>设备名称</td>
-              <td>&nbsp;</td>
+              <td id="eqMc">&nbsp;</td>
               <td>规格型号</td>
-              <td>&nbsp;</td>
+              <td id="eqXh">&nbsp;</td>
               <td>国别</td>
-              <td>&nbsp;</td>
+              <td id="eqGb">&nbsp;</td>
             </tr>
             <tr>
               <td>设备单价</td>
-              <td>&nbsp;</td>
+              <td id="eqPrice">&nbsp;</td>
               <td>数量</td>
-              <td>&nbsp;</td>
+              <td id="eqNum">&nbsp;</td>
               <td>合同总金额</td>
-              <td>&nbsp;</td>
+              <td id="eqTotalprice">&nbsp;</td>
             </tr>
             <tr>
               <td>生产厂商</td>
-              <td>&nbsp;</td>
+              <td id="eqCscs">&nbsp;</td>
               <td>保修期(月)</td>
-              <td>&nbsp;</td>
+              <td id="eqBxq">&nbsp;</td>
               <td>售后服务机构</td>
-              <td>&nbsp;</td>
+              <td id="eqShFws">&nbsp;</td>
             </tr>
             <tr>
               <td>供应商</td>
-              <td>&nbsp;</td>
+              <td id="htGhsn">&nbsp;</td>
               <td>供方联系人</td>
-              <td>&nbsp;</td>
+              <td id="htGhslxr">&nbsp;</td>
               <td>供方联系电话</td>
-              <td>&nbsp;</td>
+              <td id="htGhsdh">&nbsp;</td>
             </tr>
             <tr>
                 <td>售后联系人</td>
-                <td>&nbsp;</td>
+                <td id="eqShLxr">&nbsp;</td>
                 <td>售后联系电话</td>
-                <td>&nbsp;</td>
+                <td id="eqShLxrdh">&nbsp;</td>
                 <td>售后座机</td>
-                <td>&nbsp;</td>
+                <td id="eqShQddh">&nbsp;</td>
               </tr>
             <tr>
               <td>出厂编号</td>
-              <td colspan="5">&nbsp;</td>
+              <td id="eqScbh" colspan="5">&nbsp;</td>
             </tr>
             <tr>
               <td>出厂日期</td>
-              <td colspan="5">&nbsp;</td>
+              <td id="eqCcdate" colspan="5">&nbsp;</td>
             </tr>
             <tr>
               <td>设备类别</td>
-              <td colspan="5">&nbsp;放射/计量</td>
+              <td id="eqShLb" colspan="5">&nbsp;放射/计量</td>
             </tr>
             <tr>
               <td style="font-weight: bold;" colspan="6">现场验收情况:</td>
             </tr>
             <tr>
               <td>包装信息</td>
-              <td colspan="5">&nbsp;</td>
+              <td id="djhwBzxx" colspan="5">&nbsp;</td>
             </tr>
             <tr>
               <td>外包装</td>
-              <td colspan="5">&nbsp;</td>
+              <td id="djhwWbz" colspan="5">&nbsp;</td>
             </tr>
             <tr>
               <td>防倾斜标识</td>
-              <td colspan="5">&nbsp;</td>
+              <td id="djhwYsbs" colspan="5">&nbsp;</td>
             </tr>
             <tr>
               <td>设备外观</td>
@@ -131,57 +131,63 @@
             </tr>
             <tr>
               <td>随箱文件</td>
-              <td colspan="5">&nbsp;</td>
+              <td id="djhwSxwj" colspan="5">&nbsp;</td>
             </tr>
             <tr>
               <td>供应商代表</td>
-              <td>（加载电子签名）</td>
+              <td>
+                  <img style="width: 100px;height: 50px;" id="htGysqm" src="" alt="">
+              </td>
               <td>安装工程师</td>
-              <td>（加载电子签名）</td>
+              <td>
+                  <img style="width: 100px;height: 50px;" id="htAzgcsqm" src="" alt="">
+              </td>
               <td>科室接收人</td>
-              <td>（加载电子签名）</td>
+              <td>
+                  <img style="width: 100px;height: 50px;" id="htYsrqm" src="" alt="">
+              </td>
             </tr>
             <tr class="hiddens">
               <td style="font-weight: bold;" colspan="6">设备附件清单</td>
             </tr>
             <tr class="hiddens">
               <td>附件名称</td>
-              <td>&nbsp;</td>
+              <td id="eqFjmc">&nbsp;</td>
               <td>附件型号</td>
-              <td>&nbsp;</td>
+              <td id="eqFjxh">&nbsp;</td>
               <td>附件数量</td>
-              <td>&nbsp;</td>
+              <td id="eqFjsl">&nbsp;</td>
             </tr>
             <tr class="hiddens">
               <td>生产厂商</td>
-              <td colspan="2">&nbsp;</td>
+              <td id="eqFjsccs" colspan="2">&nbsp;</td>
               <td>出厂日期</td>
-              <td colspan="2">&nbsp;</td>
+              <td id="eqFjccrq" colspan="2">&nbsp;</td>
             </tr>
             <tr class="hiddens">
               <td>附件出厂编号</td>
-              <td colspan="5">&nbsp;</td>
+              <td id="eqFjccbh" colspan="5">&nbsp;</td>
             </tr>
             <tr class="hiddens">
               <td style="font-weight: bold;" colspan="6">附属设备清单</td>
             </tr>
             <tr class="hiddens">
               <td>附属设备名称</td>
-              <td>&nbsp;</td>
+              <td id="eqMcFs">&nbsp;</td>
               <td>附属设备型号</td>
-              <td>&nbsp;</td>
+              <td id="eqXhFs">&nbsp;</td>
               <td>附属设备数量</td>
-              <td>&nbsp;</td>
+              <td id="eqNumFs">&nbsp;</td>
             </tr>
             <tr class="hiddens">
               <td>生产厂商</td>
-              <td colspan="2">&nbsp;</td>
+              <td id="eqCscsFs" colspan="2">&nbsp;</td>
               <td>出厂日期</td>
-              <td colspan="2">&nbsp;</td>
+              <td id="eqCcdateFs" colspan="2">&nbsp;</td>
             </tr>
             <tr class="hiddens">
               <td>附属设备出厂编号</td>
-              <td colspan="5">&nbsp;</td>
+              <td id="eqScbhFs" colspan="5">&nbsp;</td>
             </tr>
             <tr>
               <td>设备培训情况：</td>
@@ -246,6 +252,7 @@
                 method:"GET",
                 dataType:"JSON",
                 success:function(res){
+                    console.log(res.data);
                     if(res.state === 200){
                         $("#htHthao").append(res.data[0].htHthao);
                         $("#htDhtime").append(res.data[0].htDhtime);
