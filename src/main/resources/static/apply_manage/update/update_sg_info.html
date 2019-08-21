@@ -33,7 +33,7 @@
             <div class="layui-form-item col-md-5">
                 <label class="layui-form-label"><span style="color: red;">*</span>供应商</label>
                 <div class="layui-input-block">
-                    <input id="gzHtGhsn" type="text" placeholder="供应商" disabled="disabled" name="htGhsn" class="layui-input" autocomplete="off" lay-verify="required">
+                    <input id="htGhsn" type="text" placeholder="供应商" name="htGhsn" class="layui-input" autocomplete="off" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item col-md-5">
@@ -264,7 +264,7 @@
         form.on('submit(sgSave)', function(data){
             console.log(data.field);
             $.ajax({
-                url:"?htId="+ids,
+                url:"/htInfo/updateInfo?htId="+ids,
                 method:"POST",
                 data:data.field,
                 dataType:"JSON",
