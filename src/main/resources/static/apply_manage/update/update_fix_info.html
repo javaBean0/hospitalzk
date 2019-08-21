@@ -185,32 +185,32 @@
 	    $(function () {
             // 获取数据
             $.ajax({
-            url:"?htId="+htId+"&eqId="+ids,
-            method:"POST",
-            dataType:"JSON",
-            success:function(res){
-                console.log(res.data);
-                if(res.data != "" && res.data != null){
-                    $("#eqMc").val(res.data.eqMc);
-                    $("#eqXh").val(res.data.eqXh);
-                    $("#eqPrice").val(res.data.eqPrice);
-                    $("#eqNum").val(res.data.eqNum);
-                    $("#eqAzdd").val(res.data.eqAzdd);
-                    $("#eqCscs").val(res.data.eqCscs);
-                    $("#eqGb").val(res.data.eqGb);
-                    $("#eqBgbh").val(res.data.eqBgbh);
-                    $("#eqScbh").val(res.data.eqScbh);
-                    $("#eqCcdate").val(res.data.eqCcdate);
-                    $("#eqBxq").val(res.data.eqBxq);
-                    $("#eqShFws").val(res.data.eqShFws);
-                    $("#eqShQddh").val(res.data.eqShQddh);
-                    $("#eqShShjl").val(res.data.eqShShjl);
-                    $("#eqShJldh").val(res.data.eqShJldh);
-                    $("#eqShLxr").val(res.data.eqShLxr);
-                    $("#eqShLxrdh").val(res.data.eqShLxrdh);
+                url:"?htId="+htId+"&eqId="+ids,
+                method:"POST",
+                dataType:"JSON",
+                success:function(res){
+                    console.log(res.data);
+                    if(res.data != "" && res.data != null){
+                        $("#eqMc").val(res.data.eqMc);
+                        $("#eqXh").val(res.data.eqXh);
+                        $("#eqPrice").val(res.data.eqPrice);
+                        $("#eqNum").val(res.data.eqNum);
+                        $("#eqAzdd").val(res.data.eqAzdd);
+                        $("#eqCscs").val(res.data.eqCscs);
+                        $("#eqGb").val(res.data.eqGb);
+                        $("#eqBgbh").val(res.data.eqBgbh);
+                        $("#eqScbh").val(res.data.eqScbh);
+                        $("#eqCcdate").val(res.data.eqCcdate);
+                        $("#eqBxq").val(res.data.eqBxq);
+                        $("#eqShFws").val(res.data.eqShFws);
+                        $("#eqShQddh").val(res.data.eqShQddh);
+                        $("#eqShShjl").val(res.data.eqShShjl);
+                        $("#eqShJldh").val(res.data.eqShJldh);
+                        $("#eqShLxr").val(res.data.eqShLxr);
+                        $("#eqShLxrdh").val(res.data.eqShLxrdh);
+                    }
                 }
-            }
-        });
+            });
             // 使用科室字典数据
             function syksList(){
                 // 清空当前列表
