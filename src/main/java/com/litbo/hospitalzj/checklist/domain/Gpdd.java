@@ -1,7 +1,5 @@
 package com.litbo.hospitalzj.checklist.domain;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 
 public class Gpdd {
@@ -13,34 +11,15 @@ public class Gpdd {
 
     private String tester;
 
-    private String auditor;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    private Date testTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    private Date shsjTime;
-    private String jcjl;
-
-
-
-
-
     private String shrJcjl;
 
-    public Date getShsjTime() {
-        return shsjTime;
-    }
+    private String auditor;
 
-    public void setShsjTime(Date shsjTime) {
-        this.shsjTime = shsjTime;
-    }
+    private Date testTime;
 
-    public String getShrJcjl() {
-        return shrJcjl;
-    }
+    private Date shsjTime;
 
-    public void setShrJcjl(String shrJcjl) {
-        this.shrJcjl = shrJcjl;
-    }
+    private String jcjl;
 
     private String jcsm;
 
@@ -190,6 +169,14 @@ public class Gpdd {
         this.tester = tester == null ? null : tester.trim();
     }
 
+    public String getShrJcjl() {
+        return shrJcjl;
+    }
+
+    public void setShrJcjl(String shrJcjl) {
+        this.shrJcjl = shrJcjl == null ? null : shrJcjl.trim();
+    }
+
     public String getAuditor() {
         return auditor;
     }
@@ -206,15 +193,15 @@ public class Gpdd {
         this.testTime = testTime;
     }
 
-    public Date getShsjtime() {
-		return shsjTime;
-	}
+    public Date getShsjTime() {
+        return shsjTime;
+    }
 
-	public void setShsjtime(Date shsjtime) {
-		this.shsjTime = shsjtime;
-	}
+    public void setShsjTime(Date shsjTime) {
+        this.shsjTime = shsjTime;
+    }
 
-	public String getJcjl() {
+    public String getJcjl() {
         return jcjl;
     }
 
