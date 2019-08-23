@@ -147,10 +147,10 @@
                   <img style="width: 100px;height: 50px;" id="htYsrqm" src="" alt="">
               </td>
             </tr>
-            <tr class="hiddens">
+            <tr class="hiddena">
               <td style="font-weight: bold;" colspan="6">设备附件清单</td>
             </tr>
-            <tr class="hiddens">
+            <tr class="hiddena">
               <td>附件名称</td>
               <td id="eqFjmc">&nbsp;</td>
               <td>附件型号</td>
@@ -158,20 +158,20 @@
               <td>附件数量</td>
               <td id="eqFjsl">&nbsp;</td>
             </tr>
-            <tr class="hiddens">
+            <tr class="hiddena">
               <td>生产厂商</td>
               <td id="eqFjsccs" colspan="2">&nbsp;</td>
               <td>出厂日期</td>
               <td id="eqFjccrq" colspan="2">&nbsp;</td>
             </tr>
-            <tr class="hiddens">
+            <tr class="hiddena">
               <td>附件出厂编号</td>
               <td id="eqFjccbh" colspan="5">&nbsp;</td>
             </tr>
-            <tr class="hiddens">
+            <tr class="hiddenb">
               <td style="font-weight: bold;" colspan="6">附属设备清单</td>
             </tr>
-            <tr class="hiddens">
+            <tr class="hiddenb">
               <td>附属设备名称</td>
               <td id="eqMcFs">&nbsp;</td>
               <td>附属设备型号</td>
@@ -179,13 +179,13 @@
               <td>附属设备数量</td>
               <td id="eqNumFs">&nbsp;</td>
             </tr>
-            <tr class="hiddens">
+            <tr class="hiddenb">
               <td>生产厂商</td>
               <td id="eqCscsFs" colspan="2">&nbsp;</td>
               <td>出厂日期</td>
               <td id="eqCcdateFs" colspan="2">&nbsp;</td>
             </tr>
-            <tr class="hiddens">
+            <tr class="hiddenb">
               <td>附属设备出厂编号</td>
               <td id="eqScbhFs" colspan="5">&nbsp;</td>
             </tr>
@@ -254,28 +254,59 @@
                 success:function(res){
                     console.log(res.data);
                     if(res.state === 200){
+                        // 合同信息
+                        $("#htSyks").append(res.data[0].htSyks);
+                        $("#htAzdd").append(res.data[0].htAzdd);
                         $("#htHthao").append(res.data[0].htHthao);
                         $("#htDhtime").append(res.data[0].htDhtime);
-                        $("#htQytime").append(res.data[0].htQytime);
-                        $("#htZje").append(res.data[0].htZje);
-                        $("#htYssj").append(res.data[0].htYssj);
-                        $("#azgcsqmTime").append(res.data[0].azgcsqmTime);
+                        $("#htGhsn").append(res.data[0].htGhsn);
+                        $("#htGhslxr").append(res.data[0].htGhslxr);
+                        $("#htGhsdh").append(res.data[0].htGhsdh);
+                        // 电子签名图片
+                        $("#htGysqm").attr("src",res.data[0].htGysqm);
                         $("#htAzgcsqm").attr("src",res.data[0].htAzgcsqm);
-                        $("#djhwBzxx").append(res.data[1].djhwBzxx);
-                        $("#djhwYsbs").append(res.data[1].djhwYsbs);
-                        $("#djhwSbwg").append(res.data[1].djhwSbwg);
-                        $("#eqBxq").append(res.data[2][0].eqBxq + "（月）");
-                        $("#eqAzdd").append(res.data[2][0].eqAzdd);
-                        $("#eqMc").append(res.data[2][0].eqMc);
-                        $("#eqNum").append(res.data[2][0].eqNum);
-                        $("#eqSyks").append(res.data[2][0].eqSyks);
-                        $("#eqXh").append(res.data[2][0].eqXh);
-                        $("#eqCscs").append(res.data[2][0].eqCscs);
-                        $("#eqGb").append(res.data[2][0].eqGb);
-                        $("#eqScbh").append(res.data[2][0].eqScbh);
-                        $("#eqCcdate").append(res.data[2][0].eqCcdate);
-                        $("#eqShLxr").append(res.data[2][0].eqShLxr);
-                        $("#eqShLxrdh").append(res.data[2][0].eqShLxrdh);
+                        $("#htYsrqm").attr("src",res.data[0].htYsrqm);
+                        // 设备信息
+                        $("#eqMc").append(res.data[1].eqMc);
+                        $("#eqXh").append(res.data[1].eqXh);
+                        $("#eqGb").attr("src",res.data[1].eqGb);
+                        $("#eqPrice").append(res.data[1].eqPrice);
+                        $("#eqNum").append(res.data[1].eqNum);
+                        $("#eqTotalprice").append(res.data[1].eqTotalprice);
+                        $("#eqCscs").append(res.data[1].eqCscs);
+                        $("#eqBxq").append(res.data[1].eqBxq + "月");
+                        $("#eqShFws").append(res.data[1].eqShFws);
+                        $("#eqShLxr").append(res.data[1].eqShLxr);
+                        $("#eqShLxrdh").append(res.data[1].eqShLxrdh);
+                        $("#eqShQddh").attr("src",res.data[1].eqShQddh);
+                        $("#eqScbh").append(res.data[1].eqScbh);
+                        $("#eqCcdate").append(res.data[1].eqCcdate);
+                        // 到货登记信息
+                        $("#djhwBzxx").append(res.data[2].djhwBzxx);
+                        $("#djhwWbz").append(res.data[2].djhwWbz);
+                        $("#djhwYsbs").append(res.data[2].djhwYsbs);
+                        $("#s").append(res.data[2].s);
+                        $("#djhwSxwj").append(res.data[2].djhwSxwj);
+                        // 附件信息
+                        if(res.data[3].eqFjmc == ""){
+                          $(".hiddena").css("display","none");
+                        }
+                        $("#eqFjmc").append(res.data[3].eqFjmc);
+                        $("#eqFjxh").append(res.data[3].eqFjxh);
+                        $("#eqFjsl").append(res.data[3].eqFjsl);
+                        $("#eqFjsccs").append(res.data[3].eqFjsccs);
+                        $("#eqFjccrq").append(res.data[3].eqFjccrq);
+                        $("#eqFjccbh").append(res.data[3].eqFjccbh);
+                        // 附属设备信息
+                        if(res.data[4].eqMc == ""){
+                          $(".hiddenb").css("display","none");
+                        }
+                        $("#eqMcFs").append(res.data[4].eqMc);
+                        $("#eqXhFs").append(res.data[4].eqXh);
+                        $("#eqNumFs").append(res.data[4].eqNum);
+                        $("#eqCscsFs").append(res.data[4].eqCscs);
+                        $("#eqCcdateFs").append(res.data[4].eqCcdate);
+                        $("#eqScbhFs").append(res.data[4].eqScbh);
                     }else{
                         layer.msg("失败");
                     }

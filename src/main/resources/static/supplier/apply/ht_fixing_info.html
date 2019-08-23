@@ -97,10 +97,10 @@
                 <div class="layui-form-item col-md-5">
                     <label class="layui-form-label"><span style="color: red;">*</span>国别</label>
                     <div class="layui-input-block">
-                        <input type="text" name="eqGb" class="layui-input" autocomplete="off" lay-verify="required">
+                        <input type="text" id="eqGb" name="eqGb" class="layui-input" autocomplete="off" lay-verify="required">
                     </div>
                 </div>
-                <div class="layui-form-item col-md-5">
+                <div id="hiddens" class="layui-form-item col-md-5">
                     <label class="layui-form-label">海关进口货物报关单号</label>
                     <div class="layui-input-block">
                         <input type="text" name="eqBgbh" placeholder="海关进口货物报关单号" class="layui-input" autocomplete="off">
@@ -239,6 +239,13 @@
                 });
             }
             sbytList();
+            $("#eqGb").blur(function(){
+                if($("#eqGb").val() == "中国"){
+                    $("#hiddens").css("display","none");
+                }else{
+                    $("#hiddens").css("display","block");
+                }
+            });
         });
         //Demo
         layui.use(['element','laydate','form','layer','jquery'], function(){

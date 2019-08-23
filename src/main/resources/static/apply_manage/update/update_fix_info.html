@@ -100,7 +100,7 @@
                         <input type="text" id="eqGb" name="eqGb" class="layui-input" autocomplete="off" lay-verify="required">
                     </div>
                 </div>
-                <div class="layui-form-item col-md-5">
+                <div id="hiddens" class="layui-form-item col-md-5">
                     <label class="layui-form-label">海关进口货物报关单号</label>
                     <div class="layui-input-block">
                         <input type="text" id="eqBgbh" name="eqBgbh" placeholder="海关进口货物报关单号" class="layui-input" autocomplete="off">
@@ -191,6 +191,11 @@
                 success:function(res){
                     console.log(res.data);
                     if(res.data != "" && res.data != null){
+                        if(res.data.eqGb == "中国"){
+                            $("#hiddens").css("display","none");
+                        }else{
+                            $("#hiddens").css("display","block");
+                        }
                         $("#eqMc").val(res.data.eqMc);
                         $("#eqXh").val(res.data.eqXh);
                         $("#eqPrice").val(res.data.eqPrice);
