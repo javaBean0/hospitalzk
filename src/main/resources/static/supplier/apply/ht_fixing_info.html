@@ -276,6 +276,8 @@
                                 location.href = "/supplier/info/ht_info.html?id="+ids;
                             }, 1000);
                             layer.msg("添加成功");
+                        }else if(res.state === 603){
+                            layer.msg("出厂编号或出厂日期数量有误，请检查");
                         }else{
                             layer.msg("添加失败");
                         }

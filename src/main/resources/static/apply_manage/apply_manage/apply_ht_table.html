@@ -46,9 +46,9 @@
               <td style="width:15%;">医院自编资产号</td>
               <td style="width:15%;">&nbsp;</td>
               <td style="width:15%;">使用科室</td>
-              <td id="htSyks" style="width:15%;">&nbsp;</td>
+              <td id="eqSyks" style="width:15%;">&nbsp;</td>
               <td style="width:15%;">安装地点</td>
-              <td id="htAzdd" style="width:15%;">&nbsp;</td>
+              <td id="eqAzdd" style="width:15%;">&nbsp;</td>
             </tr>
             <tr>
               <td>合同号</td>
@@ -72,7 +72,7 @@
               <td>数量</td>
               <td id="eqNum">&nbsp;</td>
               <td>合同总金额</td>
-              <td id="eqTotalprice">&nbsp;</td>
+              <td id="htZje">&nbsp;</td>
             </tr>
             <tr>
               <td>生产厂商</td>
@@ -127,7 +127,7 @@
             </tr>
             <tr>
               <td>设备外观</td>
-              <td colspan="5">&nbsp;</td>
+              <td id="djhwSbwg" colspan="5">&nbsp;</td>
             </tr>
             <tr>
               <td>随箱文件</td>
@@ -222,9 +222,6 @@
               <td>&nbsp;</td>
               <td style="text-align: left;">日期：</td>
             </tr>
-            <tr>
-              <td colspan="6">备注：此单相应工作完成后逐项填写； 代理商凭此单办理出入库手续，不得遗失！（资料接收人：日期：)</td>
-            </tr>
           </table>
     </div>
     <div class="col-xs-12 btn">
@@ -243,7 +240,7 @@
     var type = window.location.search;
     var ids = parseInt(type.split("=")[1]);
     //Demo
-    layui.use(['jquery','form','layer'], function(){
+    layui.use(['jquery','layer'], function(){
         var $ = layui.jquery
             , layer = layui.layer;
         $(function(){
@@ -255,58 +252,64 @@
                     console.log(res.data);
                     if(res.state === 200){
                         // 合同信息
-                        $("#htSyks").append(res.data[0].htSyks);
-                        $("#htAzdd").append(res.data[0].htAzdd);
                         $("#htHthao").append(res.data[0].htHthao);
+                        $("#htQytime").append(res.data[0].htQytime);
                         $("#htDhtime").append(res.data[0].htDhtime);
                         $("#htGhsn").append(res.data[0].htGhsn);
                         $("#htGhslxr").append(res.data[0].htGhslxr);
                         $("#htGhsdh").append(res.data[0].htGhsdh);
+                        $("#htZje").append(res.data[0].htZje);
                         // 电子签名图片
                         $("#htGysqm").attr("src",res.data[0].htGysqm);
                         $("#htAzgcsqm").attr("src",res.data[0].htAzgcsqm);
                         $("#htYsrqm").attr("src",res.data[0].htYsrqm);
                         // 设备信息
-                        $("#eqMc").append(res.data[1].eqMc);
-                        $("#eqXh").append(res.data[1].eqXh);
-                        $("#eqGb").attr("src",res.data[1].eqGb);
-                        $("#eqPrice").append(res.data[1].eqPrice);
-                        $("#eqNum").append(res.data[1].eqNum);
-                        $("#eqTotalprice").append(res.data[1].eqTotalprice);
-                        $("#eqCscs").append(res.data[1].eqCscs);
-                        $("#eqBxq").append(res.data[1].eqBxq + "月");
-                        $("#eqShFws").append(res.data[1].eqShFws);
-                        $("#eqShLxr").append(res.data[1].eqShLxr);
-                        $("#eqShLxrdh").append(res.data[1].eqShLxrdh);
-                        $("#eqShQddh").attr("src",res.data[1].eqShQddh);
-                        $("#eqScbh").append(res.data[1].eqScbh);
-                        $("#eqCcdate").append(res.data[1].eqCcdate);
+                        $("#eqSyks").append(res.data[2][0].eqSyks);
+                        $("#eqAzdd").append(res.data[2][0].eqAzdd);
+                        $("#eqMc").append(res.data[2][0].eqMc);
+                        $("#eqXh").append(res.data[2][0].eqXh);
+                        $("#eqGb").append(res.data[2][0].eqGb);
+                        $("#eqPrice").append(res.data[2][0].eqPrice);
+                        $("#eqNum").append(res.data[2][0].eqNum);
+                        $("#eqTotalprice").append(res.data[2][0].eqTotalprice);
+                        $("#eqCscs").append(res.data[2][0].eqCscs);
+                        $("#eqBxq").append(res.data[2][0].eqBxq + "月");
+                        $("#eqShFws").append(res.data[2][0].eqShFws);
+                        $("#eqShLxr").append(res.data[2][0].eqShLxr);
+                        $("#eqShLxrdh").append(res.data[2][0].eqShLxrdh);
+                        $("#eqShQddh").append(res.data[2][0].eqShQddh);
+                        $("#eqScbh").append(res.data[2][0].eqScbh);
+                        $("#eqCcdate").append(res.data[2][0].eqCcdate);
                         // 到货登记信息
-                        $("#djhwBzxx").append(res.data[2].djhwBzxx);
-                        $("#djhwWbz").append(res.data[2].djhwWbz);
-                        $("#djhwYsbs").append(res.data[2].djhwYsbs);
-                        $("#s").append(res.data[2].s);
-                        $("#djhwSxwj").append(res.data[2].djhwSxwj);
+                        $("#djhwBzxx").append(res.data[1].djhwBzxx);
+                        $("#djhwWbz").append(res.data[1].djhwWbz);
+                        $("#djhwYsbs").append(res.data[1].djhwYsbs);
+                        $("#djhwSbwg").append(res.data[1].djhwSbwg);
+                        $("#djhwSxwj").append(res.data[1].djhwSxwj);
                         // 附件信息
-                        if(res.data[3].eqFjmc == ""){
-                          $(".hiddena").css("display","none");
-                        }
-                        $("#eqFjmc").append(res.data[3].eqFjmc);
-                        $("#eqFjxh").append(res.data[3].eqFjxh);
-                        $("#eqFjsl").append(res.data[3].eqFjsl);
-                        $("#eqFjsccs").append(res.data[3].eqFjsccs);
-                        $("#eqFjccrq").append(res.data[3].eqFjccrq);
-                        $("#eqFjccbh").append(res.data[3].eqFjccbh);
+                        // if(res.data[3][0][0].eqFjmc == ""){
+                        //   $(".hiddena").css("display","none");
+                        // }else{
+                        //     $(".hiddena").css("display","block");
+                        // }
+                        $("#eqFjmc").append(res.data[3][0][0].eqFjmc);
+                        $("#eqFjxh").append(res.data[3][0][0].eqFjxh);
+                        $("#eqFjsl").append(res.data[3][0][0].eqFjsl);
+                        $("#eqFjsccs").append(res.data[3][0][0].eqFjsccs);
+                        $("#eqFjccrq").append(res.data[3][0][0].eqFjccrq);
+                        $("#eqFjccbh").append(res.data[3][0][0].eqFjccbh);
                         // 附属设备信息
-                        if(res.data[4].eqMc == ""){
-                          $(".hiddenb").css("display","none");
-                        }
-                        $("#eqMcFs").append(res.data[4].eqMc);
-                        $("#eqXhFs").append(res.data[4].eqXh);
-                        $("#eqNumFs").append(res.data[4].eqNum);
-                        $("#eqCscsFs").append(res.data[4].eqCscs);
-                        $("#eqCcdateFs").append(res.data[4].eqCcdate);
-                        $("#eqScbhFs").append(res.data[4].eqScbh);
+                        // if(res.data[4][0][0].eqMc == ""){
+                        //   $(".hiddenb").css("display","none");
+                        // }else{
+                        //     $(".hiddena").css("display","block");
+                        // }
+                        $("#eqMcFs").append(res.data[4][0][0].eqMc);
+                        $("#eqXhFs").append(res.data[4][0][0].eqXh);
+                        $("#eqNumFs").append(res.data[4][0][0].eqNum);
+                        $("#eqCscsFs").append(res.data[4][0][0].eqCscs);
+                        $("#eqCcdateFs").append(res.data[4][0][0].eqCcdate);
+                        $("#eqScbhFs").append(res.data[4][0][0].eqScbh);
                     }else{
                         layer.msg("失败");
                     }
@@ -317,6 +320,22 @@
                 }
             });
             $("#send").click(function(){
+                $.ajax({
+                    url:"/htInfo/updateYswc?htId="+ids,
+                    method:"POST",
+                    dataType:"JSON",
+                    success:function(res){
+                        if(res.state === 200){
+                            layer.msg("发送成功")
+                        }else{
+                            layer.msg("发送失败")
+                        }
+                    },
+                    error:function(data){
+                        console.log(data);
+                        layer.msg("请稍后再试");
+                    }
+                })
                 location.href="/apply_manage/home/apply_manage.html";
                 parent.location.reload();
             });

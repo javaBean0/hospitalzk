@@ -50,10 +50,10 @@
       var tableIns = table.render({
         elem:"#sbfjInfo"
         ,cellMinWidth: 80
-        ,url:"/eqfj/selectInfo?eqIds="+ids
+        ,url:"/eqfj/selectInfoGroup?eqIds="+ids
         ,method:"GET"
         ,parseData:function(res){
-          // console.log(res);
+          console.log(res);
           return{
             "code":0
             ,"msg":res.message
@@ -83,7 +83,7 @@
                   obj.del();
                   // layer.close(index);
                   $.ajax({
-                      url:"/eqfj/delete?eqFjId="+obj.data.eqFjId,
+                      url:"/eqfj/deleteBat?eqFjId="+obj.data.eqFjId,
                       success:function(res){
                           if(res.state === 200){
                               layer.msg("删除成功");

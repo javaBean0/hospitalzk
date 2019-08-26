@@ -51,7 +51,7 @@
                 <!--<a href="javascript:void(0);" data-url="./home/my_info.html" data-id="11" data-text="我的基本信息"><i class="fas fa-calendar-check"></i>我的基本信息</a>-->
             <!--</li>-->
             <li class="layui-nav-item">
-                <a href="javascript:;"><i class="layui-icon layui-icon-tabs"></i>验收申请</a>
+                <a href="javascript:;"><i class="layui-icon layui-icon-tabs"></i>验收申请<span id="waitNuma" class="layui-badge"></span></a>
                 <dl class="layui-nav-child">
                     <dd>
                         <a style="font-size: 12px;" href="javascript:void(0);" data-url="./home/ht_accept.html" data-id="11" data-text="仪器设备采购合同验收申请"><i class="layui-icon layui-icon-circle-dot"></i>仪器设备采购合同验收申请</a>
@@ -59,10 +59,13 @@
                     <dd>
                         <a style="font-size: 12px;" href="javascript:void(0);" data-url="./home/sg_accept.html" data-id="12" data-text="单价3万元且批量5万元购置审批验收申请"><i class="layui-icon layui-icon-circle-dot"></i>单价3万元且批量5万元购置审批验收申请</a>
                     </dd>
+                    <dd>
+                        <a style="font-size: 12px;" href="javascript:void(0);" data-url="./home/re_over.html" data-id="13" data-text="待完善验收申请"><i class="layui-icon layui-icon-circle-dot"></i>待完善验收申请<span id="waitNumb" class="layui-badge"></span></a>
+                    </dd>
                 </dl>
             </li>
             <li class="layui-nav-item" shiro:haspermission="a">
-                <a href="javascript:void(0);" data-url="./home/schedule.html" data-id="13" data-text="验收进度查询"><i class="fas fa-star"></i>验收进度查询</a>
+                <a href="javascript:void(0);" data-url="./home/schedule.html" data-id="14" data-text="验收进度查询"><i class="fas fa-star"></i>验收进度查询</a>
             </li>
         </ul>
     </div>
@@ -118,6 +121,24 @@
 <script src="../static/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../static/js/main.js" type="text/javascript" charset="utf-8"></script>
 <script>
+    // 待完善数量
+    $.ajax({
+        url:"/htInfo/countDws",
+        method:"GET",
+        dataType:"JSON",
+        success:function(res){
+            if(res.data != null && res.data != ""){
+                $("#waitNuma").append(res.data);
+                $("#waitNumb").append(res.data);
+            }else{
+                $("#waitNuma").css("display","none");
+                $("#waitNumb").css("display","none");
+            }
+        },
+        error:function(){
+            alert("服务器故障");
+        }
+    });
     layui.use(['element','layer','jquery'],function(){
         var element = layui.element
             ,layer = layui.layer
