@@ -151,12 +151,11 @@
         }else if(obj.event === 'upload'){
             location.href="/supplier/checked/electronic_materials.html?htId="+obj.data.htId;
         }else if(obj.event === 'stamp'){
-            // if(obj.data.htGzspd == "无"){
-            //     location.href="/supplier/checked/look_hta_info.html?htId="+obj.data.htId;
-            // }else{
-            //     location.href="/supplier/checked/look_sga_info.html?htId="+obj.data.htId;
-            // }
-            location.href="/supplier/home/stamp.html?htId="+obj.data.htId;
+            if(obj.data.htGzspd == "无"){
+              location.href="/supplier/home/stamp_ht.html?htId="+obj.data.htId;
+            }else{
+              location.href="/supplier/home/stamp_sg.html?htId="+obj.data.htId;
+            }  
         }
       });
     });

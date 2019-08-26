@@ -222,7 +222,7 @@
     </div>
     <div class="col-xs-12 btn">
         <a id="back" class="layui-btn layui-btn-primary">返回</a>
-        <button id="send" class="layui-btn layui-btn-normal">发送给此供应商打印</button>
+        <button id="print" class="layui-btn layui-btn-normal">打印</button>
     </div>
 </div>
 <script>
@@ -245,7 +245,7 @@
                 dataType:"JSON",
                 success:function(res){
                     if(res.state === 200){
-                         // 合同信息
+                        // 合同信息
                         $("#htGzspd").append(res.data[0].htGzspd);
                         $("#htQytime").append(res.data[0].htQytime);
                         $("#htDhtime").append(res.data[0].htDhtime);
@@ -312,11 +312,7 @@
                     console.log(data);
                     layer.msg("请稍后再试")
                 }
-            });
-            $("#send").click(function(){
-                location.href="/apply_manage/home/apply_manage.html";
-                parent.location.reload();
-            });
+            })
         })
     });
 </script>
