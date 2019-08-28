@@ -121,7 +121,7 @@ public class DqjcController extends BaseController {
         eqZjlsService.insert(eqZjls);
 
         int[] x = {dqjc.getDqjcid(), yqEqId};
-        return new ResponseResult<>(200, x);
+        return new ResponseResult<int[]>(200, x);
     }
 
 
@@ -149,7 +149,7 @@ public class DqjcController extends BaseController {
             userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
         }
         int[] x = {dqjc.getDqjcid(), yqEqId,userEqId};
-        return new ResponseResult<>(200, x);
+        return new ResponseResult<int[]>(200, x);
     }
 
 
@@ -207,9 +207,18 @@ public class DqjcController extends BaseController {
     //修改状态
     @RequestMapping("/updateState")
     public ResponseResult<Void> updateState(@RequestParam("yqEqId") Integer yqEqId, @RequestParam("userEqId") Integer userEqId) {
+        //根据设备id查此id与检测仪器的关联表
+        //如果此设备id关联的检测仪器有一个状态为待上传，那么此设备状态为待上传
+        //如果此设备id关联的检测仪器全部状态为已上传，那么此设备状态为已上传
         yqEqService.updateState(yqEqId, 0);
         yqEqService.updateType(yqEqId, EnumProcess2.IS_UPLOAD.getMessage());
-        userEqService.setEqState(userEqId, EnumProcess2.UNDER_REVIEW.getMessage());
+        //改为待审核之前判断一下yqeq是否有待上传记录
+        YqEq yqEq = yqEqService.findById(yqEqId);
+        //待上传的
+        List<YqEq> yqEqs = yqEqService.findByType(yqEq.getEqId(), EnumProcess2.TO_UPLOAD.getMessage());
+        if(yqEqs.size() == 0){
+            userEqService.setEqState(userEqId, EnumProcess2.UNDER_REVIEW.getMessage());
+        }
         return new ResponseResult<Void>(200);
     }
 
