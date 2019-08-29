@@ -135,7 +135,7 @@ public class JhyController extends BaseController {
 		table.setValue(2);
 		tabEqService.insert(table);
 		int[] x={dcsjhy.getDcid(),yqEqId};
-		return new ResponseResult<>(200, x);
+		return new ResponseResult<int[]>(200, x);
 	}
 
 
@@ -191,7 +191,7 @@ public class JhyController extends BaseController {
 			userEqService.setEqState(userEqId,EnumProcess2.TO_UPLOAD.getMessage());
 		}
 		int[] x={dcsjhy.getDcid(),yqEqId,userEqId};
-		return new ResponseResult<>(200, x);
+		return new ResponseResult<int[]>(200, x);
 	}
 
 
@@ -229,7 +229,7 @@ public class JhyController extends BaseController {
 		table.setValue(1);
 		tabEqService.insert(table);
 		int[] x={dcsjhy.getDcid(),yqEqId, userEqId};
-		return new ResponseResult<>(200, x);
+		return new ResponseResult<int[]>(200, x);
 	}
 
 	/**
@@ -262,7 +262,7 @@ public class JhyController extends BaseController {
 		}
 
 		int[] x={dcsjhy.getDcid(),yqEqId, userEqId,userEqId};
-		return new ResponseResult<>(200, x);
+		return new ResponseResult<int[]>(200, x);
 	}
 
 	//成人

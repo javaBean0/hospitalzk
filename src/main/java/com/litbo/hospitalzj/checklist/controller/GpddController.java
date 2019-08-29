@@ -74,7 +74,7 @@ public class GpddController extends BaseController {
         eqZjls.setEqDah(eqById.getEqDah());
         eqZjlsService.insert(eqZjls);
         int[] x = {gpdd.getGpddid(), yqEqId};
-        return new ResponseResult<>(200, x);
+        return new ResponseResult<int[]>(200, x);
     }
 
 
@@ -112,7 +112,7 @@ public class GpddController extends BaseController {
         }
 
         int[] x = {gpdd.getGpddid(), yqEqId,userEqId};
-        return new ResponseResult<>(200, x);
+        return new ResponseResult<int[]>(200, x);
     }
 
 
