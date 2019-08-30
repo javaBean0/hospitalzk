@@ -179,19 +179,6 @@
     <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
 </script>
 <script>
-    // // 随机四位验证码
-    // var code;
-    // function createCode(){
-    //     code = "";
-    //     var codeLength = 4;
-    //     var codeV = document.getElementById("code");
-    //     var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
-    //     for(var i=0;i<codeLength;i++){
-    //         var index = Math.floor(Math.random()*36);
-    //         code += random[index];
-    //     }
-    //     codeV.innerHTML = code;
-    // }
     // 获取上个页面传递的类型
     var type = window.location.search;
     var ids = parseInt(type.split("=")[1]);
@@ -236,7 +223,7 @@
         table.render({
             elem:"#sbInfo"
             ,cellMinWidth: 100
-            ,url:"/eqInfo/selectEqInfo?htIds="+ids
+            ,url:"/eqInfo/selectGroupEqInfo2?htIds="+ids
             ,method:"GET"
             ,response: {
                 statusName: 'status' //规定数据状态的字段名称，默认：code
