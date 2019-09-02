@@ -273,7 +273,7 @@
                     console.log(data);
                 }
             });
-            // 技术资料
+            // 操作使用技术资料
             upload.render({
                 elem: '#czjszl'
                 ,url:  '/wjsc/insertWszl?sourceId='+ids+'&type='+3
@@ -300,13 +300,229 @@
             // 合格证/检测报告
             upload.render({
                 elem: '#hgz'
-                ,url: '/wjsc/insertWszl?sourceId='+ids+'&type='+4
+                ,url: '/wjsc/insertWszl?sourceId='+ids+'&type='+5
                 ,multiple: true
                 ,accept:"file"
                 ,before: function(obj){
                     //预读本地文件示例，不支持ie8
                     obj.preview(function(index, file, result){
                         $('#hgzImg').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+                    });
+                }
+                ,done:function(res){
+                    if(res.state === 200){
+                        layer.msg("上传成功");
+                    }else{
+                        layer.msg(res.message);
+                    }
+                },
+                error:function(data){
+                    layer.msg("上传失败,请稍后再试");
+                    console.log(data);
+                }
+            });
+            // 廉洁购销合同
+            upload.render({
+                elem: '#ljgx'
+                ,url: '/wjsc/insertWszl?sourceId='+ids+'&type=' + 6
+                ,multiple: true
+                ,accept:"file"
+                ,before: function(obj){
+                    //预读本地文件示例，不支持ie8
+                    obj.preview(function(index, file, result){
+                        $('#ljgxImg').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+                    });
+                }
+                ,done:function(res){
+                    if(res.state === 200){
+                        layer.msg("上传成功");
+                    }else{
+                        layer.msg(res.message);
+                    }
+                },
+                error:function(data){
+                    layer.msg("上传失败,请稍后再试");
+                    console.log(data);
+                }
+            });
+            // 培训登记
+            upload.render({
+                elem: '#pxdj'
+                ,url: '/wjsc/insertWszl?sourceId='+ids+'&type='+7
+                ,multiple: true
+                ,accept:"file"
+                ,before: function(obj){
+                    //预读本地文件示例，不支持ie8
+                    obj.preview(function(index, file, result){
+                        $('#pxdjImg').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+                    });
+                }
+                ,done:function(res){
+                    if(res.state === 200){
+                        layer.msg("上传成功");
+                    }else{
+                        layer.msg(res.message);
+                    }
+                },
+                error:function(data){
+                    layer.msg("上传失败,请稍后再试");
+                    console.log(data);
+                }
+            });
+            // 进口设备入境货物检验检疫证明
+            upload.render({
+                elem: '#jksb'
+                ,url: '/wjsc/insertWszl?sourceId='+ids+'&type='+8
+                ,multiple: true
+                ,accept:"file"
+                ,before: function(obj){
+                    //预读本地文件示例，不支持ie8
+                    obj.preview(function(index, file, result){
+                        $('#jksbImg').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+                    });
+                }
+                ,done:function(res){
+                    if(res.state === 200){
+                        layer.msg("上传成功");
+                    }else{
+                        layer.msg(res.message);
+                    }
+                },
+                error:function(data){
+                    layer.msg("上传失败,请稍后再试");
+                    console.log(data);
+                }
+            });
+            // 发票复印件
+            upload.render({
+                elem: '#fpfy'
+                ,url: '/wjsc/insertWszl?sourceId='+ids+'&type='+9
+                ,multiple: true
+                ,accept:"file"
+                ,before: function(obj){
+                    //预读本地文件示例，不支持ie8
+                    obj.preview(function(index, file, result){
+                        $('#fpfyImg').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+                    });
+                }
+                ,done:function(res){
+                    if(res.state === 200){
+                        layer.msg("上传成功");
+                    }else{
+                        layer.msg(res.message);
+                    }
+                },
+                error:function(data){
+                    layer.msg("上传失败,请稍后再试");
+                    console.log(data);
+                }
+            });
+            // (压力容器)特种承压设备检测研究院检测证明
+            upload.render({
+                elem: '#ylrq'
+                ,url: '/wjsc/insertWszl?sourceId='+ids+'&type='+10
+                ,multiple: true
+                ,accept:"file"
+                ,before: function(obj){
+                    //预读本地文件示例，不支持ie8
+                    obj.preview(function(index, file, result){
+                        $('#ylrqImg').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+                    });
+                }
+                ,done:function(res){
+                    if(res.state === 200){
+                        layer.msg("上传成功");
+                    }else{
+                        layer.msg(res.message);
+                    }
+                },
+                error:function(data){
+                    layer.msg("上传失败,请稍后再试");
+                    console.log(data);
+                }
+            });
+            // 强检设备首检计量检测检定证书
+            upload.render({
+                elem: '#qjsb'
+                ,url: '/wjsc/insertWszl?sourceId='+ids+'&type='+11
+                ,multiple: true
+                ,accept:"file"
+                ,before: function(obj){
+                    //预读本地文件示例，不支持ie8
+                    obj.preview(function(index, file, result){
+                        $('#qjsbImg').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+                    });
+                }
+                ,done:function(res){
+                    if(res.state === 200){
+                        layer.msg("上传成功");
+                    }else{
+                        layer.msg(res.message);
+                    }
+                },
+                error:function(data){
+                    layer.msg("上传失败,请稍后再试");
+                    console.log(data);
+                }
+            });
+            // 大型设备性能检测报告
+            upload.render({
+                elem: '#xnjc'
+                ,url: '/wjsc/insertWszl?sourceId='+ids+'&type='+12
+                ,multiple: true
+                ,accept:"file"
+                ,before: function(obj){
+                    //预读本地文件示例，不支持ie8
+                    obj.preview(function(index, file, result){
+                        $('#xnjcImg').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+                    });
+                }
+                ,done:function(res){
+                    if(res.state === 200){
+                        layer.msg("上传成功");
+                    }else{
+                        layer.msg(res.message);
+                    }
+                },
+                error:function(data){
+                    layer.msg("上传失败,请稍后再试");
+                    console.log(data);
+                }
+            });
+            // 大型设备防护检测报告
+            upload.render({
+                elem: '#fhjc'
+                ,url: '/wjsc/insertWszl?sourceId='+ids+'&type='+13
+                ,multiple: true
+                ,accept:"file"
+                ,before: function(obj){
+                    //预读本地文件示例，不支持ie8
+                    obj.preview(function(index, file, result){
+                        $('#fhjcImg').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+                    });
+                }
+                ,done:function(res){
+                    if(res.state === 200){
+                        layer.msg("上传成功");
+                    }else{
+                        layer.msg(res.message);
+                    }
+                },
+                error:function(data){
+                    layer.msg("上传失败,请稍后再试");
+                    console.log(data);
+                }
+            });
+            // 设备维修线路图
+            upload.render({
+                elem: '#wxxl'
+                ,url: '/wjsc/insertWszl?sourceId='+ids+'&type='+14
+                ,multiple: true
+                ,accept:"file"
+                ,before: function(obj){
+                    //预读本地文件示例，不支持ie8
+                    obj.preview(function(index, file, result){
+                        $('#wxxlImg').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
                     });
                 }
                 ,done:function(res){

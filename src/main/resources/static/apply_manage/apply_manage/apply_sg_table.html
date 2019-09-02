@@ -304,6 +304,100 @@
                         $("#eqCscsFs").append(res.data[4][0][0].eqCscs);
                         $("#eqCcdateFs").append(res.data[4][0][0].eqCcdate);
                         $("#eqScbhFs").append(res.data[4][0][0].eqScbh);
+                        // 已上传文件信息
+                        // 合同文件信息
+                        if(res.data[5][0].type == "1"){
+                            $("#wjxx").append("购置审批申请单" + "，");
+                        }else{
+                            $("#wjxx").append("");
+                        }
+                        if(res.data[5][1].type == "2"){
+                            $("#wjxx").append("医疗器械注册登记证" + "，");
+                        }else{
+                            $("#wjxx").append("");
+                        }
+                        if(res.data[5][2].type == "3"){
+                            $("#wjxx").append("厂家授权证明书" + "，");
+                        }else{
+                            $("#wjxx").append("");
+                        }
+                        if(res.data[5][3].type == "4"){
+                            $("#wjxx").append("海关进口货物报关单" + "，");
+                        }else{
+                            $("#wjxx").append("");
+                        }
+                        // 完善资料文件信息
+                        if(res.data[6][0].type == "1"){
+                            $("#wjxx").append("厂家安装调试报告" + "，");
+                        }else{
+                            $("#wjxx").append("");
+                        }
+                        if(res.data[6][1].type == "2"){
+                            $("#wjxx").append("售后服务承诺书 / 保修证明或延保协议" + "，");
+                        }else{
+                            $("#wjxx").append("");
+                        }
+                        if(res.data[6][2].type == "3"){
+                            $("#wjxx").append("设备操作使用技术资料" + "，");
+                        }else{
+                            $("#wjxx").append("");
+                        }
+                        if(res.data[6][3].type == "4"){
+                            $("#wjxx").append("设备维护维修技术资料" + "，");
+                        }else{
+                            $("#wjxx").append("");
+                        }
+                        if(res.data[6][4].type == "5"){
+                            $("#wjxx").append("产品合格证/出厂检测报告" + "，");
+                        }else{
+                            $("#wjxx").append("");
+                        }
+
+                        if(res.data[6][5].type == "6"){
+                            $("#wjxx").append("廉洁购销合同" + "，");
+                        }else{
+                            $("#wjxx").append("");
+                        }
+                        if(res.data[6][6].type == "7"){
+                            $("#wjxx").append("培训登记表" + "，");
+                        }else{
+                            $("#wjxx").append("");
+                        }
+                        if(res.data[6][7].type == "8"){
+                            $("#wjxx").append("进口设备入境货物检验检疫证明" + "，");
+                        }else{
+                            $("#wjxx").append("");
+                        }
+                        if(res.data[6][8].type == "9"){
+                            $("#wjxx").append("发票复印件" + "，");
+                        }else{
+                            $("#wjxx").append("");
+                        }
+                        if(res.data[6][9].type == "10"){
+                            $("#wjxx").append("(压力容器)特种承压设备检测研究院检测证明" + "，");
+                        }else{
+                            $("#wjxx").append("");
+                        }
+                        if(res.data[6][10].type == "11"){
+                            $("#wjxx").append("强检设备首检计量检测检定证书" + "，");
+                        }else{
+                            $("#wjxx").append("");
+                        }
+                        if(res.data[6][11].type == "12"){
+                            $("#wjxx").append("大型设备性能检测报告" + "，");
+                        }else{
+                            $("#wjxx").append("");
+                        }
+                        if(res.data[6][12].type == "13"){
+                            $("#wjxx").append("大型设备防护检测报告" + "，");
+                        }else{
+                            $("#wjxx").append("");
+                        }
+                        if(res.data[6][13].type == "14"){
+                            $("#wjxx").append("设备维修线路图");
+                        }else{
+                            $("#wjxx").append("");
+                        }
                     }else{
                         layer.msg("失败");
                     }
