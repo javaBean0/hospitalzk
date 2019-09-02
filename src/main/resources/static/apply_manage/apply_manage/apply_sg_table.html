@@ -252,7 +252,7 @@
                         $("#htGhsn").append(res.data[0].htGhsn);
                         $("#htGhslxr").append(res.data[0].htGhslxr);
                         $("#htGhsdh").append(res.data[0].htGhsdh);
-                        $("#htZje").append(res.data[0].htZje);
+                        $("#htZje").append(res.data[0].htZje + res.data[0].htJedw);
                         // 电子签名图片
                         $("#htGysqm").attr("src",res.data[0].htGysqm);
                         $("#htAzgcsqm").attr("src",res.data[0].htAzgcsqm);
@@ -263,7 +263,7 @@
                         $("#eqMc").append(res.data[2][0].eqMc);
                         $("#eqXh").append(res.data[2][0].eqXh);
                         $("#eqGb").append(res.data[2][0].eqGb);
-                        $("#eqPrice").append(res.data[2][0].eqPrice);
+                        $("#eqPrice").append(res.data[2][0].eqPrice + res.data[0].htJedw);
                         $("#eqNum").append(res.data[2][0].eqNum);
                         $("#eqTotalprice").append(res.data[2][0].eqTotalprice);
                         $("#eqCscs").append(res.data[2][0].eqCscs);
