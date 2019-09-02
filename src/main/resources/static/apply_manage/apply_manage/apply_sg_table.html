@@ -143,48 +143,8 @@
                   <img style="width: 100px;height: 50px;" id="htYsrqm" src="" alt="">
               </td>
             </tr>
-            <tr class="hiddena">
-              <td style="font-weight: bold;" colspan="6">设备附件清单</td>
-            </tr>
-            <tr class="hiddena">
-              <td>附件名称</td>
-              <td id="eqFjmc">&nbsp;</td>
-              <td>附件型号</td>
-              <td id="eqFjxh">&nbsp;</td>
-              <td>附件数量</td>
-              <td id="eqFjsl">&nbsp;</td>
-            </tr>
-            <tr class="hiddena">
-              <td>生产厂商</td>
-              <td id="eqFjsccs" colspan="2">&nbsp;</td>
-              <td>出厂日期</td>
-              <td id="eqFjccrq" colspan="2">&nbsp;</td>
-            </tr>
-            <tr class="hiddena">
-              <td>附件出厂编号</td>
-              <td id="eqFjccbh" colspan="5">&nbsp;</td>
-            </tr>
-            <tr class="hiddenb">
-              <td style="font-weight: bold;" colspan="6">附属设备清单</td>
-            </tr>
-            <tr class="hiddenb">
-              <td>附属设备名称</td>
-              <td id="eqMcFs">&nbsp;</td>
-              <td>附属设备型号</td>
-              <td id="eqXhFs">&nbsp;</td>
-              <td>附属设备数量</td>
-              <td id="eqNumFs">&nbsp;</td>
-            </tr>
-            <tr class="hiddenb">
-              <td>生产厂商</td>
-              <td id="eqCscsFs" colspan="2">&nbsp;</td>
-              <td>出厂日期</td>
-              <td id="eqCcdateFs" colspan="2">&nbsp;</td>
-            </tr>
-            <tr class="hiddenb">
-              <td>附属设备出厂编号</td>
-              <td id="eqScbhFs" colspan="5">&nbsp;</td>
-            </tr>
+            <tr id="fssbInfo">
+            <tr id="fusbInfo">
             <tr>
               <td>设备培训情况：</td>
               <td colspan="2">操作人员应用培训完成，能正常操作仪器；维修人员设备常见故障及基本维修培训完成。</td>
@@ -281,29 +241,37 @@
                         $("#djhwSbwg").append(res.data[1].djhwSbwg);
                         $("#djhwSxwj").append(res.data[1].djhwSxwj);
                         // 附件信息
-                        // if(res.data[3][0][0].eqFjmc == ""){
-                        //   $(".hiddena").css("display","none");
-                        // }else{
-                        //     $(".hiddena").css("display","block");
-                        // }
-                        $("#eqFjmc").append(res.data[3][0][0].eqFjmc);
-                        $("#eqFjxh").append(res.data[3][0][0].eqFjxh);
-                        $("#eqFjsl").append(res.data[3][0][0].eqFjsl);
-                        $("#eqFjsccs").append(res.data[3][0][0].eqFjsccs);
-                        $("#eqFjccrq").append(res.data[3][0][0].eqFjccrq);
-                        $("#eqFjccbh").append(res.data[3][0][0].eqFjccbh);
+                        if(res.data[3][0][0].eqFjmc !== ""){
+                            var strA = "";
+                            for(var a = 0;a <= res.data[3][0].length;a++){
+                                strA += "<td style='font-weight: bold;' colspan='6'>设备附件清单"+a+"</td></tr><td style='15%;'>附件名称</td><td style='15%;'>"+res.data[3][0][a].eqFjmc+"</td><td style='15%;'>附件型号</td><td style='15%;'>"+res.data[3][0][a].eqFjxh+"</td><td>附件数量</td><td>"+res.data[3][0][a].eqFjsl+"</td></tr><tr><td>生产厂商</td><td colspan='2'>="+res.data[3][0][a].eqFjsccs+"</td><td>出厂日期</td><td colspan='2'>"+res.data[3][0][a].eqFjccrq+"</td></tr><tr><td>附件出厂编号</td><td colspan='5'>"+res.data[3][0][a].eqFjccbh+"</td></tr>";
+                            }
+                            $("#fssbInfo").append(strA);
+                        }else{
+                            $("#fssbInfo").css("display","none");
+                        }
+                        // $("#eqFjmc").append(res.data[3][0][0].eqFjmc);
+                        // $("#eqFjxh").append(res.data[3][0][0].eqFjxh);
+                        // $("#eqFjsl").append(res.data[3][0][0].eqFjsl);
+                        // $("#eqFjsccs").append(res.data[3][0][0].eqFjsccs);
+                        // $("#eqFjccrq").append(res.data[3][0][0].eqFjccrq);
+                        // $("#eqFjccbh").append(res.data[3][0][0].eqFjccbh);
                         // 附属设备信息
-                        // if(res.data[4][0][0].eqMc == ""){
-                        //   $(".hiddenb").css("display","none");
-                        // }else{
-                        //     $(".hiddena").css("display","block");
-                        // }
-                        $("#eqMcFs").append(res.data[4][0][0].eqMc);
-                        $("#eqXhFs").append(res.data[4][0][0].eqXh);
-                        $("#eqNumFs").append(res.data[4][0][0].eqNum);
-                        $("#eqCscsFs").append(res.data[4][0][0].eqCscs);
-                        $("#eqCcdateFs").append(res.data[4][0][0].eqCcdate);
-                        $("#eqScbhFs").append(res.data[4][0][0].eqScbh);
+                        if(res.data[4][0][0].eqFjmc && res.data[4][0][0].eqFjmc !== ""){
+                            var strB = "";
+                            for(var b = 0;b <= res.data[4][0].length;b++){
+                                strB += "<td style='font-weight: bold;' colspan='6'>设备附件清单"+b+"</td></tr><td style='15%;'>附属设备名称</td><td style='15%;'>"+res.data[4][0][b].eqMc+"</td><td style='15%;'>附属设备型号</td><td style='15%;'>"+res.data[4][0][b].eqXh+"</td><td style='15%;'>附属设备数量</td><td style='15%;'>"+res.data[4][0][b].eqNum+"</td></tr><tr><td>生产厂商</td><td colspan='2'>="+res.data[4][0][b].eqCscs+"</td><td>出厂日期</td><td colspan='2'>"+res.data[4][0][b].eqCcdate+"</td></tr><tr><td>附属设备出厂编号</td><td colspan='5'>"+res.data[4][0][b].eqScbh+"</td></tr>";
+                            }
+                            $("#fusbInfo").append(strB);
+                        }else{
+                            $("#fusbInfo").css("display","none");
+                        }
+                        // $("#eqMcFs").append(res.data[4][0][0].eqMc);
+                        // $("#eqXhFs").append(res.data[4][0][0].eqXh);
+                        // $("#eqNumFs").append(res.data[4][0][0].eqNum);
+                        // $("#eqCscsFs").append(res.data[4][0][0].eqCscs);
+                        // $("#eqCcdateFs").append(res.data[4][0][0].eqCcdate);
+                        // $("#eqScbhFs").append(res.data[4][0][0].eqScbh);
                         // 已上传文件信息
                         // 合同文件信息
                         if(res.data[5][0].type == "1"){
