@@ -184,7 +184,9 @@
                 method:"GET",
                 dataType:"JSON",
                 success:function(res){
+                    console.log(res);
                     if(res.data != "" && res.data != ""){
+                        sessionStorage['sgh'] = res.data.htGzspd;
                         $("#htGhsn").append(res.data.htGhsn);
                         $("#htGhslxr").append(res.data.htGhslxr);
                         $("#htGhsdh").append(res.data.htGhsdh);
@@ -295,11 +297,11 @@
             var data = obj.data;
             //console.log(obj)
             if(obj.event === 'lookMore'){
-                location.href="/apply_manage/not_manage/fix_info.html?id="+obj.data.eqId;
+                location.href="/apply_manage/apply_manage/fix_info.html?id="+obj.data.eqId;
             }else if(obj.event === 'lookFssb'){
-                location.href="/apply_manage/not_manage/child_fix_info.html?id="+obj.data.eqId;
+                location.href="/apply_manage/apply_manage/child_fix_info.html?id="+obj.data.eqId;
             }else if(obj.event === 'lookFj'){
-                location.href="/apply_manage/not_manage/enclosure_info.html?id="+obj.data.eqId;
+                location.href="/apply_manage/apply_manage/fj_info.html?id="+obj.data.eqId;
             }
         });
         // 查看合同文件

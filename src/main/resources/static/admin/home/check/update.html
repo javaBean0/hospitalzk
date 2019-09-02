@@ -61,8 +61,9 @@
             </div>
             <div class="layui-form-item btn">
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal" lay-submit lay-filter="create">保存</button>
                     <a id="back" class="layui-btn layui-btn-primary">返回</a>
+                    <a id="lookImg" class="layui-btn">查看证书</a>
+                    <button class="layui-btn layui-btn-normal" lay-submit lay-filter="create">保存</button>
                 </div>
             </div>
         </form>
@@ -125,6 +126,9 @@
         });
         $("#back").click(function(){
             window.history.back(-1);
+        });
+        $("#lookImg").click(function(){
+            location.href="/admin/home/check/look_img.html?id="+ids;
         });
     })
 </script>
