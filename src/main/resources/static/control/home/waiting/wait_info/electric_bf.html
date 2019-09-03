@@ -156,7 +156,14 @@
     var thiseqId = parseInt(sessionStorage['thiseqId']);
     var thissjId = parseInt(sessionStorage['thissjId']);
     var thisId = parseInt(sessionStorage['thisId']);
+    var babySb = sessionStorage['babySb'];
+    var breathSb = sessionStorage['breathSb'];
+    var lifeSb = sessionStorage['lifeSb'];
+    var ccSb = sessionStorage['ccSb'];
+    var ddSb = sessionStorage['ddSb'];
+    var zsSb = sessionStorage['zsSb'];
     $(function(){
+        sessionStorage['dqSb'] = 1;
     	$.ajax({
             url:"/dqjc/findByDqjcid?dqjcid="+ids,
             method:"GET",
@@ -307,7 +314,11 @@
                     if(res.state === 200){
                         layer.msg("上传成功，请耐心等待管理员审核");
                         setTimeout(function(){
-                            location.href="/control/home/waiting/check_info.html?id="+thiseqId;
+                            if(babySb == 1 || breathSb == 1 || lifeSb == 1 || ccSb == 1 || ddSb == 1 || zsSb == 1){
+                                location.href="/control/home/home.html";
+                            }else{
+                                location.href="/control/home/waiting/check_info.html?id="+thiseqId;
+                            }
                         },1000)
                     }else{
                         layer.msg("上传失败");
@@ -325,7 +336,11 @@
         });
         // 返回
         $("#back").click(function () {
-            location.href="/control/home/waiting/check_info.html?id="+thiseqId;
+            if(babySb == 1 || breathSb == 1 || lifeSb == 1 || ccSb == 1 || ddSb == 1 || zsSb == 1){
+                location.href="/control/home/home.html";
+            }else{
+                location.href="/control/home/waiting/check_info.html?id="+thiseqId;
+            }
         })
     })
 </script>

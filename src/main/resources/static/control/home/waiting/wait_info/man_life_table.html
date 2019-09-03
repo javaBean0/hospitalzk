@@ -181,7 +181,9 @@
     // var thisjcyqId = parseInt(sessionStorage['thisjcyqId']);
     var thissjId = parseInt(sessionStorage['thissjId']);
     var thisId = parseInt(sessionStorage['thisId']);
+    var dqSb = sessionStorage['dqSb'];
     $(function(){
+        sessionStorage['lifeSb'] = 1;
         $.ajax({
             url:"/jhy/findByDcidM?dcid="+ids,
             method:"GET",
@@ -331,7 +333,11 @@
                     if(res.state === 200){
                         layer.msg("上传成功，请耐心等待管理员审核");
                         setTimeout(function(){
-                            location.href="/control/home/waiting/check_info.html?id="+thiseqId;
+                            if(dqSb == 1){
+                                location.href="/control/home/home.html";
+                            }else{
+                                location.href="/control/home/waiting/check_info.html?id="+thiseqId;
+                            }
                         },1000)
                     }else{
                         layer.msg("上传失败");
@@ -349,7 +355,11 @@
         });
         // 返回
         $("#back").click(function () {
-            location.href="/control/home/waiting/check_info.html?id="+thiseqId;
+            if(dqSb == 1){
+                location.href="/control/home/home.html";
+            }else{
+                location.href="/control/home/waiting/check_info.html?id="+thiseqId;
+            }
         })
     })
 </script>
