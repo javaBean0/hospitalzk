@@ -239,7 +239,7 @@
                     $("#wcxyHValue35").append(res.data.wcxyHValue35+"/"+res.data.wcxyMValue35+"/"+res.data.wcxyLValue35);
                     var wcxyHValue5 = (Math.max(res.data.wcxyHValue15,res.data.wcxyHValue25,res.data.wcxyHValue35) - Math.min(res.data.wcxyHValue15,res.data.wcxyHValue25,res.data.wcxyHValue33));
                     var wcxyMValue5 = (Math.max(res.data.wcxyMValue15,res.data.wcxyMValue25,res.data.wcxyMValue35) - Math.min(res.data.wcxyMValue15,res.data.wcxyMValue25,res.data.wcxyMValue35));
-                    if(wcxyHValue1 != "" && wcxyHValue1 <= 8.5 && wcxyHValue2 != "" && wcxyHValue2 <= 8.5 && wcxyHValue3 != "" && wcxyHValue3 <= 8.5 && wcxyHValue4 != "" && wcxyHValue4 <= 8.5 && wcxyHValue5 != "" && wcxyHValue5 <= 8.5 && wcxyMValue1 != "" && wcxyMValue1 <= 8.5 && wcxyMValue2 != "" && wcxyMValue2 <= 8.5 && wcxyMValue3 != "" && wcxyMValue3 <= 8.5 && wcxyMValue4 != "" && wcxyMValue4 <= 8.5 && wcxyMValue5 != "" && wcxyMValue5 <= 8.5){
+                    if(wcxyHValue1 <= 8.5 && wcxyHValue2 <= 8.5 && wcxyHValue3 <= 8.5 && wcxyHValue4 <= 8.5 && wcxyHValue5 <= 8.5 && wcxyMValue1 <= 8.5 && wcxyMValue2 <= 8.5 && wcxyMValue3 <= 8.5 && wcxyMValue4 <= 8.5 && wcxyMValue5 <= 8.5){
                         $("#wcxyHValues").append("<p style='color:green;'>符合</p>");
                     }else{
                         $("#wcxyHValues").append("<p style='color:red;'>不符合</p>");
