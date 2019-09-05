@@ -115,7 +115,7 @@ window.onload = function(){
     // 湿度偏差
     $("#sdcsz").blur(function(){
         var sdpc = (parseFloat($("#sdszz").val()) - parseFloat($("#sdcsz").val())).toFixed(2);
-        if(Math.abs(sdpc) <= 0.1){
+        if(Math.abs(sdpc) <= parseFloat($("#sdszz").val())*0.1){
             $("#wc11").text("符合");
             $("#wc11").removeClass("no").addClass("is");
         }else{
