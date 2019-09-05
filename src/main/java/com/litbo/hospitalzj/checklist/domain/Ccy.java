@@ -151,6 +151,16 @@ public class Ccy {
 
     private String zdnl;
 
+    private String zdnl2;
+
+    public String getZdnl2() {
+        return zdnl2;
+    }
+
+    public void setZdnl2(String zdnl2) {
+        this.zdnl2 = zdnl2;
+    }
+
     public Integer getCcyId() {
         return ccyId;
     }

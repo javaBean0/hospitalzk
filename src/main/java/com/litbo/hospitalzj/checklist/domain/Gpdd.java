@@ -127,15 +127,55 @@ public class Gpdd {
 
     private Byte sjgpldResult;
 
-    private Byte spare1;
+    private String spare1;
 
-    private Byte spare2;
+    private String spare2;
 
-    private Byte spare3;
+    private Integer spare3;
 
-    private Byte spare4;
+    private Integer spare4;
 
-    private Byte spare5;
+    private Integer spare5;
+
+    public String getSpare1() {
+        return spare1;
+    }
+
+    public void setSpare1(String spare1) {
+        this.spare1 = spare1;
+    }
+
+    public String getSpare2() {
+        return spare2;
+    }
+
+    public void setSpare2(String spare2) {
+        this.spare2 = spare2;
+    }
+
+    public Integer getSpare3() {
+        return spare3;
+    }
+
+    public void setSpare3(Integer spare3) {
+        this.spare3 = spare3;
+    }
+
+    public Integer getSpare4() {
+        return spare4;
+    }
+
+    public void setSpare4(Integer spare4) {
+        this.spare4 = spare4;
+    }
+
+    public Integer getSpare5() {
+        return spare5;
+    }
+
+    public void setSpare5(Integer spare5) {
+        this.spare5 = spare5;
+    }
 
     public Integer getGpddid() {
         return gpddid;
@@ -633,43 +673,4 @@ public class Gpdd {
         this.sjgpldResult = sjgpldResult;
     }
 
-    public Byte getSpare1() {
-        return spare1;
-    }
-
-    public void setSpare1(Byte spare1) {
-        this.spare1 = spare1;
-    }
-
-    public Byte getSpare2() {
-        return spare2;
-    }
-
-    public void setSpare2(Byte spare2) {
-        this.spare2 = spare2;
-    }
-
-    public Byte getSpare3() {
-        return spare3;
-    }
-
-    public void setSpare3(Byte spare3) {
-        this.spare3 = spare3;
-    }
-
-    public Byte getSpare4() {
-        return spare4;
-    }
-
-    public void setSpare4(Byte spare4) {
-        this.spare4 = spare4;
-    }
-
-    public Byte getSpare5() {
-        return spare5;
-    }
-
-    public void setSpare5(Byte spare5) {
-        this.spare5 = spare5;
-    }
 }

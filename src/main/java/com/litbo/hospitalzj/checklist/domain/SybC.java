@@ -43,11 +43,11 @@ public class SybC {
 
     private Double bjszL;
 
-    private Double bjsjH;
+    private String bjsjH;
 
-    private Double bjsjM;
+    private String bjsjM;
 
-    private Double bjsjL;
+    private String bjsjL;
 
     private Double bjylH;
 
@@ -234,27 +234,27 @@ public class SybC {
         this.bjszL = bjszL;
     }
 
-    public Double getBjsjH() {
+    public String getBjsjH() {
         return bjsjH;
     }
 
-    public void setBjsjH(Double bjsjH) {
+    public void setBjsjH(String bjsjH) {
         this.bjsjH = bjsjH;
     }
 
-    public Double getBjsjM() {
+    public String getBjsjM() {
         return bjsjM;
     }
 
-    public void setBjsjM(Double bjsjM) {
+    public void setBjsjM(String bjsjM) {
         this.bjsjM = bjsjM;
     }
 
-    public Double getBjsjL() {
+    public String getBjsjL() {
         return bjsjL;
     }
 
-    public void setBjsjL(Double bjsjL) {
+    public void setBjsjL(String bjsjL) {
         this.bjsjL = bjsjL;
     }
 
