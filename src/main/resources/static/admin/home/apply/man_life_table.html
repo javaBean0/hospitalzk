@@ -38,7 +38,7 @@
         <h2>多参数监护仪质量检测原始记录表(成人)</h2>
         <table class="layui-table">
             <tr>
-                <th style="text-align: center;width:15%;" rowspan="2" scope="row">心率(次/min)</th>
+                <th style="width: 15%; text-align: center;" rowspan="2" scope="row">心率(次/min)</th>
                 <td style="width: 10%;">测试点</td>
                 <td style="width: 10%;">30</td>
                 <td style="width: 10%;">60</td>
@@ -137,7 +137,7 @@
                 <td rowspan="2"> 无创血压气密性</td>
                 <td> 设定值 </td>
                 <td>250</td>
-                <td> 泄漏率 ≤ 6mmHg/min </td>
+                <td>泄漏率 ≤ 6mmHg/min </td>
             </tr>
             <tr>
                 <td> 监护仪测量值 </td>
@@ -297,6 +297,8 @@
                     }else{
                         $("#jyjcResult").append("<p style='color:red;'>不符合</p>");
                     }
+                }else{
+                    layer.msg("无数据");
                 }
             }
         })
