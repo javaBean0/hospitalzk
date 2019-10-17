@@ -29,12 +29,12 @@
         <h2>医疗设备通用电气安全检测原始记录表</h2>
         <table class="layui-table">
             <thead>
-                <tr>
-                    <th colspan="3">定量检测</th>
-                    <th colspan="4">检测结果</th>
-                    <th colspan="2">允许值</th>
-                    <th>&nbsp;</th>
-                </tr>
+            <tr>
+                <th colspan="3">定量检测</th>
+                <th colspan="4">检测结果</th>
+                <th colspan="2">允许值</th>
+                <th>&nbsp;</th>
+            </tr>
             </thead>
             <tr>
                 <td width="134" rowspan="7">电源部分</td>
@@ -96,8 +96,7 @@
                 <td>正常状态</td>
                 <td id="hzldlZcZxbfValue" colspan="2">正向:&nbsp;</td>
                 <td id="hzldlZcFxbfValue" colspan="2">反向:&nbsp;</td>
-                <td>≤100µA</td>
-                <td>≤10µA</td>
+                <td colspan="2">≤10µA</td>
                 <td id="hzldlZcZxbfValues"></td>
             </tr>
             <tr>
@@ -106,8 +105,7 @@
                 <td id="hzldlDyZxddbfValue">正向断地:&nbsp;</td>
                 <td id="hzldlDyFxdlbfValue">反向断零:&nbsp;</td>
                 <td id="hzldlDyFxddbfValue">反向断地:&nbsp;</td>
-                <td>≤500µA</td>
-                <td>≤50µA</td>
+                <td colspan="2">≤50µA</td>
                 <td id="hzldlDyZxdlbfValues"></td>
             </tr>
             <tr>
@@ -115,8 +113,7 @@
                 <td>正常状态</td>
                 <td id="hzfzldlZcZxbfValue" colspan="2">正向:&nbsp;</td>
                 <td id="hzfzldlZcFxbfValue" colspan="2">反向:&nbsp;</td>
-                <td>≤100µA</td>
-                <td>≤10µA</td>
+                <td colspan="2">≤10µA</td>
                 <td id="hzfzldlZcZxbfValues"></td>
             </tr>
             <tr>
@@ -125,8 +122,7 @@
                 <td id="hzfzldlDyZxddbfValue">正向断地:&nbsp;</td>
                 <td id="hzfzldlDyFxdlbfValue">反向断零:&nbsp;</td>
                 <td id="hzfzldlDyFxddbfValue">反向断地:&nbsp;</td>
-                <td>≤500µA</td>
-                <td>≤50µA</td>
+                <td colspan="2">≤50µA</td>
                 <td id="hzfzldlDyZxdlbfValues"></td>
             </tr>
         </table>
@@ -175,8 +171,8 @@
                 console.log(res);
                 dqId = res.data.dqjcid;
                 if(res.data != null && res.data != ""){
-                    // 电源电压
-                    $("#dydyValue").append(res.data.dydyValue);
+                     // 电源电压
+                     $("#dydyValue").append(res.data.dydyValue);
                     if(res.data.dydyValue>198 && res.data.dydyValue<242 || res.data.dydyValue == "OL"){
                         $("#dydyValues").append("<p style='color:green;'>符合</p>")
                     }else{
@@ -236,7 +232,7 @@
                     // 正常
                     $("#hzldlZcZxbfValue").append(res.data.hzldlZcZxcfValue);
                     $("#hzldlZcFxbfValue").append(res.data.hzldlZcFxcfValue);
-                    if(res.data.hzldlZcZxcfValue <= 100 && res.data.hzldlZcFxcfValue <= 100 && res.data.hzldlZcZxcfValue != "" && res.data.hzldlZcFxcfValue != ""){
+                    if(res.data.hzldlZcZxcfValue <= 10 && res.data.hzldlZcFxcfValue <= 10 && res.data.hzldlZcZxcfValue != "" && res.data.hzldlZcFxcfValue != ""){
                         $("#hzldlZcZxbfValues").append("<p style='color:green;'>符合</p>")
                     }else{
                         $("#hzldlZcZxbfValues").append("<p style='color:red;'>不符合</p>")
@@ -246,7 +242,7 @@
                     $("#hzldlDyZxddbfValue").append(res.data.hzldlDyZxddcfValue);
                     $("#hzldlDyFxdlbfValue").append(res.data.hzldlDyFxdlcfValue);
                     $("#hzldlDyFxddbfValue").append(res.data.hzldlDyFxddcfValue);
-                    if(res.data.hzldlDyZxdlcfValue <= 500 && res.data.hzldlDyZxddcfValue <= 500 && res.data.hzldlDyFxdlcfValue <= 500 && res.data.hzldlDyFxddcfValue <= 500 && res.data.hzldlDyZxdlcfValue != "" && res.data.hzldlDyZxddcfValue != "" && res.data.hzldlDyFxdlcfValue != "" && res.data.hzldlDyFxddcfValue != ""){
+                    if(res.data.hzldlDyZxdlcfValue <= 50 && res.data.hzldlDyZxddcfValue <= 50 && res.data.hzldlDyFxdlcfValue <= 50 && res.data.hzldlDyFxddcfValue <= 50 && res.data.hzldlDyZxdlcfValue != "" && res.data.hzldlDyZxddcfValue != "" && res.data.hzldlDyFxdlcfValue != "" && res.data.hzldlDyFxddcfValue != ""){
                         $("#hzldlDyZxdlbfValues").append("<p style='color:green;'>符合</p>")
                     }else{
                         $("#hzldlDyZxdlbfValues").append("<p style='color:red;'>不符合</p>")
@@ -255,7 +251,7 @@
                     // 正常
                     $("#hzfzldlZcZxbfValue").append(res.data.hzfzldlZcZxcfValue);
                     $("#hzfzldlZcFxbfValue").append(res.data.hzfzldlZcFxcfValue);
-                    if(res.data.hzfzldlZcZxcfValue <= 100 && res.data.hzfzldlZcFxcfValue <= 100 && res.data.hzfzldlZcZxcfValue != "" && res.data.hzfzldlZcFxcfValue != ""){
+                    if(res.data.hzfzldlZcZxcfValue <= 10 && res.data.hzfzldlZcFxcfValue <= 10 && res.data.hzfzldlZcZxcfValue != "" && res.data.hzfzldlZcFxcfValue != ""){
                         $("#hzfzldlZcZxbfValues").append("<p style='color:green;'>符合</p>")
                     }else{
                         $("#hzfzldlZcZxbfValues").append("<p style='color:red;'>不符合</p>")
@@ -265,11 +261,13 @@
                     $("#hzfzldlDyZxddbfValue").append(res.data.hzfzldlDyZxddcfValue);
                     $("#hzfzldlDyFxdlbfValue").append(res.data.hzfzldlDyFxdlcfValue);
                     $("#hzfzldlDyFxddbfValue").append(res.data.hzfzldlDyFxddcfValue);
-                    if(res.data.hzfzldlDyZxdlcfValue <= 500 && res.data.hzfzldlDyZxddcfValue <= 500 && res.data.hzfzldlDyFxdlcfValue <= 500 && res.data.hzfzldlDyFxddcfValue <= 500 && res.data.hzfzldlDyZxdlcfValue != "" && res.data.hzfzldlDyZxddcfValue != "" && res.data.hzfzldlDyFxdlcfValue != "" && res.data.hzfzldlDyFxddcfValue != ""){
+                    if(res.data.hzfzldlDyZxdlcfValue <= 50 && res.data.hzfzldlDyZxddcfValue <= 50 && res.data.hzfzldlDyFxdlcfValue <= 50 && res.data.hzfzldlDyFxddcfValue <= 50 && res.data.hzfzldlDyZxdlcfValue != "" && res.data.hzfzldlDyZxddcfValue != "" && res.data.hzfzldlDyFxdlcfValue != "" && res.data.hzfzldlDyFxddcfValue != ""){
                         $("#hzfzldlDyZxdlbfValues").append("<p style='color:green;'>符合</p>")
                     }else{
                         $("#hzfzldlDyZxdlbfValues").append("<p style='color:red;'>不符合</p>")
                     }
+                }else{
+                    layer.msg("无数据");
                 }
             }
         })

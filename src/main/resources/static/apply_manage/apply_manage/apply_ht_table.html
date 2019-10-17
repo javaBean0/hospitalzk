@@ -41,7 +41,7 @@
         <fieldset class="layui-elem-field layui-field-title">
             <legend style="color: #0C0C0C;font-size: 22px;text-align: center;">南方医科大学南方医院设备验收报告</legend>
         </fieldset>
-        <table border="1px;">
+        <table id="fsInfo" border="1px;">
             <tr>
               <td style="width:15%;">医院自编资产号</td>
               <td style="width:15%;">&nbsp;</td>
@@ -147,8 +147,8 @@
                   <img style="width: 100px;height: 50px;" id="htYsrqm" src="" alt="">
               </td>
             </tr>
-            <tr id="fssbInfo">
-            <tr id="fusbInfo">
+            <!-- <tr id=""> -->
+            <!-- <tr id="fusbInfo"> -->
             <tr>
               <td>设备培训情况：</td>
               <td colspan="2">操作人员应用培训完成，能正常操作仪器；维修人员设备常见故障及基本维修培训完成。</td>
@@ -182,6 +182,9 @@
               <td>&nbsp;</td>
               <td style="text-align: left;">日期：</td>
             </tr>
+            <tr>
+                <td style="font-size: 12px;" colspan="6">备注：此单相应工作完成后逐项填写；代理商凭此单办理出入库手续，不得遗失！（资料接收人：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日期：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;）</td>
+            </tr>
           </table>
     </div>
     <div class="col-xs-12 btn">
@@ -195,6 +198,18 @@
         $("#print").click(function(){
             $("#all").jqprint();
         });
+        var strA = "";
+        for(var a = 0;a < 1;a++){
+            strA += "<tr><td style='font-weight: bold;' colspan='6'>设备附件清单"+a+"</td></tr><td style='15%;'>附件名称</td><td style='15%;'>"+a+"</td><td style='15%;'>附件型号</td><td style='15%;'>"+a+"</td><td>附件数量</td><td>"+a+"</td></tr><tr><td>生产厂商</td><td colspan='2'>"+a+"</td><td>出厂日期</td><td colspan='2'>"+a+"</td></tr><tr><td>附件出厂编号</td><td colspan='5'>"+a+"</td></tr>";
+        }
+        console.log(strA);
+        $("#fssbInfo").append(strA);
+        var strA = "";
+        for(var a = 0;a < 1;a++){
+            strA += "<tr><td style='font-weight: bold;' colspan='6'>设备附件清单"+a+"</td></tr><td style='15%;'>附件名称</td><td style='15%;'>"+a+"</td><td style='15%;'>附件型号</td><td style='15%;'>"+a+"</td><td>附件数量</td><td>"+a+"</td></tr><tr><td>生产厂商</td><td colspan='2'>"+a+"</td><td>出厂日期</td><td colspan='2'>"+a+"</td></tr><tr><td>附件出厂编号</td><td colspan='5'>"+a+"</td></tr>";
+        }
+        console.log(strA);
+        $("#fssbInfo").append(strA);
     });
     // 获取上个页面传递的类型
     var type = window.location.search;
@@ -249,12 +264,12 @@
                         // 附件信息
                         if(res.data[3][0][0].eqFjmc !== ""){
                             var strA = "";
-                            for(var a = 0;a <= res.data[3][0].length;a++){
-                                strA += "<td style='font-weight: bold;' colspan='6'>设备附件清单"+a+"</td></tr><td style='15%;'>附件名称</td><td style='15%;'>"+res.data[3][0][0].eqFjmc+"</td><td style='15%;'>附件型号</td><td style='15%;'>"+res.data[3][0][0].eqFjxh+"</td><td>附件数量</td><td>"+res.data[3][0][0].eqFjsl+"</td></tr><tr><td>生产厂商</td><td colspan='2'>="+res.data[3][0][0].eqFjsccs+"</td><td>出厂日期</td><td colspan='2'>"+res.data[3][0][0].eqFjccrq+"</td></tr><tr><td>附件出厂编号</td><td colspan='5'>"+res.data[3][0][0].eqFjccbh+"</td></tr>";
+                            for(var a = 0;a < res.data[3][0].length;a++){
+                                strA += "<tr><td style='font-weight: bold;' colspan='6'>设备附件清单"+a+"</td></tr><td style='15%;'>附件名称</td><td style='15%;'>"+a+"</td><td style='15%;'>附件型号</td><td style='15%;'>"+a+"</td><td>附件数量</td><td>"+a+"</td></tr><tr><td>生产厂商</td><td colspan='2'>"+a+"</td><td>出厂日期</td><td colspan='2'>"+a+"</td></tr><tr><td>附件出厂编号</td><td colspan='5'>"+a+"</td></tr>";
                             }
-                            $("#fssbInfo").append(strA);
+                            $("#fsInfo").append(strA);
                         }else{
-                            $("#fssbInfo").css("display","none");
+                            $("#fsInfo").append("");
                         }
                         // $("#eqFjmc").append(res.data[3][0][0].eqFjmc);
                         // $("#eqFjxh").append(res.data[3][0][0].eqFjxh);
@@ -266,11 +281,11 @@
                         if(res.data[4][0][0].eqFjmc && res.data[4][0][0].eqFjmc !== ""){
                             var strB = "";
                             for(var b = 0;b <= res.data[4][0].length;b++){
-                                strB += "<td style='font-weight: bold;' colspan='6'>设备附件清单"+b+"</td></tr><td style='15%;'>附属设备名称</td><td style='15%;'>"+res.data[4][0][b].eqMc+"</td><td style='15%;'>附属设备型号</td><td style='15%;'>"+res.data[4][0][b].eqXh+"</td><td style='15%;'>附属设备数量</td><td style='15%;'>"+res.data[4][0][b].eqNum+"</td></tr><tr><td>生产厂商</td><td colspan='2'>="+res.data[4][0][b].eqCscs+"</td><td>出厂日期</td><td colspan='2'>"+res.data[4][0][b].eqCcdate+"</td></tr><tr><td>附属设备出厂编号</td><td colspan='5'>"+res.data[4][0][b].eqScbh+"</td></tr>";
+                                strB += "<tr><td style='font-weight: bold;' colspan='6'>设备附件清单"+b+"</td></tr><td style='15%;'>附属设备名称</td><td style='15%;'>"+res.data[4][0][b].eqMc+"</td><td style='15%;'>附属设备型号</td><td style='15%;'>"+res.data[4][0][b].eqXh+"</td><td style='15%;'>附属设备数量</td><td style='15%;'>"+res.data[4][0][b].eqNum+"</td></tr><tr><td>生产厂商</td><td colspan='2'>="+res.data[4][0][b].eqCscs+"</td><td>出厂日期</td><td colspan='2'>"+res.data[4][0][b].eqCcdate+"</td></tr><tr><td>附属设备出厂编号</td><td colspan='5'>"+res.data[4][0][b].eqScbh+"</td></tr>";
                             }
-                            $("#fusbInfo").append(strB);
+                            $("#fsInfo").append(strB);
                         }else{
-                            $("#fusbInfo").css("display","none");
+                            $("#fsInfo").append("");
                         }
                         // $("#eqMcFs").append(res.data[4][0][0].eqMc);
                         // $("#eqXhFs").append(res.data[4][0][0].eqXh);
@@ -280,7 +295,7 @@
                         // $("#eqScbhFs").append(res.data[4][0][0].eqScbh);
                         // 已上传文件信息
                         // 合同文件信息
-                        if(!res.data[5][0] && res.data[5][0] !== ""){
+                        if(!res.data[5][0] || res.data[5][0] !== ""){
                             if(res.data[5][0].type == "1"){
                                 $("#wjxx").append("合同文件" + "，");
                             }else{
@@ -379,7 +394,7 @@
                                 $("#wjxx").append("");
                             }
                         }else{
-                            console.log("无上传文件信息");
+                            $("#wjxx").append("无上传文件信息");
                         }
                     }else{
                         layer.msg("失败");
