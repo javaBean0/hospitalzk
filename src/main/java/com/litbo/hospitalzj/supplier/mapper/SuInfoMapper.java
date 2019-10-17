@@ -3,6 +3,7 @@ package com.litbo.hospitalzj.supplier.mapper;
 import com.litbo.hospitalzj.supplier.entity.SuInfo;
 import com.litbo.hospitalzj.supplier.vo.SuInfoAndZzInfo;
 import org.apache.ibatis.annotations.*;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -73,4 +74,10 @@ public interface SuInfoMapper {
 
     @Select("select * from su_info where su_id=#{suId} and is_delete=0")
     SuInfoAndZzInfo findSuinfoById(Integer suId);
+
+    @Select("select name from t_dict_district where `code` = #{suSf}")
+    String findDictByCode(String suSf);
+
+    @Update("update su_info set now_time = #{nowTime} where su_id = #{suId}")
+    void insertNowTime(@Param("suId") String suId, @Param("nowTime") String nowTime);
 }

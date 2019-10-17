@@ -1,5 +1,6 @@
 package com.litbo.hospitalzj.supplier.service;
 
+import com.litbo.hospitalzj.supplier.entity.District;
 import com.litbo.hospitalzj.supplier.entity.HtInfo;
 import com.litbo.hospitalzj.supplier.vo.EqHtVo;
 import org.apache.ibatis.annotations.Param;
@@ -42,4 +43,15 @@ public interface HtInfoService {
 
 	int count(@Param("htState") String htState);
 
+	List<District> findProvinceByParentId(String parent);
+
+    void saveqm(String htId, String img, Integer num);
+
+	void updateHtInfoStateAndTime(Integer htId, String format, String message);
+
+	void updateHtInfoStateAndwsTime(Integer htId, String format, String message);
+
+    List<HtInfo> findBySuMc(String suMc);
+
+	void deleteById(String htId);
 }

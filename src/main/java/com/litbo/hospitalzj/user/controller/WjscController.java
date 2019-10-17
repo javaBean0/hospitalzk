@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -43,6 +44,19 @@ public class WjscController extends BaseController {
         String path = FileUpload.uploadOne(file, session);
         System.out.println(path);
         wjsc.setSourceType(1);
+        wjsc.setPath(path);
+        wjsc.setScTime(new Date());
+        wjscService.insert(wjsc);
+        return new ResponseResult<Void>(SUCCESS);
+    }
+
+
+    @RequestMapping("/insertJztp")
+    public ResponseResult<Void> insertJztp(Wjsc wjsc, @RequestParam("file") MultipartFile file, HttpSession session) {
+        String path = FileUpload.uploadOne(file, session);
+        System.out.println(path);
+        wjsc.setSourceType(4);
+        wjsc.setSourceId(-1);
         wjsc.setPath(path);
         wjsc.setScTime(new Date());
         wjscService.insert(wjsc);
@@ -77,6 +91,8 @@ public class WjscController extends BaseController {
         return new ResponseResult<Void>(SUCCESS);
     }
 
+
+
     //sourceType供应商，验收
     //sourceId来源id，httongid
     //文件类型
@@ -84,6 +100,24 @@ public class WjscController extends BaseController {
     public ResponseResult<List<Wjsc>> select(@RequestParam("sourceType") Integer sourceType, @RequestParam("sourceId") Integer sourceId, @RequestParam("type") Integer type) {
         List<Wjsc> data = wjscService.select(sourceType, sourceId, type);
         return new ResponseResult<List<Wjsc>>(SUCCESS, data);
+    }
+
+
+    @RequestMapping("/selectLast")
+    public ResponseResult<String> selectLast(String type){
+        Wjsc wjsc = wjscService.selectLast(4, -1, type);
+        return new ResponseResult<>(200, wjsc.getPath());
+    }
+
+
+    @RequestMapping("/selectType")
+    public ResponseResult selectType(Integer sourceId){
+        List<Wjsc> data0= wjscService.selectByType(0, sourceId);
+        List<Wjsc> data2= wjscService.selectByType(2, sourceId);
+        List list = new ArrayList();
+        list.add(data0);
+        list.add(data2);
+        return new ResponseResult(200, list);
     }
 
     //文件下载
